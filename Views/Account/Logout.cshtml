@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "Logout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/site.css" />
+}
+
+<div class="account-wrapper">
+    <div class="account-left">
+        <img src="~/images/logo.png" alt="Moo-arvelous Coders Logo" />
+    </div>
+
+    <div class="account-right" style="background-image: url('/images/background-logout.jpg');">
+        <h2>LOGOUT</h2>
+        <p>Leave your farm and herd profile</p>
+
+        <div class="account-box" style="text-align: center;">
+            <p>😊 Ready to logout and hit the hay?</p>
+            <p>Your data is safely stored and your herd is in good hands.</p>
+
+            <form method="get" asp-controller="Home" asp-action="Index">
+                <button type="submit">LOGOUT 🔒</button>
+            </form>
+
+            <p style="margin-top: 20px;">Thank you for using HerdWise.<br />Looking forward to your next visit Farmer!</p>
+        </div>
+
+        <p class="footer-note">Life isn't perfect, but with HerdWise your farm can be.</p>
+    </div>
+</div>

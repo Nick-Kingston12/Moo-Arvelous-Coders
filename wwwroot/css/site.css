@@ -17,6 +17,88 @@ html {
   min-height: 100%;
 }
 
-body {
-  margin-bottom: 60px;
+/* account.css - for Login & Logout pages */
+
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    height: 100vh;
+}
+
+.account-wrapper {
+    display: flex;
+    height: 100vh;
+    background-color: #f5f5f0;
+}
+
+.account-left {
+    width: 35%;
+    background-color: #9E5333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+    .account-left img {
+        width: 300px;
+    }
+
+.account-right {
+    flex: 1;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.account-box {
+    background-color: #f0e6e0;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+    width: 400px;
+}
+
+    .account-box h2 {
+        font-size: 32px;
+        margin-bottom: 10px;
+    }
+
+    .account-box p {
+        margin-bottom: 20px;
+    }
+
+    .account-box label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .account-box input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+
+    .account-box button {
+        width: 100%;
+        background-color: #9E5333;
+        color: white;
+        padding: 10px;
+        border: none;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+.footer-note {
+    font-size: 12px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.error-message {
+    color: red;
+    margin-top: 10px;
 }
