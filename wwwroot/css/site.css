@@ -102,3 +102,102 @@ body, html {
     color: red;
     margin-top: 10px;
 }
+body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    background: #f1f0e8;
+    color: #4e3d25;
+}
+
+.home-container {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    position: relative;
+}
+
+.home-left {
+    width: 40%;
+    background: #b75524;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.home-logo {
+    width: 80%;
+    max-width: 300px;
+}
+
+.home-right {
+    width: 60%;
+    padding: 3rem;
+    background: url('/images/cows-background.jpg') no-repeat center center;
+    background-size: cover;
+    position: relative;
+    overflow-y: auto;
+}
+
+h1 {
+    margin-top: 0;
+    font-size: 2.5rem;
+}
+
+.search-bar {
+    display: flex;
+    margin: 1rem 0;
+}
+
+    .search-bar input {
+        flex-grow: 1;
+        padding: 0.5rem;
+        font-size: 1rem;
+    }
+
+    .search-bar button {
+        background: #b75524;
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+    }
+
+.home-buttons .btn {
+    display: inline-block;
+    margin-top: 1rem;
+    background: #b75524;
+    color: white;
+    padding: 0.7rem 1.5rem;
+    text-decoration: none;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+    .home-buttons .btn:hover {
+        background: #94451e;
+    }
+
+.logout {
+    background-color: #d65c1e;
+}
+
+.footer-text {
+    margin-top: 3rem;
+    font-style: italic;
+}
+
+.menu-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: #b75524;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+    border-radius: 4px;
+}
+

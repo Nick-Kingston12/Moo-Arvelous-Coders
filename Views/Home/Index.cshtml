@@ -1,8 +1,38 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Welcome to HerdWise";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<link rel="stylesheet" href="~/css/site.css" />
+
+<div class="home-container">
+    <div class="home-left">
+        <img src="~/images/Logo.png" alt="Moo-arvelous Coders Logo" class="home-logo" />
+    </div>
+
+    <div class="home-right">
+        <h1>Welcome to HerdWise !</h1>
+
+        <div class="search-bar">
+            <input type="text" placeholder="Search ..." />
+            <button><i class="fas fa-search"></i></button>
+        </div>
+
+        <div class="home-buttons">
+            <a class="btn" href="/Account/Details">Personal Account</a>
+            <p>View all personal account details. Edit and update all personal account details.</p>
+
+            <a class="btn" href="/Farms/Index">Farms</a>
+            <p>Create and add a new farm(s). Edit, update and delete farm details.</p>
+
+            <a class="btn" href="/Herds/Index">Herds</a>
+            <p>Create and add a new herd(s). Edit, update and delete herd details. Create, add and edit cattle in herds.</p>
+
+            <a class="btn logout" href="/Account/Logout">Logout</a>
+            <p>Ready to logout and hit the hay?</p>
+        </div>
+
+        <p class="footer-text">Life isn’t perfect, but with HerdWise your farm can be.</p>
+    </div>
+
+    <button class="menu-button">MENU</button>
 </div>
