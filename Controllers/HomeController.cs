@@ -13,7 +13,7 @@ namespace Moo_Arvelous_Coders.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index1()
         {
             return View();
         }

@@ -1,5 +1,8 @@
+
 html {
-  font-size: 14px;
+    font-size: 14px;
+    position: relative;
+    min-height: 100%;
 }
 
 @media (min-width: 768px) {
@@ -12,18 +15,31 @@ html {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
-}
-
 /* account.css - for Login & Logout pages */
 
 body, html {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', sans-serif;
+    height: 100%;
+    overflow: hidden;
+}
+
+.main-container{
+    position: relative;
+    width: 100%;
     height: 100vh;
+}
+
+.background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+    z-index: 1;
 }
 
 .account-wrapper {
@@ -54,6 +70,11 @@ body, html {
     justify-content: center;
 }
 
+.title{
+    font-size: 2rem;
+    color: #3e2d22;
+    text-shadow: 1px 1px #fff;
+}
 .account-box {
     background-color: #f0e6e0;
     padding: 30px;
@@ -105,15 +126,15 @@ body, html {
 body {
     font-family: 'Segoe UI', sans-serif;
     margin: 0;
-    background: #f1f0e8;
+    background-color: #f0f0f0;
     color: #4e3d25;
 }
 
 .home-container {
-    display: flex;
     height: 100vh;
     width: 100%;
     position: relative;
+    overflow: hidden;
 }
 
 .home-left {
@@ -141,7 +162,9 @@ body {
 
 h1 {
     margin-top: 0;
+    color: #4CAF50;
     font-size: 2.5rem;
+    text-align: center;
 }
 
 .search-bar {
@@ -185,8 +208,12 @@ h1 {
 }
 
 .footer-text {
+    position: absolute;
+    bottom: 1rem;
+    font-size: 0.85rem;
     margin-top: 3rem;
     font-style: italic;
+    color: #3a3a3a;
 }
 
 .menu-button {
@@ -199,5 +226,80 @@ h1 {
     padding: 0.5rem 1rem;
     font-weight: bold;
     border-radius: 4px;
+}
+.your-herd {
+    font-size: 3rem;
+    color: #335444;
+    line-height: 1.2;
+    margin: 0;
+}
+
+.managed {
+    font-weight: bold;
+    font-size: 4rem;
+    color: #334533;
+}
+
+.button-group {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.home-button {
+    background-color: #9a4c2f;
+    color: white;
+    text-decoration: none;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 3px;
+    box-shadow: 1px 2px 5px rgba(0,0,0,0.3);
+}
+
+    .home-button:hover {
+        background-color: #7d3a24;
+    }
+
+.button-subtext {
+    display: flex;
+    gap: 4rem;
+    font-size: 0.9rem;
+    color: #2f2f2f;
+    margin-top: 0.5rem;
+}
+
+.overlay-content {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+.right-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 600px;
+}
+.top-line {
+    width: 80%;
+    border: none;
+    height: 2px;
+    background-color: #fff;
+    margin: 1rem 0;
 }
 

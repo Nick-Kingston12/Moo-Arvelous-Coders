@@ -1,0 +1,41 @@
+﻿@model dynamic
+@{
+    ViewData["Title"] = "Welcome to HerdWise";
+}
+
+<meta charset="UTF-8">
+<title>Welcome to HerdWise !</title>
+<link rel="stylesheet" href="~/css/site.css" />
+
+<div class="account-wrapper">
+    <img src="~/images/landing-page.png" alt="Landing Page Background" class="background-image" />
+
+    <div class="overlay-content">
+        <h1 class="title">Welcome to Herdwise !</h1>
+        <hr class="top-line" />
+
+        <div class="right-text">
+            <p class="your-herd">
+                Your<br>
+                <span class="managed">
+                    Herd,<br />
+                    Managed.
+                </span>
+            </p>
+
+            <div class="button-group">
+                <a href="/RegisterFarmer" class="home-button">REGISTER FARMER</a>
+                <a href="/Farmer/Create" class="home-button">REGISTER BUYER</a>
+                <a href="/Account/Login" class="home-button">LOGIN</a>
+            </div>
+
+            <div class="button-subtext">
+                <p>Create a farming profile.</p>
+                <p>For auction access.</p>
+                <p>Already have a profile?</p>
+            </div>
+        </div>
+
+        <p class="footer-text">Life isn't perfect, but with HerdWise your farm can be.</p>
+    </div>
+</div>
