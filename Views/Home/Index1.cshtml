@@ -3,39 +3,43 @@
     ViewData["Title"] = "Welcome to HerdWise";
 }
 
-<meta charset="UTF-8">
-<title>Welcome to HerdWise !</title>
 <link rel="stylesheet" href="~/css/site.css" />
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
 
-<div class="account-wrapper">
-    <img src="~/images/landing-page.png" alt="Landing Page Background" class="background-image" />
+<div class="landing-page">
+    <img src="~/images/landing-page.png" alt="landing-background" class="background-image" />
 
-    <div class="overlay-content">
-        <h1 class="title">Welcome to Herdwise !</h1>
+    <div class="landing-left">
+    </div>
+
+    <div class="landing-right">
+        <h1 class="welcome-title">Welcome to Herdwise!</h1>
         <hr class="top-line" />
 
         <div class="right-text">
             <p class="your-herd">
                 Your<br>
-                <span class="managed">
-                    Herd,<br />
-                    Managed.
-                </span>
+                <span class="managed">Herd,<br /> Managed.</span>
             </p>
 
             <div class="button-group">
-                <a href="/RegisterFarmer" class="home-button">REGISTER FARMER</a>
-                <a href="/Farmer/Create" class="home-button">REGISTER BUYER</a>
-                <a href="/Account/Login" class="home-button">LOGIN</a>
-            </div>
-
-            <div class="button-subtext">
-                <p>Create a farming profile.</p>
-                <p>For auction access.</p>
-                <p>Already have a profile?</p>
+                <div class="button-wrapper">
+                    <a href="/Farmers/Create" class="home-button">REGISTER FARMER</a>
+                    <p class="button-subtext">Create a farming profile.</p>
+                </div>
+                <div class="button-wrapper">
+                    <a href="" class="home-button">REGISTER BUYER</a>
+                    <p class="button-subtext">For auction access.</p>
+                </div>
+                <div class="button-wrapper">
+                    <a href="/Account/Login" class="home-button">LOGIN</a>
+                    <p class="button-subtext">Already have a profile?</p>
+                </div>
             </div>
         </div>
 
-        <p class="footer-text">Life isn't perfect, but with HerdWise your farm can be.</p>
+        <footer class="footer-text">
+            <p>Life isn't perfect, but with HerdWise your farm can be.</p>
+        </footer>
     </div>
 </div>
