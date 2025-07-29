@@ -1,0 +1,71 @@
+﻿@model Moo_Arvelous_Coders.Models.Buyer
+
+@{
+    ViewData["Title"] = "Register Buyer";
+}
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register Buyer</title>
+<link rel="stylesheet" href="~/css/site.css">
+
+<div class="form-title">REGISTER AUCTION BUYER</div>
+<div class="subheading">Don't have an account yet? Create an auction buyer profile.</div>
+<div class="register-container">
+
+    <div class="left-box">
+        <h3 class="form-heading">NOTES</h3>
+        <p class="reg-words">
+            Create your buyer profile by entering your personal information within the fields
+            on the right hand side to gain access to all cows information listen for sale.
+            <br><br>
+            All fields are required and have to be filled in.
+            <br><br>
+            Create a strong 8 digit password making use of uppercase and lowercase letters as well as numbers and symbols.
+        </p>
+    </div>
+
+    <div class="right-form">
+        <h3 class="form-heading">Personal Information</h3>
+        <form id="farmerForm" onsubmit="return validateForm()" class="reg-words">
+            <label>First Name:</label>
+            <input type="text" id="firstname" required>
+
+            <label>Last Name:</label>
+            <input type="text" id="lastname" required>
+
+            <label>Email Address:</label>
+            <input type="email" id="email" required>
+
+            <label>Contact Number:</label>
+            <input type="text" id="contact" required>
+
+            <label>ID Number:</label>
+            <input type="text" id="idNumber" required>
+
+            <label>Create Password:</label>
+            <div class="password-cotainer">
+                <input type="password" id="password" required>
+                <span class="toggle-password" onclick="togglePassword('password')">👁️</span>
+            </div>
+
+            <label>Confirm Password:</label>
+            <div class="password-cotainer">
+                <input type="password" id="confirmPassword" required>
+                <span class="toggle-password" onclick="togglePassword('confirmPassword')">👁️</span>
+            </div>
+
+
+            <div id="errorMsg" class="error-message"></div>
+
+            <div class="button-row">
+                <button type="reset" class="clear-btn">CLEAR FORM</button>
+                <button type="submit" class="submit-btn">CREATE ACCOUNT</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<footer class="footer-text">
+    <p>Life isn't perfect, but with HerdWise your farm can be.</p>
+</footer>

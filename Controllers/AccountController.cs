@@ -20,6 +20,16 @@ namespace Moo_Arvelous_Coders.Controllers
             return View();
         }
 
+        public IActionResult RegisterFarmer()
+        {
+            return View();
+        }
+
+        public IActionResult RegisterBuyer()
+        {
+            return View();
+        }
+
         // POST: /Account/Login
         [HttpPost]
         public async Task<IActionResult> Login(string EmailAddress, string Password)
