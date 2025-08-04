@@ -1,0 +1,30 @@
+﻿@model Moo_Arvelous_Coders.Models.Herd
+
+@{
+    ViewData["Title"] = "Herd Details";
+}
+
+<link rel="stylesheet" href="~/css/site.css" />
+
+<div class="farm-create-container">
+    <div class="farm-header">
+        <img src="~/images/Logo.png" class="logo-top" />
+        <h1>HERD DETAILS</h1>
+        <p class="subtitle">Review herd information.</p>
+        <a class="menu-button" href="/Herds">BACK TO HERDS</a>
+    </div>
+
+    <div class="farm-content">
+        <img src="~/images/cows-group.png" class="herd-image" />
+
+        <div class="form-box">
+            <div class="form-header">Herd Info</div>
+
+            <p><strong>Herd ID:</strong> @Model.HerdId</p>
+            <p><strong>Herd Name:</strong> @Model.HerdName</p>
+            <p><strong>Herd Size:</strong> @Model.Herdsize</p>
+        </div>
+    </div>
+
+    <p class="footer-text">Life isn’t perfect, but with HerdWise your herd can be.</p>
+</div>

@@ -11,12 +11,20 @@
         <img src="~/images/Logo.png" class="logo-top" />
         <h1>FARMS</h1>
         <p class="subtitle">Welcome to your farm. Visit an existing farm or create a new one.</p>
-        <button class="menu-button">MENU</button>
+        <a class="menu-button" href="/">MENU</a>
+
     </div>
 
     <div class="farm-center-button">
         <a class="btn create-btn" href="/Farms/Create">CREATE NEW FARM</a>
     </div>
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="success-message">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+
 
     <div class="farm-list-box">
         <div class="box-header">Visit Your Created Farm</div>

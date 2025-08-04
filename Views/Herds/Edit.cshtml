@@ -1,0 +1,41 @@
+﻿@model Moo_Arvelous_Coders.Models.Herd
+
+@{
+    ViewData["Title"] = "Edit Herd";
+}
+
+<link rel="stylesheet" href="~/css/site.css" />
+
+<div class="farm-create-container">
+    <div class="farm-header">
+        <img src="~/images/Logo.png" class="logo-top" />
+        <h1>EDIT HERD</h1>
+        <p class="subtitle">Update the details of your herd.</p>
+        <a class="menu-button" href="/">MENU</a>
+    </div>
+
+    <div class="farm-content">
+        <img src="~/images/cows-group.png" class="herd-image" />
+
+        <form asp-action="Edit" method="post" class="farm-form">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <input type="hidden" asp-for="HerdId" />
+
+            <div class="form-box">
+                <div class="form-header">Edit Herd Info</div>
+
+                <label asp-for="HerdName"></label>
+                <input asp-for="HerdName" class="form-control" />
+                <span asp-validation-for="HerdName" class="text-danger"></span>
+
+                <label asp-for="Herdsize"></label>
+                <input asp-for="Herdsize" class="form-control" />
+                <span asp-validation-for="Herdsize" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="add-farm-button">SAVE CHANGES</button>
+        </form>
+    </div>
+
+    <p class="footer-text">Life isn’t perfect, but with HerdWise your herd can be.</p>
+</div>

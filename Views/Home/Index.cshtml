@@ -16,6 +16,13 @@
             <input type="text" placeholder="Search ..." />
             <button><i class="fas fa-search"></i></button>
         </div>
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="success-message">
+                @TempData["SuccessMessage"]
+            </div>
+        }
+
 
         <div class="home-buttons">
             <a class="btn" href="/Account/Details">Personal Account</a>

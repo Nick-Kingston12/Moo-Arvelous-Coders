@@ -866,10 +866,10 @@ button {
 }
 
 .animal-buttons {
-    margin-top: 1rem;
     display: flex;
-    gap: 0.5rem;
     flex-wrap: wrap;
+    gap: 1rem;
+    margin: 1rem 0;
 }
 
 .animal-btn {
@@ -905,6 +905,9 @@ button {
     border: none;
     border-radius: 6px;
     font-weight: bold;
+    width: 100%;
+    margin-top: 1rem;
+    cursor: pointer;
 }
 
 .footer-text {
@@ -915,4 +918,55 @@ button {
     border-top: 4px solid black;
     padding-top: 1rem;
 }
+.success-message {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    padding: 1rem;
+    margin: 1rem auto;
+    max-width: 600px;
+    text-align: center;
+    border-radius: 6px;
+    font-weight: bold;
+}
+.go-back-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.delete-farm-button {
+    background-color: #d9534f; /* red tone */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+.comment-btn {
+    background-color: #20639B;
+    color: white;
+    padding: 0.4rem 0.8rem;
+    margin-left: 0.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+}
+.clear-btn {
+    background-color: #bbbbbb;
+    color: #333;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    margin-right: 1rem;
+    cursor: pointer;
+}
+
+.herd-form-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+
+
 

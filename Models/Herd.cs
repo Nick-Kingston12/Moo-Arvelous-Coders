@@ -1,19 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Moo_Arvelous_Coders.Models;
 
 public partial class Herd
 {
-    public int HerdId { get; set; }
+    [Key]
+    public string HerdId { get; set; } = Guid.NewGuid().ToString().Substring(0, 8); // auto-create on model creation
 
-    public string HerdName { get; set; } = null!;
 
-    public string Bull { get; set; } = null!;
+    [Required(ErrorMessage = "Herd name is required.")]
+    public string HerdName { get; set; }
 
-    public string Cattle { get; set; } = null!;
+    public string Bull { get; set; } 
 
-    public double Herdsize { get; set; }
+    public string Cattle { get; set; } 
+
+    [Required(ErrorMessage = "Herd size is required.")]
+    [Range(1, 1000, ErrorMessage = "Herd size must be a number between 1 and 1000.")]
+    public int Herdsize { get; set; }
 
     public int? FarmId { get; set; }
 

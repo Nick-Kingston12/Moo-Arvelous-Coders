@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Moo_Arvelous_Coders.Models.Herd>
+
+@{
+    ViewData["Title"] = "Manage Herds";
+}
+
+<link rel="stylesheet" href="~/css/site.css" />
+
+<div class="farm-list-container">
+    <div class="farm-header">
+        <img src="~/images/Logo.png" class="logo-top" />
+        <h1>HERDS</h1>
+        <p class="subtitle">Manage your herds. Edit, delete, view, or create new ones.</p>
+        <a class="menu-button" href="/">MENU</a>
+    </div>
+
+    <div class="farm-center-button">
+        <a class="btn create-btn" href="/Herds/Create">CREATE NEW HERD</a>
+    </div>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="success-message">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+
+    <div class="farm-list-box">
+        <div class="box-header">Your Herds</div>
+        <ol class="farm-list">
+            @foreach (var herd in Model)
+            {
+                <li>
+                    <strong>@herd.HerdName</strong> (Size: @herd.Herdsize)
+                    <a href="/Herds/Details/@herd.HerdId" class="btn">Details</a>
+                    <a href="/Herds/Edit/@herd.HerdId" class="btn edit-btn">Edit</a>
+                    <a href="/Herds/Delete/@herd.HerdId" class="btn delete-btn">Delete</a>
+                    <a href="/Comments/Create?herdId=@herd.HerdId" class="btn comment-btn">Comment</a>
+                </li>
+            }
+        </ol>
+    </div>
+
+    <p class="footer-text">Life isn’t perfect, but with HerdWise your herd can be.</p>
+</div>
+

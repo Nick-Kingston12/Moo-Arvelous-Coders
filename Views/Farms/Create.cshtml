@@ -11,37 +11,55 @@
         <img src="~/images/Logo.png" class="logo-top" />
         <h1>CREATE FARM</h1>
         <p class="subtitle">Personal farmer profile has been created. Create your farm.</p>
-        <button class="menu-button">MENU</button>
+        <a class="menu-button" href="/">MENU</a>
+
+
     </div>
 
     <div class="farm-content">
         <img src="~/images/Farm.png" class="farm-image" />
 
         <form asp-action="Create" method="post" class="farm-form">
-            <div class="form-box">
-                <div class="form-header">Farm information</div>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                <label>Farm Name:</label>
-                <input type="text" name="FarmName" placeholder="(Your farm name)" />
+            @if (Model?.FarmId != null)
+            {
+                <div class="form-group">
+                    <label>Farm ID (generated):</label>
+                    <input class="form-control" value="@Model.FarmId" readonly />
+                </div>
+            }
 
-                <label>Farm ID:</label>
-                <input type="text" name="FarmId" placeholder="(Create a unique farm ID)" />
 
-                <label>Farm Location:</label>
-                <input type="text" name="FarmLocation" placeholder="(Street, Suburb, City, Postal Code, Province, Country)" />
+            <label asp-for="FarmName"></label>
+            <input asp-for="FarmName" class="form-control" />
+            <span asp-validation-for="FarmName" class="text-danger"></span>
 
-                <label>Farm Size:</label>
-                <input type="text" name="FarmSize" placeholder="(Farm size in hectares)" />
+            <label asp-for="Location"></label>
+            <input asp-for="Location" class="form-control" />
+            <span asp-validation-for="Location" class="text-danger"></span>
 
-                <label>Farm Price:</label>
-                <input type="text" name="FarmPrice" placeholder="R (Purchase Price)" />
+            <label asp-for="FarmSize"></label>
+            <input asp-for="FarmSize" class="form-control" />
+            <span asp-validation-for="FarmSize" class="text-danger"></span>
 
-                <label>Farm Manager Name:</label>
-                <input type="text" name="FarmManager" placeholder="(First and last name of the farm manager)" />
-            </div>
+            <label asp-for="PriceBought"></label>
+            <input asp-for="PriceBought" class="form-control" />
+            <span asp-validation-for="PriceBought" class="text-danger"></span>
 
-            <button type="submit" class="add-farm-button">ADD FARM</button>
+            <label asp-for="Manager"></label>
+            <input asp-for="Manager" class="form-control" />
+            <span asp-validation-for="Manager" class="text-danger"></span>
+
+            @if (Model?.FarmId != null)
+            {
+                <p><strong>Generated Farm ID:</strong> @Model.FarmId</p>
+            }
+
+
+            <button type="submit" class="btn btn-primary">ADD FARM</button>
         </form>
+
     </div>
 
     <p class="footer-text">Life isn’t perfect, but with HerdWise your farm can be.</p>
