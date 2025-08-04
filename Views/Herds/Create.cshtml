@@ -1,0 +1,53 @@
+﻿@model Moo_Arvelous_Coders.Models.Herd
+
+@{
+    ViewData["Title"] = "Create Herd";
+}
+
+<link rel="stylesheet" href="~/css/site.css" />
+
+<div class="herd-create-container">
+    <div class="herd-header">
+        <img src="~/images/Logo.png" class="logo-top" />
+        <h1>CREATE HERD</h1>
+        <p class="subtitle">Farm profile has been created. Create and add your new herd.</p>
+        <button class="menu-button">MENU</button>
+    </div>
+
+    <div class="herd-content">
+        <img src="~/images/cows-group.png" class="herd-image" />
+
+        <form asp-action="Create" method="post" class="herd-form">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" }) <!-- ⬅️ Add this here -->
+            <div class="form-box">
+                <div class="form-header">Herd information</div>
+
+                <label>Herd Name:</label>
+                <input type="text" name="HerdName" placeholder="(Enter 'Herd' and then add your bull name afterwards)" />
+
+                <label>Herd ID:</label>
+                <input type="text" name="HerdID" placeholder="(Create a unique herd ID)" />
+
+                <label>Herd Size:</label>
+                <div class="herd-size-group">
+                    <input type="number" name="HerdSize" value="0" min="0" />
+                    <button type="button" class="size-btn">+</button>
+                    <button type="button" class="size-btn">−</button>
+                </div>
+
+                <div class="animal-buttons">
+                    <button type="button" class="animal-btn">Add Cow to Herd</button>
+                    <button type="button" class="animal-btn">Add Bull to Herd</button>
+                    <button type="button" class="animal-btn">Add Calf to Herd</button>
+                </div>
+            </div>
+
+            <div class="herd-form-actions">
+                <button type="reset" class="clear-btn">CLEAR FORM</button>
+                <button type="submit" class="add-herd-btn">ADD HERD</button>
+            </div>
+        </form>
+    </div>
+
+    <p class="footer-text">Life isn’t perfect, but with HerdWise your farm can be.</p>
+</div>

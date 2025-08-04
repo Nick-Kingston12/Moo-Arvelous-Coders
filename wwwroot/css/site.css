@@ -492,3 +492,427 @@ button {
     object-fit: cover; 
     border: 3px solid white; 
 }
+.farm-create-container {
+    background-color: #eef0e4;
+    font-family: 'Segoe UI', sans-serif;
+    padding: 2rem;
+    position: relative;
+}
+
+.farm-header {
+    text-align: center;
+    position: relative;
+}
+
+.logo-top {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 60px;
+    margin: 1rem;
+}
+
+.farm-header h1 {
+    font-size: 2.2rem;
+    color: #4b2e1f;
+    border-bottom: 4px solid #4b2e1f;
+    display: inline-block;
+    padding-bottom: 0.4rem;
+}
+
+.subtitle {
+    margin-top: 0.5rem;
+    color: #555;
+}
+
+.menu-button {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background-color: #e0a806;
+    border: none;
+    padding: 0.6rem 1.4rem;
+    font-weight: bold;
+    color: white;
+    border-radius: 6px;
+}
+
+.farm-content {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 2rem;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.farm-image {
+    width: 180px;
+}
+
+.farm-form {
+    max-width: 500px;
+    width: 100%;
+}
+
+.form-box {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 8px 8px 0 #bfbfbf;
+    padding: 2rem;
+    border: 2px solid #888;
+    position: relative;
+}
+
+.form-header {
+    background-color: #4f6443;
+    color: white;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 12px 12px 0 0;
+    position: absolute;
+    top: -1.2rem;
+    left: 1rem;
+}
+
+.form-box label {
+    display: block;
+    margin-top: 1rem;
+    font-weight: bold;
+}
+
+.form-box input {
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 0.3rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+
+.add-farm-button {
+    margin-top: 1.5rem;
+    background-color: #a44312;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+}
+
+    .add-farm-button:hover {
+        background-color: #872d00;
+    }
+
+.footer-text {
+    text-align: center;
+    font-style: italic;
+    margin-top: 2rem;
+    color: #333;
+    border-top: 4px solid black;
+    padding-top: 1rem;
+}
+.farm-list-container {
+    background-color: #eef0e4;
+    font-family: 'Segoe UI', sans-serif;
+    padding: 2rem;
+    position: relative;
+}
+
+.farm-header {
+    text-align: center;
+    position: relative;
+}
+
+.logo-top {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 60px;
+    margin: 1rem;
+}
+
+.farm-header h1 {
+    font-size: 2.2rem;
+    color: #4b2e1f;
+    border-bottom: 4px solid #4b2e1f;
+    display: inline-block;
+    padding-bottom: 0.4rem;
+}
+
+.subtitle {
+    margin-top: 0.5rem;
+    color: #555;
+}
+
+.menu-button {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background-color: #e0a806;
+    border: none;
+    padding: 0.6rem 1.4rem;
+    font-weight: bold;
+    color: white;
+    border-radius: 6px;
+}
+
+.farm-center-button {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.create-btn {
+    background-color: #a44312;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.farm-list-box {
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 8px 8px 0 #bfbfbf;
+    padding: 2rem;
+    max-width: 700px;
+    margin: 2rem auto;
+    position: relative;
+}
+
+.box-header {
+    background-color: #4f6443;
+    color: white;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    position: absolute;
+    top: -1.5rem;
+    left: 2rem;
+}
+
+.instruction {
+    margin-bottom: 1rem;
+}
+
+.farm-list {
+    list-style-position: inside;
+    padding-left: 0;
+}
+
+    .farm-list li {
+        margin: 0.8rem 0;
+    }
+
+    .farm-list a {
+        font-weight: bold;
+        text-decoration: underline;
+        color: #2c2c2c;
+        margin-right: 1rem;
+    }
+
+.edit-btn,
+.delete-btn {
+    background-color: #b75524;
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    text-decoration: none;
+    margin-left: 0.3rem;
+}
+
+    .edit-btn:hover,
+    .delete-btn:hover {
+        background-color: #943e1e;
+    }
+
+.arrow-nav {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+    font-size: 1.5rem;
+}
+
+.arrow {
+    cursor: pointer;
+}
+
+.footer-text {
+    text-align: center;
+    font-style: italic;
+    margin-top: 2rem;
+    color: #333;
+    border-top: 4px solid black;
+    padding-top: 1rem;
+}
+.herd-create-container {
+    background-color: #eef0e4;
+    font-family: 'Segoe UI', sans-serif;
+    padding: 2rem;
+    position: relative;
+}
+
+.herd-header {
+    text-align: center;
+    position: relative;
+}
+
+.logo-top {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 60px;
+    margin: 1rem;
+}
+
+.herd-header h1 {
+    font-size: 2.2rem;
+    color: #4b2e1f;
+    border-bottom: 4px solid #4b2e1f;
+    display: inline-block;
+    padding-bottom: 0.4rem;
+}
+
+.subtitle {
+    margin-top: 0.5rem;
+    color: #555;
+}
+
+.menu-button {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background-color: #e0a806;
+    border: none;
+    padding: 0.6rem 1.4rem;
+    font-weight: bold;
+    color: white;
+    border-radius: 6px;
+}
+
+.herd-content {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 2rem;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.herd-image {
+    width: 220px;
+}
+
+.herd-form {
+    max-width: 500px;
+    width: 100%;
+}
+
+.form-box {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 8px 8px 0 #bfbfbf;
+    padding: 2rem;
+    border: 2px solid #888;
+    position: relative;
+}
+
+.form-header {
+    background-color: #4f6443;
+    color: white;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 12px 12px 0 0;
+    position: absolute;
+    top: -1.2rem;
+    left: 1rem;
+}
+
+.form-box label {
+    display: block;
+    margin-top: 1rem;
+    font-weight: bold;
+}
+
+.form-box input[type="text"],
+.form-box input[type="number"] {
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 0.3rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+
+.herd-size-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.size-btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    border: none;
+    background-color: #b75524;
+    color: white;
+    font-weight: bold;
+}
+
+.animal-buttons {
+    margin-top: 1rem;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.animal-btn {
+    background-color: #a44312;
+    color: white;
+    padding: 0.6rem 1rem;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    flex: 1;
+}
+
+.herd-form-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+}
+
+.clear-btn {
+    background-color: #b75524;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+.add-herd-btn {
+    background-color: #a44312;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+.footer-text {
+    text-align: center;
+    font-style: italic;
+    margin-top: 2rem;
+    color: #333;
+    border-top: 4px solid black;
+    padding-top: 1rem;
+}
+

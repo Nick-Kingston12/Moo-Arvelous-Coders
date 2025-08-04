@@ -1,0 +1,49 @@
+﻿@model Moo_Arvelous_Coders.Models.Farm
+
+@{
+    ViewData["Title"] = "Create Farm";
+}
+
+<link rel="stylesheet" href="~/css/site.css" />
+
+<div class="farm-create-container">
+    <div class="farm-header">
+        <img src="~/images/Logo.png" class="logo-top" />
+        <h1>CREATE FARM</h1>
+        <p class="subtitle">Personal farmer profile has been created. Create your farm.</p>
+        <button class="menu-button">MENU</button>
+    </div>
+
+    <div class="farm-content">
+        <img src="~/images/Farm.png" class="farm-image" />
+
+        <form asp-action="Create" method="post" class="farm-form">
+            <div class="form-box">
+                <div class="form-header">Farm information</div>
+
+                <label>Farm Name:</label>
+                <input type="text" name="FarmName" placeholder="(Your farm name)" />
+
+                <label>Farm ID:</label>
+                <input type="text" name="FarmId" placeholder="(Create a unique farm ID)" />
+
+                <label>Farm Location:</label>
+                <input type="text" name="FarmLocation" placeholder="(Street, Suburb, City, Postal Code, Province, Country)" />
+
+                <label>Farm Size:</label>
+                <input type="text" name="FarmSize" placeholder="(Farm size in hectares)" />
+
+                <label>Farm Price:</label>
+                <input type="text" name="FarmPrice" placeholder="R (Purchase Price)" />
+
+                <label>Farm Manager Name:</label>
+                <input type="text" name="FarmManager" placeholder="(First and last name of the farm manager)" />
+            </div>
+
+            <button type="submit" class="add-farm-button">ADD FARM</button>
+        </form>
+    </div>
+
+    <p class="footer-text">Life isn’t perfect, but with HerdWise your farm can be.</p>
+</div>
+

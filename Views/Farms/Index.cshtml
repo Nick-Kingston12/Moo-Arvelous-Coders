@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Moo_Arvelous_Coders.Models.Farm>
+
+@{
+    ViewData["Title"] = "Farms";
+}
+
+<link rel="stylesheet" href="~/css/site.css" />
+
+<div class="farm-list-container">
+    <div class="farm-header">
+        <img src="~/images/Logo.png" class="logo-top" />
+        <h1>FARMS</h1>
+        <p class="subtitle">Welcome to your farm. Visit an existing farm or create a new one.</p>
+        <button class="menu-button">MENU</button>
+    </div>
+
+    <div class="farm-center-button">
+        <a class="btn create-btn" href="/Farms/Create">CREATE NEW FARM</a>
+    </div>
+
+    <div class="farm-list-box">
+        <div class="box-header">Visit Your Created Farm</div>
+        <p class="instruction">Click on one of the farm links below to select and access your farm.</p>
+
+        <ol class="farm-list">
+            @foreach (var farm in Model)
+            {
+                <li>
+                    <a href="/Farms/Details/@farm.FarmId">@farm.FarmName</a>
+                    <a href="/Farms/Edit/@farm.FarmId" class="btn edit-btn">Edit</a>
+                    <a href="/Farms/Delete/@farm.FarmId" class="btn delete-btn">Delete</a>
+                </li>
+            }
+        </ol>
+
+        <div class="arrow-nav">
+            <span class="arrow left-arrow">←</span>
+            <span class="arrow right-arrow">→</span>
+        </div>
+    </div>
+
+    <p class="footer-text">Life isn’t perfect, but with HerdWise your farm can be.</p>
+</div>
+
