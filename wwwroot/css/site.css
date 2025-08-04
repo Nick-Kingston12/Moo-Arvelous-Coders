@@ -19,7 +19,6 @@ html {
 
 html, body {
     margin: 0;
-    padding: 0;
     overflow-x: hidden;
     width: 100%;
     height: 100%;
@@ -31,16 +30,6 @@ html, body {
     position: relative;
     width: 100%;
     height: 100vh;
-}
-
-.background-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
-    z-index: 0;
 }
 
 .account-wrapper {
@@ -120,6 +109,7 @@ html, body {
     font-size: 12px;
     margin-top: 20px;
     text-align: center;
+    color: #5c3b28;
 }
 
 .error-message {
@@ -129,7 +119,6 @@ html, body {
 body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
-    padding: 0;
     background-color: #e9f1e4;
 }
 
@@ -200,6 +189,7 @@ h1 {
     border: none;
     border-radius: 5px;
     transition: background 0.3s;
+    justify-content: center;
 }
 
     .home-buttons .btn:hover {
@@ -212,9 +202,10 @@ h1 {
 
 .footer-text {
     text-align: center;
-    margin-top: 40px;
+    margin-top: 65px;
     font-size: 0.9rem;
     color: #5c3b28;
+    font-weight: bold;
 }
 
 .menu-button {
@@ -228,12 +219,6 @@ h1 {
     font-weight: bold;
     border-radius: 4px;
 }
-.your-herd {
-    font-size: 2.5rem;
-    color: #335444;
-    line-height: 1.2;
-    margin: 0;
-}
 
 .managed {
     font-weight: 600;
@@ -243,26 +228,27 @@ h1 {
 
 .button-group {
     display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
+    gap: 30px;
     margin-top: 20px;
+    margin-bottom: 40px;
 }
 .button-wrapper {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .home-button {
-    padding: 15px 25px;
+    padding: 12px 20px;
     background-color: #984b28;
     color: white;
-    text-decoration: none;
-    font-weight: 600;
-    border: none;
-    font-size: 14px;
-    letter-spacing: 1px;
+    white-space: nowrap;
     width: 180px;
-    text-align: center;
-    border-radius: 3px;
+    text-decoration: none;
+    font-weight: bold;
+    border: none;
+    font-size: 16px;
+    border-radius: 7px;
     transition: background-color 0.3s ease;
 }
 
@@ -273,50 +259,39 @@ h1 {
 
 .button-subtext {
     font-size: 13px;
-    color: #3b3b3b;
-    margin-top: 6px;
+    color: #5c3b28;
+    margin-top: 10px;
+    font-weight: bold;
 }
 
-.landing-page {
-    display: flex;
-    height: 100vh;
-    width: 100vw;
-    overflow: hidden;
-    font-family: 'Poppins', sans-serif;
-    z-index: 0;
-    position: relative;
-}
-
-.landing-left {
-    width: 50%;
-    background-color: #9E5333;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.landing-right {
-    width: 55%;
-    background: url('../images/landing-page.png') no-repeat center center;
-    background-size: cover;
-    padding: 60px 5%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    position: relative;
-    z-index: 1;
-    color: #1d1d1d;
-}
 .right-text {
     margin-top: 20px;
     text-align: left;
+    overflow: hidden;
 }
+    .right-text::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('../images/cows.jfif');
+        background-size: cover;
+        background-position: center;
+        opacity: 0.25;
+        z-index: 0;
+    }
+    .right-text > * {
+        position: relative;
+        z-index: 1;
+    }
 .top-line {
-    width: 80%;
-    border: none;
-    height: 2px;
+    width: 100%; 
+    max-width: 400px; 
+    height: 4px;
     background-color: #fff;
-    margin: 1rem 0;
+    margin: 1.5rem auto;
 }
 .content-box {
     position: relative;
@@ -333,18 +308,20 @@ h1 {
 
 .welcome-title {
     font-family: 'Libre Baskerville', serif;
-    font-size: 26px;
-    color: #3b2d1f;
+    font-size: 29px;
+    color: #5c3b28;
     text-align: left;
     margin-bottom: 10px;
+    font-weight: bold;
+    text-shadow: 1px 1px #d2c8b0;
+    display: inline-block;
 }
 
 .top-line {
-    width: 80px;
-    border: none;
+    width: 300px;
     height: 3px;
     background-color: #3b2d1f;
-    margin: 1rem 0;
+    margin: 1rem auto 0;
 }
 
 .register-container {
@@ -445,6 +422,12 @@ button {
     color: #4e3e26;
 }
 
+.top-heading {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 80px;
+    margin-top: -90px;
+}
 .subheading {
     text-align: center;
     font-size: 16px;
@@ -463,3 +446,49 @@ button {
     font-weight: bold;
 }
 
+.landing-wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    height: 100vh;
+    background-color: #fff;
+
+}
+
+.left-color-block {
+    background-color: #a34d2e;
+    width: 30%;
+}
+
+.right-content {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    padding: 60px 40px;
+}
+.heading-group {
+    font-size: 30px;
+    color: #566543;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+    .heading-group strong {
+        font-size: 38px;
+        font-weight: 900;
+        display: block;
+        color: #566543;
+        margin-top: 8px;
+    }
+.logo-image {
+    display: block;
+    margin: 0 auto;
+    margin-top: 50%;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    object-fit: cover; 
+    border: 3px solid white; 
+}
