@@ -13,9 +13,9 @@ public partial class Herd
     [Required(ErrorMessage = "Herd name is required.")]
     public string HerdName { get; set; }
 
-    public string Bull { get; set; } 
+    public string? Bull { get; set; } 
 
-    public string Cattle { get; set; } 
+    public string? Cattle { get; set; } 
 
     [Required(ErrorMessage = "Herd size is required.")]
     [Range(1, 1000, ErrorMessage = "Herd size must be a number between 1 and 1000.")]
