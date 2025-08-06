@@ -231,6 +231,7 @@ h1 {
     gap: 30px;
     margin-top: 20px;
     margin-bottom: 40px;
+    justify-content: center;
 }
 .button-wrapper {
     display: flex;
@@ -262,6 +263,12 @@ h1 {
     font-size: 13px;
     color: #5c3b28;
     margin-top: 10px;
+    font-weight: bold;
+}
+.button-sub {
+    font-size: 16px;
+    color: #5c3b28;
+    margin-top: 6px;
     font-weight: bold;
 }
 
@@ -331,6 +338,7 @@ h1 {
     justify-content: space-between;
     align-items: flex-start;
     padding: 40px;
+    position: relative;
 }
 
 .left-box, .right-form {
@@ -755,8 +763,27 @@ button {
 .herd-create-container {
     background-color: #eef0e4;
     font-family: 'Segoe UI', sans-serif;
-    padding: 2rem;
     position: relative;
+}
+
+.form-herd-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; 
+    padding: 50px;
+    gap: 25px;
+}
+
+.form-herd-container > div {
+    flex: 1;
+}
+
+.image-container-herd img{
+    width: 100%;
+    max-width: 410px;
+    height: auto;
+    display: block;
+    background: transparent;
 }
 
 .herd-header {
@@ -766,10 +793,13 @@ button {
 
 .logo-top {
     position: absolute;
-    left: 0;
-    top: 0;
-    width: 60px;
-    margin: 1rem;
+    top: -0.5rem;
+    left: 1rem;
+    width: 120px;
+    height: auto;
+    border-radius: 50%;
+    object-fit: cover;
+    z-index: 10;
 }
 
 .herd-header h1 {
@@ -804,10 +834,7 @@ button {
     margin-top: 2rem;
     gap: 2rem;
     flex-wrap: wrap;
-}
-
-.herd-image {
-    width: 220px;
+    margin-right:50px;
 }
 
 .herd-form {
@@ -971,5 +998,21 @@ button {
     margin-top: 1rem;
 }
 
+.image-container {
+    position: absolute;
+    bottom: 2rem;
+    left: 3rem;
+    max-width: 400px;
+    z-index: 1;
+    margin-bottom: 80px;
+    margin-left: 100px;
+}
+
+    .image-container img {
+        width: 100%;
+        height: auto;
+        opacity: 0.95;
+        background: transparent;
+    }
 
 

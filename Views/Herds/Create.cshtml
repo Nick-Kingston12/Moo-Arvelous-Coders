@@ -8,14 +8,19 @@
 
 <div class="herd-create-container">
     <div class="herd-header">
-        <img src="~/images/Logo.png" class="logo-top" />
+        <img src="~/images/Logo.png" alt="HerdWise Logo" class="logo-top" />
         <h1 class="welcome-title">CREATE HERD</h1>
         <p class="subheading">Farm profile has been created. Create and add your new herd.</p>
         <a class="menu-button" href="/">MENU</a>
     </div>
 
+    <div class="form-herd-container">
+
+    <div class="image-container-herd">
+        <img src="~/images/herd.png" alt="Cartoon Herd" />
+    </div>
+
     <div class="herd-content">
-        <img src="~/images/cows-group.png" class="herd-image" />
 
         <form asp-action="Create" method="post" class="herd-form">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -37,14 +42,12 @@
             <span asp-validation-for="Herdsize" class="text-danger"></span>
 
             <div class="animal-buttons">
-                <button type="button" class="animal-btn">Add Cow to Herd</button>
-                <button type="button" class="animal-btn">Add Bull to Herd</button>
-                <button type="button" class="animal-btn">Add Calf to Herd</button>
+                <button type="button" class="animal-btn">Add Cattle</button>
             </div>
 
             <div class="herd-form-actions">
-                <button type="reset" class="clear-btn">CLEAR FORM</button>
-                <button type="submit" class="add-herd-btn">ADD HERD</button>
+                <button type="reset" class="home-button">CLEAR FORM</button>
+                <button type="submit" class="home-button">ADD HERD</button>
 
             </div>
             
@@ -58,7 +61,7 @@
         }
 
     </div>
-
+    </div>
     <p class="footer-text">Life isn’t perfect, but with HerdWise your farm can be.</p>
 </div>
 
