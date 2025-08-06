@@ -1,47 +1,37 @@
 ﻿@{
     ViewData["Title"] = "Welcome to HerdWise";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <link rel="stylesheet" href="~/css/site.css" />
 
-<div class="home-container">
-    <div class="home-left">
-        <img src="~/images/Logo.png" alt="Moo-arvelous Coders Logo" class="home-logo" />
+<div class="landing-wrapper">
+    <div class="left-color-block">
+        <img src="~/images/Logo.png" alt="HerdWise Logo" class="logo-image" />
     </div>
 
-    <div class="home-right">
-        <h1>Welcome to HerdWise !</h1>
+    <div class="right-content">
+        <div >
+            <h2 class="welcome-title">Welcome to Herdwise!</h2>
+        </div>
 
         <div class="search-bar">
             <input type="text" placeholder="Search ..." />
             <button><i class="fas fa-search"></i></button>
         </div>
-        @if (TempData["SuccessMessage"] != null)
-        {
-            <div class="success-message">
-                @TempData["SuccessMessage"]
-            </div>
-        }
-
 
         <div class="home-buttons">
-            <a class="btn" href="/Account/Details">Personal Account</a>
-            <p>View all personal account details. Edit and update all personal account details.</p>
+            <a class="btn" href="/Account/Details">PERSONAL ACCOUNT</a>
+            <p class="button-subtext">View all personal account details. Edit and update all personal account details.</p>
 
-            <a class="btn" href="/Farms/Index">Farms</a>
-            <p>Create and add a new farm(s). Edit, update and delete farm details.</p>
+            <a class="btn" href="/Farms/Index">FARMS</a>
+            <p class="button-subtext">Create and add a new farm(s). Edit, update and delete farm details.</p>
 
-            <a class="btn" href="/Farms">Farms</a>
-            <p>Lets go to our farm.</p>
+            <a class="btn" href="/Herds/Index">HERDS</a>
+            <p class ="button-subtext">Create and add a new herd(s). Edit, update and delete herd details. Create, add and edit cattle in herds.</p>
 
-            <a href="/Herds/Create">Go to Create Herd</a>
-            <p> Lets see the Herds</p>
-
-            <a class="btn" href="/Herds/Index">Herds</a>
-            <p>Create and add a new herd(s). Edit, update and delete herd details. Create, add and edit cattle in herds.</p>
-
-            <a class="btn logout" href="/Account/Logout">Logout</a>
-            <p>Ready to logout and hit the hay?</p>
+            <a class="btn logout" href="/Account/Logout">LOGOUT</a>
+            <p class="button-subtext">Ready to logout and hit the hay?</p>
         </div>
 
         <p class="footer-text">Life isn’t perfect, but with HerdWise your farm can be.</p>

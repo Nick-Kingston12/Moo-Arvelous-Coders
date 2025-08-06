@@ -18,6 +18,11 @@ namespace Moo_Arvelous_Coders.Controllers
             return View();
         }
 
+        public IActionResult Index()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();

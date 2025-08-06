@@ -181,7 +181,7 @@ h1 {
 .home-buttons .btn {
     display: inline-block;
     margin-top: 1rem;
-    background: #b75524;
+    background-color: #984b28;
     color: white;
     padding: 0.7rem 1.5rem;
     text-decoration: none;
@@ -250,6 +250,7 @@ h1 {
     font-size: 16px;
     border-radius: 7px;
     transition: background-color 0.3s ease;
+    justify-content: center;
 }
 
 
@@ -269,7 +270,7 @@ h1 {
     text-align: left;
     overflow: hidden;
 }
-    .right-text::before {
+    .right-content::before {
         content: "";
         position: absolute;
         top: 0;
@@ -282,7 +283,7 @@ h1 {
         opacity: 0.25;
         z-index: 0;
     }
-    .right-text > * {
+    .right-content > * {
         position: relative;
         z-index: 1;
     }
@@ -307,14 +308,14 @@ h1 {
 }
 
 .welcome-title {
-    font-family: 'Libre Baskerville', serif;
     font-size: 29px;
-    color: #5c3b28;
-    text-align: left;
+    color: #4e3e26;
+    text-align: center;
     margin-bottom: 10px;
-    font-weight: bold;
-    text-shadow: 1px 1px #d2c8b0;
+    font-weight: 700;
+    text-shadow: 1px 1px #4e3e26;
     display: inline-block;
+    overflow: hidden;
 }
 
 .top-line {
@@ -322,6 +323,7 @@ h1 {
     height: 3px;
     background-color: #3b2d1f;
     margin: 1rem auto 0;
+    overflow: hidden;
 }
 
 .register-container {
@@ -468,6 +470,7 @@ button {
     text-align: center;
     position: relative;
     padding: 60px 40px;
+    overflow: hidden;
 }
 .heading-group {
     font-size: 30px;
@@ -665,7 +668,7 @@ button {
 }
 
 .create-btn {
-    background-color: #a44312;
+    background-color: #a5522c;
     color: white;
     padding: 0.8rem 1.5rem;
     border: none;
@@ -717,7 +720,7 @@ button {
 
 .edit-btn,
 .delete-btn {
-    background-color: #b75524;
+    background-color: #a5522c;
     color: white;
     padding: 0.3rem 0.8rem;
     border-radius: 4px;
@@ -890,7 +893,7 @@ button {
 }
 
 .clear-btn {
-    background-color: #b75524;
+    background-color: #a5522c;
     color: white;
     padding: 0.8rem 1.5rem;
     border: none;
@@ -952,8 +955,8 @@ button {
     text-decoration: none;
 }
 .clear-btn {
-    background-color: #bbbbbb;
-    color: #333;
+    background-color: #984b28;
+    color: white;
     padding: 0.6rem 1.2rem;
     border: none;
     border-radius: 6px;
