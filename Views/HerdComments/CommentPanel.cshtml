@@ -1,0 +1,28 @@
+﻿@model Moo_Arvelous_Coders.Models.HerdComment
+
+<div class="comment-panel">
+    <h3>COMMENT ON HERD</h3>
+    <p>Use this as a digital notebook to keep important notes on your herd.</p>
+
+    <form asp-controller="HerdComments" asp-action="Create" method="post">
+        <label>Select a herd to comment on:</label>
+        <select asp-for="HerdId" class="form-control">
+            <option value="">( Select correct herd )</option>
+            @foreach (var herd in ViewBag.Herds as List<Moo_Arvelous_Coders.Models.Herd>)
+            {
+                <option value="@herd.HerdId">@herd.HerdName</option>
+            }
+        </select>
+        <span asp-validation-for="HerdId" class="text-danger"></span>
+
+        <label>Create your herd comment:</label>
+        <textarea asp-for="CommentDescription" class="form-control"
+                  placeholder="Add extra comments regarding any camp movements, treatments, feed, etc."></textarea>
+        <span asp-validation-for="CommentDescription" class="text-danger"></span>
+
+        <div class="herd-form-actions" style="margin-top: 10px;">
+            <button type="submit" class="btn btn-primary">RECORD COMMENT</button>
+            <button type="reset" class="btn btn-secondary">CLEAR COMMENT</button>
+        </div>
+    </form>
+</div>

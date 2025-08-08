@@ -6,9 +6,13 @@ namespace Moo_Arvelous_Coders.Controllers
     public class HerdsController : Controller
     {
         private static List<Herd> _herds = new List<Herd>();
+        // HerdsController.cs
+        public static List<Herd> HerdList => _herds;
+
 
         public IActionResult Index()
         {
+            ViewBag.Herds = _herds;
             return View(_herds);
         }
         // GET: /Herds/Create
