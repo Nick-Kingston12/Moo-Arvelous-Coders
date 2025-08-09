@@ -1092,5 +1092,45 @@ button {
     .comment-clear-btn:hover {
         background-color: #999;
     }
+.search-container {
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    padding: 2rem;
+    max-width: 500px;
+    margin: 2rem auto;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+    .search-container h2 {
+        margin-bottom: 1rem;
+    }
+
+    .search-container input {
+        margin-bottom: 1rem;
+        padding: 0.5rem;
+    }
+.farm-details-container {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+}
+
+.farm-details-box {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+    margin-top: 20px;
+}
+
+.farm-details-actions {
+    margin-top: 20px;
+}
+
+    .farm-details-actions .btn {
+        margin-right: 10px;
+    }
+
+
 
 

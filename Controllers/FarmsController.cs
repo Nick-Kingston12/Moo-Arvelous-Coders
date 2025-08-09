@@ -10,6 +10,7 @@ namespace Moo_Arvelous_Coders.Controllers
     {
         // TEMPORARY in-memory list (until DB is set up)
         private static List<Farm> _farms = new List<Farm>();
+        public static List<Farm> FarmList => _farms;
 
         // GET: /Farms/Create
         public IActionResult Create()
@@ -109,6 +110,15 @@ namespace Moo_Arvelous_Coders.Controllers
             _farms.Remove(farm);
             TempData["SuccessMessage"] = "Farm deleted successfully!";
             return RedirectToAction("Index");
+        }
+        public IActionResult Details(string id)
+        {
+            var farm = FarmList.FirstOrDefault(f => f.FarmId == id);
+            if (farm == null)
+            {
+                return NotFound();
+            }
+            return View(farm);
         }
 
 
