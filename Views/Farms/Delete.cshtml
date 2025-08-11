@@ -7,39 +7,36 @@
 <link rel="stylesheet" href="~/css/site.css" />
 
 <div class="farm-create-container">
+    <!-- Header -->
     <div class="farm-header">
         <img src="~/images/Logo.png" alt="HerdWise Logo" class="logo-top" />
-        <h1 class="form-title">DELETE FARM</h1><a href="c:\users\user\documents\0 uni 2025\wrrv301 - year project\main code\views\farms\delete.cshtml">c:\users\user\documents\0 uni 2025\wrrv301 - year project\main code\views\farms\delete.cshtml</a>
+        <h1 class="form-title">DELETE FARM</h1>
         <p class="subtitle">Are you sure you want to delete this farm?</p>
         <a class="menu-button" href="/">MENU</a>
     </div>
 
-    <div class="farm-content">
-        <img src="~/images/Farm.png" class="farm-image" />
-
-
-        <form asp-action="Delete" method="post">
-            @Html.AntiForgeryToken()
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-            <input type="hidden" asp-for="FarmId" />
-            <div class="form-box">
+    <!-- Main Delete Box -->
+    <div class="delete-content">
+        <div class="farm-delete-card">
+            <img src="~/images/Farm.png" alt="Farm Image" class="farm-image" />
+            <div class="farm-info">
                 <p><strong>@Model.FarmName</strong></p>
                 <p>@Model.Location</p>
                 <p>Size: @Model.FarmSize</p>
                 <p>Price: R @Model.PriceBought</p>
             </div>
-
-            <button type="submit" class="delete-farm-button">YES, DELETE</button>
-        </form>
-
-        <!-- This is placed OUTSIDE the form now -->
-        <div class="go-back-container">
-            <a href="/Farms/Index" class="menu-button">NO, GO BACK</a>
         </div>
-        
+
+        <!-- Buttons -->
+        <div class="delete-actions">
+            <form asp-action="Delete" method="post">
+                @Html.AntiForgeryToken()
+                <input type="hidden" asp-for="FarmId" />
+                <button type="submit" class="delete-farm-button">YES, DELETE</button>
+            </form>
+            <a href="/Farms/Index" class="cancel-button">NO, GO BACK</a>
+        </div>
     </div>
 
     <p class="footer-text">Life isn’t perfect, but with HerdWise your farm can be.</p>
 </div>
-
