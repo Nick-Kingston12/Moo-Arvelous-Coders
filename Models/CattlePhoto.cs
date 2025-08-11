@@ -5,9 +5,9 @@ namespace Moo_Arvelous_Coders.Models;
 
 public partial class CattlePhoto
 {
-    public int PhotoId { get; set; }
+    public string PhotoId { get; set; }
 
-    public int? CattleId { get; set; }
+    public string? CattleId { get; set; }
 
     public string PhotoUrl { get; set; } = null!;
 

@@ -21,9 +21,9 @@ public partial class Herd
     [Range(1, 1000, ErrorMessage = "Herd size must be a number between 1 and 1000.")]
     public int Herdsize { get; set; }
 
-    public int? FarmId { get; set; }
+    public string? FarmId { get; set; }
 
-    public int? FarmerId { get; set; }
+    public string? FarmerId { get; set; }
 
     public virtual ICollection<Cattle> Cattles { get; set; } = new List<Cattle>();
 

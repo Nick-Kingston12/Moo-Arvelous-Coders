@@ -5,7 +5,7 @@ namespace Moo_Arvelous_Coders.Models;
 
 public partial class Cattle
 {
-    public int CattleId { get; set; }
+    public string CattleId { get; set; }
 
     public string? Status { get; set; }
 
@@ -19,9 +19,9 @@ public partial class Cattle
 
     public DateOnly? DateOfDeath { get; set; }
 
-    public int? HerdId { get; set; }
+    public string? HerdId { get; set; }
 
-    public int? FarmerId { get; set; }
+    public string? FarmerId { get; set; }
 
     public virtual ICollection<CattleHealthRecord> CattleHealthRecords { get; set; } = new List<CattleHealthRecord>();
 

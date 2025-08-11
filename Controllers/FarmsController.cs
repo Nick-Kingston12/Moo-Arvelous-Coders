@@ -1,119 +1,144 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Moo_Arvelous_Coders.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Moo_Arvelous_Coders.Controllers
 {
     public class FarmsController : Controller
     {
-        // TEMPORARY in-memory list (until DB is set up)
-        private static List<Farm> _farms = new List<Farm>();
-        public static List<Farm> FarmList => _farms;
+        private readonly MooArvelousDbContext _context;
 
-        // GET: /Farms/Create
+        public FarmsController(MooArvelousDbContext context)
+        {
+            _context = context;
+        }
+
+        // GET: Farms
+        public async Task<IActionResult> Index()
+        {
+            var farms = await _context.Farms.ToListAsync();
+            return View(farms);
+        }
+
+        // GET: Farms/Details/{id}
+        public async Task<IActionResult> Details(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var farm = await _context.Farms.FirstOrDefaultAsync(f => f.FarmId == id);
+            if (farm == null)
+            {
+                return NotFound();
+            }
+
+            return View(farm);
+        }
+
+        // GET: Farms/Create
         public IActionResult Create()
         {
-            // 🔧 Generate ID here too so user can SEE it before submitting
+            // Generate a new string ID for the view
             var model = new Farm
             {
                 FarmId = Guid.NewGuid().ToString().Substring(0, 8)
             };
-
             return View(model);
         }
 
-        // GET: /Farms/
-        public IActionResult Index()
-        {
-            return View(_farms);
-        }
-
-        // POST: /Farms/Create
+        // POST: Farms/Create
         [HttpPost]
-        public IActionResult Create(Farm model)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(Farm model)
         {
             if (ModelState.IsValid)
             {
-                // ✅ Only re-generate ID if for some reason it's still empty
+                // Generate ID if missing (just in case)
                 if (string.IsNullOrWhiteSpace(model.FarmId))
                 {
                     model.FarmId = Guid.NewGuid().ToString().Substring(0, 8);
                 }
 
                 // Check for duplicate FarmName
-                var exists = _farms.Any(f => f.FarmName == model.FarmName);
+                bool exists = await _context.Farms.AnyAsync(f => f.FarmName == model.FarmName);
                 if (exists)
                 {
                     ModelState.AddModelError("FarmName", "A farm with this name already exists.");
                     return View(model);
                 }
 
-                _farms.Add(model);
+                _context.Add(model);
+                await _context.SaveChangesAsync();
                 TempData["SuccessMessage"] = "Farm created successfully!";
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             }
-
-            // 🔁 Re-show form with errors and current Farm ID
             return View(model);
         }
-        // GET: /Farms/Edit/{id}
-        public IActionResult Edit(string id)
+
+        // GET: Farms/Edit/{id}
+        public async Task<IActionResult> Edit(string id)
         {
-            var farm = _farms.FirstOrDefault(f => f.FarmId == id);
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var farm = await _context.Farms.FindAsync(id);
             if (farm == null)
             {
                 return NotFound();
             }
             return View(farm);
         }
-        // POST: /Farms/Edit/{id}
+
+        // POST: Farms/Edit/{id}
         [HttpPost]
-        public IActionResult Edit(Farm model)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(string id, Farm model)
         {
+            if (id != model.FarmId)
+            {
+                return NotFound();
+            }
+
             if (ModelState.IsValid)
             {
-                var farm = _farms.FirstOrDefault(f => f.FarmId == model.FarmId);
-                if (farm == null) return NotFound();
-
-                // Update all fields
-                farm.FarmName = model.FarmName;
-                farm.Location = model.Location;
-                farm.PriceBought = model.PriceBought;
-                farm.FarmSize = model.FarmSize;
-                farm.Manager = model.Manager;
-
-                TempData["SuccessMessage"] = "Farm details updated successfully!";
-                return RedirectToAction("Index");
+                try
+                {
+                    _context.Update(model);
+                    await _context.SaveChangesAsync();
+                    TempData["SuccessMessage"] = "Farm details updated successfully!";
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!await FarmExists(model.FarmId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
             }
-
-            // Return view with validation errors
             return View(model);
         }
-        //GET: /Farms/Delete/{id}
-        public IActionResult Delete(string id)
-        {
-            var farm = _farms.FirstOrDefault(f => f.FarmId == id);
-            if (farm == null) return NotFound();
 
-            return View(farm); // Go to confirmation page
-        }
-
-        // POST: /Farms/Delete/{id}
-        [HttpPost, ActionName("Delete")]
-        public IActionResult DeleteConfirmed(string id)
+        // GET: Farms/Delete/{id}
+        public async Task<IActionResult> Delete(string id)
         {
-            var farm = _farms.FirstOrDefault(f => f.FarmId == id);
-            if (farm == null) return NotFound();
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-            _farms.Remove(farm);
-            TempData["SuccessMessage"] = "Farm deleted successfully!";
-            return RedirectToAction("Index");
-        }
-        public IActionResult Details(string id)
-        {
-            var farm = FarmList.FirstOrDefault(f => f.FarmId == id);
+            var farm = await _context.Farms.FirstOrDefaultAsync(f => f.FarmId == id);
             if (farm == null)
             {
                 return NotFound();
@@ -121,8 +146,24 @@ namespace Moo_Arvelous_Coders.Controllers
             return View(farm);
         }
 
+        // POST: Farms/Delete/{id}
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(string id)
+        {
+            var farm = await _context.Farms.FindAsync(id);
+            if (farm != null)
+            {
+                _context.Farms.Remove(farm);
+                await _context.SaveChangesAsync();
+                TempData["SuccessMessage"] = "Farm deleted successfully!";
+            }
+            return RedirectToAction(nameof(Index));
+        }
 
-
-
+        private async Task<bool> FarmExists(string id)
+        {
+            return await _context.Farms.AnyAsync(f => f.FarmId == id);
+        }
     }
 }

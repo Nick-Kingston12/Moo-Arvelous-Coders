@@ -5,18 +5,22 @@ using Moo_Arvelous_Coders.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") 
+// Connection strings from appsettings.json
+var identityConnection = builder.Configuration.GetConnectionString("DefaultConnection")
     ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));
+var mooConnection = builder.Configuration.GetConnectionString("MooArvelousConnection")
+    ?? throw new InvalidOperationException("Connection string 'MooArvelousConnection' not found.");
 
+// Identity database
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(identityConnection));
+
+// Moo-Arvelous business data database
 builder.Services.AddDbContext<MooArvelousDbContext>(options =>
-    options.UseSqlServer(connectionString));
+    options.UseSqlServer(mooConnection));
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-
 
 // Identity config
 builder.Services.AddDefaultIdentity<IdentityUser>(options =>
@@ -29,7 +33,6 @@ builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();
@@ -37,7 +40,6 @@ if (app.Environment.IsDevelopment())
 else
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -45,14 +47,14 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
-
-app.UseAuthentication(); // <--- REQUIRED
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index1}/{id?}");
-app.MapRazorPages();
 
+app.MapRazorPages();
 app.Run();
+
+

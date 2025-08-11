@@ -5,17 +5,17 @@ namespace Moo_Arvelous_Coders.Models;
 
 public partial class CattleSaleRecord
 {
-    public int SaleId { get; set; }
+    public string SaleId { get; set; }
 
-    public int? CattleId { get; set; }
+    public string? CattleId { get; set; }
 
-    public int? FarmerId { get; set; }
+    public string? FarmerId { get; set; }
 
     public DateOnly SaleDate { get; set; }
 
     public decimal SalePrice { get; set; }
 
-    public int? BuyerId { get; set; }
+    public string? BuyerId { get; set; }
 
     public virtual Buyer? Buyer { get; set; }
 

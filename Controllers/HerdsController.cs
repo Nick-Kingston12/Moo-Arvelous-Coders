@@ -1,21 +1,28 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Moo_Arvelous_Coders.Models;
+using System;
+using System.Threading.Tasks;
 
 namespace Moo_Arvelous_Coders.Controllers
 {
     public class HerdsController : Controller
     {
-        private static List<Herd> _herds = new List<Herd>();
-        // HerdsController.cs
-        public static List<Herd> HerdList => _herds;
+        private readonly MooArvelousDbContext _context;
 
-
-        public IActionResult Index()
+        public HerdsController(MooArvelousDbContext context)
         {
-            ViewBag.Herds = _herds;
-            return View(_herds);
+            _context = context;
         }
-        // GET: /Herds/Create
+
+        // GET: Herds
+        public async Task<IActionResult> Index()
+        {
+            var herds = await _context.Herds.ToListAsync();
+            return View(herds);
+        }
+
+        // GET: Herds/Create
         public IActionResult Create()
         {
             var model = new Herd
@@ -25,98 +32,106 @@ namespace Moo_Arvelous_Coders.Controllers
             return View(model);
         }
 
-        // POST: /Herds/Create
+        // POST: Herds/Create
         [HttpPost]
-        public IActionResult Create(Herd model)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(Herd model)
         {
             if (ModelState.IsValid)
             {
-                // Only regenerate if ID wasn't passed in
                 if (string.IsNullOrWhiteSpace(model.HerdId))
                 {
                     model.HerdId = Guid.NewGuid().ToString().Substring(0, 8);
                 }
 
-                _herds.Add(model);
-                TempData["SuccessMessage"] = "Herd created successfully!";
-                return RedirectToAction("Index", "Herds");
-                // Send to homepage
-            }
+                _context.Herds.Add(model);
+                await _context.SaveChangesAsync();
 
-            // Validation failed
+                TempData["SuccessMessage"] = "Herd created successfully!";
+                return RedirectToAction(nameof(Index));
+            }
             return View(model);
         }
-        public IActionResult Details(string id)
+
+        // GET: Herds/Details/{id}
+        public async Task<IActionResult> Details(string id)
         {
-            var herd = _herds.FirstOrDefault(h => h.HerdId == id);
-            if (herd == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
+
+            var herd = await _context.Herds.FirstOrDefaultAsync(h => h.HerdId == id);
+            if (herd == null) return NotFound();
 
             return View(herd);
         }
 
-        // GET: /Herds/Edit/{id}
-        public IActionResult Edit(string id)
+        // GET: Herds/Edit/{id}
+        public async Task<IActionResult> Edit(string id)
         {
-            var herd = _herds.FirstOrDefault(h => h.HerdId == id);
-            if (herd == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
+
+            var herd = await _context.Herds.FindAsync(id);
+            if (herd == null) return NotFound();
 
             return View(herd);
         }
 
-        // POST: /Herds/Edit
+        // POST: Herds/Edit/{id}
         [HttpPost]
-        public IActionResult Edit(Herd model)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(string id, Herd model)
         {
+            if (id != model.HerdId) return NotFound();
+
             if (ModelState.IsValid)
             {
-                var herd = _herds.FirstOrDefault(h => h.HerdId == model.HerdId);
-                if (herd == null)
+                try
                 {
-                    return NotFound();
+                    _context.Update(model);
+                    await _context.SaveChangesAsync();
+
+                    TempData["SuccessMessage"] = "Herd details updated successfully!";
+                    return RedirectToAction(nameof(Index));
                 }
-
-                herd.HerdName = model.HerdName;
-                herd.Herdsize = model.Herdsize;
-
-                TempData["SuccessMessage"] = "Herd details updated successfully!";
-                return RedirectToAction("Index");
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!await HerdExists(model.HerdId))
+                        return NotFound();
+                    else
+                        throw;
+                }
             }
-
             return View(model);
         }
 
-        // GET: /Herds/Delete/{id}
-        public IActionResult Delete(string id)
+        // GET: Herds/Delete/{id}
+        public async Task<IActionResult> Delete(string id)
         {
-            var herd = _herds.FirstOrDefault(h => h.HerdId == id);
-            if (herd == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
+
+            var herd = await _context.Herds.FirstOrDefaultAsync(h => h.HerdId == id);
+            if (herd == null) return NotFound();
 
             return View(herd);
         }
 
-        // POST: /Herds/Delete
+        // POST: Herds/Delete/{id}
         [HttpPost, ActionName("Delete")]
-        public IActionResult DeleteConfirmed(string id)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var herd = _herds.FirstOrDefault(h => h.HerdId == id);
-            if (herd == null)
+            var herd = await _context.Herds.FindAsync(id);
+            if (herd != null)
             {
-                return NotFound();
+                _context.Herds.Remove(herd);
+                await _context.SaveChangesAsync();
+                TempData["SuccessMessage"] = "Herd deleted successfully!";
             }
+            return RedirectToAction(nameof(Index));
+        }
 
-            _herds.Remove(herd);
-            TempData["SuccessMessage"] = "Herd deleted successfully!";
-            return RedirectToAction("Index");
+        private async Task<bool> HerdExists(string id)
+        {
+            return await _context.Herds.AnyAsync(h => h.HerdId == id);
         }
     }
 }
-

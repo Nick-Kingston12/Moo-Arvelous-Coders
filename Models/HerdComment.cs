@@ -7,15 +7,15 @@ namespace Moo_Arvelous_Coders.Models;
 public partial class HerdComment
 {
     
-    public int CommentId { get; set; }
+    public string CommentId { get; set; }
 
     [Required(ErrorMessage = "Comment is required.")]
     public string CommentDescription { get; set; }
 
     [Required(ErrorMessage = "Please select a herd.")]
-    public int? HerdId { get; set; }
+    public string? HerdId { get; set; }
 
-    public int? FarmerId { get; set; }
+    public string? FarmerId { get; set; }
 
     public virtual Farmer? Farmer { get; set; }
 

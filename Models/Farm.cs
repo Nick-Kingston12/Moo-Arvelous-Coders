@@ -29,7 +29,7 @@ public partial class Farm
     [Required(ErrorMessage = "Farm manager name is required.")]
     public string Manager { get; set; } = null!;
 
-    public int? FarmerId { get; set; }
+    public string? FarmerId { get; set; }
 
     public virtual Farmer? Farmer { get; set; }
 

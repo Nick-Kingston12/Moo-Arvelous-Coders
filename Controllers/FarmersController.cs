@@ -25,7 +25,7 @@ namespace Moo_Arvelous_Coders.Controllers
         }
 
         // GET: Farmers/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(string? id)
         {
             if (id == null)
             {
@@ -49,8 +49,6 @@ namespace Moo_Arvelous_Coders.Controllers
         }
 
         // POST: Farmers/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("FarmerId,FirstName,LastName,Idnumber,PhoneNumber,EmailAddress,Location")] Farmer farmer)
@@ -65,7 +63,7 @@ namespace Moo_Arvelous_Coders.Controllers
         }
 
         // GET: Farmers/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(string? id)
         {
             if (id == null)
             {
@@ -81,11 +79,9 @@ namespace Moo_Arvelous_Coders.Controllers
         }
 
         // POST: Farmers/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("FarmerId,FirstName,LastName,Idnumber,PhoneNumber,EmailAddress,Location")] Farmer farmer)
+        public async Task<IActionResult> Edit(string id, [Bind("FarmerId,FirstName,LastName,Idnumber,PhoneNumber,EmailAddress,Location")] Farmer farmer)
         {
             if (id != farmer.FarmerId)
             {
@@ -116,7 +112,7 @@ namespace Moo_Arvelous_Coders.Controllers
         }
 
         // GET: Farmers/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(string? id)
         {
             if (id == null)
             {
@@ -136,7 +132,7 @@ namespace Moo_Arvelous_Coders.Controllers
         // POST: Farmers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(string id)   // Changed from int to string here
         {
             var farmer = await _context.Farmers.FindAsync(id);
             if (farmer != null)
@@ -148,9 +144,12 @@ namespace Moo_Arvelous_Coders.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool FarmerExists(int id)
+        private bool FarmerExists(string id)
         {
             return _context.Farmers.Any(e => e.FarmerId == id);
         }
     }
 }
+
+
+

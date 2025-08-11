@@ -1,17 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Moo_Arvelous_Coders.Models;
+using System.Threading.Tasks;
 
 namespace Moo_Arvelous_Coders.Controllers
 {
     public class SearchController : Controller
     {
+        private readonly MooArvelousDbContext _context;
+
+        public SearchController(MooArvelousDbContext context)
+        {
+            _context = context;
+        }
+
         public IActionResult Index()
         {
             return View(new SearchViewModel());
         }
 
         [HttpPost]
-        public IActionResult Index(SearchViewModel model)
+        public async Task<IActionResult> Index(SearchViewModel model)
         {
             string id = model.SearchId?.Trim();
 
@@ -21,24 +30,24 @@ namespace Moo_Arvelous_Coders.Controllers
                 return View(model);
             }
 
-            // Check Farms
-            var farm = FarmsController.FarmList.FirstOrDefault(f => f.FarmId == id);
+            // Check Farms in DB
+            var farm = await _context.Farms.FirstOrDefaultAsync(f => f.FarmId == id);
             if (farm != null)
             {
-                return RedirectToAction("Details", "Farms", new { id = id });
+                return RedirectToAction("Details", "Farms", new { id });
             }
 
-            // Check Herds
-            var herd = HerdsController.HerdList.FirstOrDefault(h => h.HerdId == id);
+            // Check Herds in DB
+            var herd = await _context.Herds.FirstOrDefaultAsync(h => h.HerdId == id);
             if (herd != null)
             {
-                return RedirectToAction("Details", "Herds", new { id = id });
+                return RedirectToAction("Details", "Herds", new { id });
             }
-                     
 
             model.Message = "No match found for the provided ID.";
             return View(model);
         }
     }
 }
+
 

@@ -5,9 +5,9 @@ namespace Moo_Arvelous_Coders.Models;
 
 public partial class CattleHealthRecord
 {
-    public int RecordId { get; set; }
+    public string RecordId { get; set; }
 
-    public int? CattleId { get; set; }
+    public string? CattleId { get; set; }
 
     public DateOnly RecordDate { get; set; }
 

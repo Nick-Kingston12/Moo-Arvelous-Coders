@@ -5,7 +5,7 @@ namespace Moo_Arvelous_Coders.Models;
 
 public partial class Farmer
 {
-    public int FarmerId { get; set; }
+    public string FarmerId { get; set; }
 
     public string FirstName { get; set; } = null!;
 
