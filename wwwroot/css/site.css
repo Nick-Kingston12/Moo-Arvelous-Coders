@@ -413,12 +413,12 @@ button {
 }
 
 .clear-btn {
-    background-color: #a5522c;
+    background-color: #984b28;
     color: white;
 }
 
 .submit-btn {
-    background-color: #a5522c;
+    background-color: #984b28;
     color: white;
 }
 
@@ -508,8 +508,7 @@ button {
     object-fit: cover; 
     border: 3px solid white; 
 }
-/* Create farm*/
-/* Container for the whole create farm page */
+
 .farm-create-container {
     background-color: #f5f8f3;
     padding: 20px;
@@ -517,7 +516,6 @@ button {
     margin: auto;
 }
 
-/* Header */
 .farm-header {
     text-align: center;
     margin-bottom: 20px;
@@ -555,7 +553,6 @@ button {
     color: #4b3f2f;
 }
 
-/* Two-column layout */
 .form-herd-container {
     display: flex;
     align-items: flex-start;
@@ -565,7 +562,6 @@ button {
     width: 200px;
 }
 
-/* Farm content box */
 .farm-content {
     background-color: white;
     padding: 20px;
@@ -576,7 +572,6 @@ button {
     position: relative;
 }
 
-/* Green tab for title */
 .form-section-title {
     background-color: #5c7f4f;
     color: white;
@@ -588,7 +583,6 @@ button {
     left: 20px;
 }
 
-/* Inputs & placeholders */
 .farm-form label {
     font-weight: bold;
     display: block;
@@ -609,7 +603,6 @@ button {
         font-style: italic;
     }
 
-/* Price input with R sign */
 .price-input {
     display: flex;
     align-items: center;
@@ -629,7 +622,6 @@ button {
     border-radius: 0 5px 5px 0;
 }
 
-/* Buttons */
 .herd-form-actions {
     margin-top: 15px;
     display: flex;
@@ -646,11 +638,11 @@ button {
 }
 
 .add-farm-btn {
-    background-color: #d95f34;
+    background-color: #984b28;
     color: white;
 }
 
-/* Footer */
+
 .footer-text {
     text-align: center;
     margin-top: 20px;
@@ -659,8 +651,6 @@ button {
     font-size: 12px;
 }
 
-/* Create farm*/
-/*Delete farm*/
 .delete-content {
     display: flex;
     flex-direction: column;
@@ -694,7 +684,7 @@ button {
 }
 
 .delete-farm-button {
-    background-color: #d95f34;
+    background-color: #984b28;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -703,15 +693,14 @@ button {
 }
 
 .cancel-button {
-    background-color: #f8e48b;
+    background-color: #984b28;
     padding: 10px 20px;
     border-radius: 5px;
     text-decoration: none;
     font-weight: bold;
     color: #4b3f2f;
 }
-/*Delete farm*/
-/*Farm Index*/
+
 .farm-list {
     list-style: none;
     padding: 0;
@@ -744,12 +733,12 @@ button {
 }
 
 .edit-btn {
-    background-color: #5c7f4f;
+    background-color: #984b28;
     color: white;
 }
 
 .delete-btn {
-    background-color: #d95f34;
+    background-color: #984b28;
     color: white;
 }
 
@@ -765,7 +754,7 @@ button {
         color: #4b3f2f;
         text-decoration: none;
     }
-/*Farm index*/
+
 
 .farm-list-container {
     background-color: #eef0e4;
@@ -818,7 +807,7 @@ button {
 }
 
 .create-btn {
-    background-color: #a5522c;
+    background-color: #984b28;
     color: white;
     padding: 0.8rem 1.5rem;
     border: none;
@@ -878,19 +867,19 @@ button {
 }
 
 .edit-btn {
-    background-color: #007bff;
+    background-color: #984b28;
 }
 
 .delete-btn {
-    background-color: #dc3545;
+    background-color: #984b28;
 }
 
 .edit-btn:hover {
-    background-color: #0056b3;
+    background-color: #984b28;
 }
 
 .delete-btn:hover {
-    background-color: #a71d2a;
+    background-color: #984b28;
 }
 
 
@@ -913,7 +902,7 @@ button {
     border-top: 4px solid black;
     padding-top: 1rem;
 }
-/*Farm index*/
+
 .herd-create-container {
     background-color: #eef0e4;
     font-family: 'Segoe UI', sans-serif;
@@ -1044,7 +1033,7 @@ button {
     font-size: 1rem;
     border-radius: 4px;
     border: none;
-    background-color: #b75524;
+    background-color: #984b28;
     color: white;
     font-weight: bold;
 }
@@ -1057,7 +1046,7 @@ button {
 }
 
 .animal-btn {
-    background-color: #a44312;
+    background-color: #984b28;
     color: white;
     padding: 0.6rem 1rem;
     border: none;
@@ -1074,7 +1063,7 @@ button {
 }
 
 .clear-btn {
-    background-color: #a5522c;
+    background-color: #984b28;
     color: white;
     padding: 0.8rem 1.5rem;
     border: none;
@@ -1083,7 +1072,7 @@ button {
 }
 
 .add-herd-btn {
-    background-color: #a44312;
+    background-color: #984b28;
     color: white;
     padding: 0.8rem 1.5rem;
     border: none;
@@ -1119,7 +1108,7 @@ button {
 }
 
 .delete-farm-button {
-    background-color: #d9534f; /* red tone */
+    background-color: #984b28;
     color: white;
     padding: 10px 20px;
     border: none;
@@ -1128,7 +1117,7 @@ button {
     cursor: pointer;
 }
 .comment-btn {
-    background-color: #20639B;
+    background-color: #984b28;
     color: white;
     padding: 0.4rem 0.8rem;
     margin-left: 0.5rem;

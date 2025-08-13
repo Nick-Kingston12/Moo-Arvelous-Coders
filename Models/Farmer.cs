@@ -19,6 +19,8 @@ public partial class Farmer
 
     public string Location { get; set; } = null!;
 
+    public string Password { get; set; } = null!;
+
     public virtual ICollection<CattleSaleRecord> CattleSaleRecords { get; set; } = new List<CattleSaleRecord>();
 
     public virtual ICollection<Cattle> Cattles { get; set; } = new List<Cattle>();
