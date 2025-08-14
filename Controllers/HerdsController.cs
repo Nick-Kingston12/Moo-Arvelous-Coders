@@ -19,6 +19,7 @@ namespace Moo_Arvelous_Coders.Controllers
         public async Task<IActionResult> Index()
         {
             var herds = await _context.Herds.ToListAsync();
+            ViewBag.Herds = herds;
             return View(herds);
         }
 
@@ -133,5 +134,7 @@ namespace Moo_Arvelous_Coders.Controllers
         {
             return await _context.Herds.AnyAsync(h => h.HerdId == id);
         }
+       
+
     }
 }
