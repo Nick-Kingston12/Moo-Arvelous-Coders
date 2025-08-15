@@ -31,5 +31,5 @@ public partial class Herd
 
     public virtual Farmer? Farmer { get; set; }
 
-    public virtual ICollection<HerdComment> HerdComments { get; set; } = new List<HerdComment>();
+    public virtual ICollection<HerdComment> HerdComments { get; set; }
 }

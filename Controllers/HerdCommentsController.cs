@@ -27,12 +27,12 @@ namespace Moo_Arvelous_Coders.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(HerdComment model)
         {
-            // Reload herds for dropdown if we return view with errors
+            // Reload dropdown in case we need to redisplay the view
             ViewBag.Herds = await _context.Herds.ToListAsync();
 
             if (ModelState.IsValid)
             {
-                // Optionally generate a string ID for the comment if not set
+                // Generate CommentId if not already set
                 if (string.IsNullOrWhiteSpace(model.CommentId))
                 {
                     model.CommentId = Guid.NewGuid().ToString().Substring(0, 8);
@@ -42,11 +42,16 @@ namespace Moo_Arvelous_Coders.Controllers
                 await _context.SaveChangesAsync();
 
                 TempData["SuccessMessage"] = "Comment recorded!";
-                return RedirectToAction("Index", "Herds");
+
+                // ✅ Redirect straight to herd's details page
+                return RedirectToAction("Details", "Herds", new { id = model.HerdId });
             }
 
+            // If model is invalid, stay on the page and show errors
             return View(model);
         }
+
     }
 }
+
 

@@ -26,5 +26,23 @@
         </div>
     </div>
 
+    <div class="form-box">
+        <div class="form-header">Herd Comments</div>
+        @if (Model.HerdComments != null && Model.HerdComments.Any())
+        {
+            <ul>
+                @foreach (var comment in Model.HerdComments)
+                {
+                    <li>@comment.CommentDescription</li>
+                }
+            </ul>
+        }
+        else
+        {
+            <p>No comments yet.</p>
+        }
+    </div>
+
+
     <p class="footer-text">Life isn’t perfect, but with HerdWise your herd can be.</p>
 </div>

@@ -6,7 +6,13 @@
     <h3 class="comment-title">COMMENT ON HERD</h3>
     <p class="comment-subtitle">Use this as a digital notebook to keep important notes on your herd.</p>
 
+    <!-- Show model validation summary -->
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <!-- Ensure AntiForgeryToken is included -->
     <form asp-controller="HerdComments" asp-action="Create" method="post">
+        @Html.AntiForgeryToken()
+
         <div class="form-group">
             <label>Select a herd to comment on:</label>
             <select asp-for="HerdId" class="form-control comment-dropdown">
@@ -26,9 +32,9 @@
             <span asp-validation-for="CommentDescription" class="text-danger"></span>
         </div>
 
-        <div class="herd-form-actions">
-            <button type="submit" class="comment-submit-btn">RECORD COMMENT</button>
-            <button type="reset" class="comment-clear-btn">CLEAR COMMENT</button>
+        <div class="herd-form-actions" style="margin-top: 10px;">
+            <button type="submit" class="btn btn-primary">RECORD COMMENT</button>
+            <button type="reset" class="btn btn-secondary">CLEAR COMMENT</button>
         </div>
     </form>
 </div>

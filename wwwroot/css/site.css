@@ -726,10 +726,16 @@ button {
     gap: 10px;
 }
 
-.edit-btn, .delete-btn {
+.edit-btn, .delete-btn, .details-btn {
     padding: 5px 10px;
     border-radius: 5px;
     text-decoration: none;
+}
+
+
+.details-btn {
+    background-color: #984b28;
+    color: white;
 }
 
 .edit-btn {

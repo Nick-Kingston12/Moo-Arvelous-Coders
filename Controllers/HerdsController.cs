@@ -59,7 +59,10 @@ namespace Moo_Arvelous_Coders.Controllers
         {
             if (id == null) return NotFound();
 
-            var herd = await _context.Herds.FirstOrDefaultAsync(h => h.HerdId == id);
+            var herd = await _context.Herds
+                .Include(h => h.HerdComments) // Include comments in the query
+                .FirstOrDefaultAsync(h => h.HerdId == id);
+
             if (herd == null) return NotFound();
 
             return View(herd);

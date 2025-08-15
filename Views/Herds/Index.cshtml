@@ -35,7 +35,7 @@
                     {
                         <li>
                             <strong>@herd.HerdName</strong> (Size: @herd.Herdsize)
-                            <a href="/Herds/Details/@herd.HerdId" class="btn">Details</a>
+                            <a href="/Herds/Details/@herd.HerdId" class="btn details-btn">Details</a>
                             <a href="/Herds/Edit/@herd.HerdId" class="btn edit-btn">Edit</a>
                             <a href="/Herds/Delete/@herd.HerdId" class="btn delete-btn">Delete</a>
                         </li>
@@ -46,7 +46,7 @@
 
         <!-- RIGHT: Comment Panel -->
         <div style="flex: 1;">
-            @await Html.PartialAsync("~/Views/HerdComments/CommentPanel.cshtml", new Moo_Arvelous_Coders.Models.HerdComment())
+            @await Html.PartialAsync("~/Views/HerdComments/create.cshtml", new Moo_Arvelous_Coders.Models.HerdComment())
         </div>
     </div>
 
