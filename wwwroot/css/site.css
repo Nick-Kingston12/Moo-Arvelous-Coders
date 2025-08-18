@@ -1147,6 +1147,23 @@ button {
     margin-top: 1rem;
 }
 
+.image-containerB {
+    position: absolute;
+    bottom: 2rem;
+    left: 3rem;
+    max-width: 400px;
+    z-index: 1;
+    margin-bottom: 50px;
+    margin-left: 100px;
+}
+
+    .image-containerB img {
+        width: 100%;
+        height: auto;
+        opacity: 0.95;
+        background: transparent;
+    }
+
 .image-container {
     position: absolute;
     bottom: 2rem;
@@ -1278,3 +1295,56 @@ button {
 
 
 
+.cattle-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    margin: 2rem;
+}
+
+/* Left */
+.photo-section {
+    width: 25%;
+    text-align: center;
+}
+
+.photo-box {
+    background: #f3f3f3;
+    border: 2px dashed #666;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 1rem;
+}
+
+.upload-btn, .delete-btn {
+    display: block;
+    width: 100%;
+    margin: 0.5rem 0;
+}
+
+.instructions {
+    background: #f7eadd;
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+/* Middle */
+.cattle-info {
+    flex: 1;
+    background: #e9ded7;
+    border-radius: 15px;
+    padding: 2rem;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+/* Right */
+.health-section {
+    width: 25%;
+    background: #e9ded7;
+    border-radius: 15px;
+    padding: 2rem;
+}

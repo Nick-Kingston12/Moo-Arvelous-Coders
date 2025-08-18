@@ -16,11 +16,25 @@
 
     <div class="register-container">
 
-        <div class="image-container">
-            <img src="~/images/farmer.png" alt="Cartoon Farmer" />
+        <div class="image-containerB">
+            <img src="~/images/moneytree.png" alt="Cartoon Farmer" />
+        </div>
+
+        <div class="left-box">
+            <h3 class="form-heading">NOTES</h3>
+            <p class="reg-words">
+                Create your buyer profile by entering your personal information within the fields
+                on the right hand side to gain access to all cows information listen for sale.
+                <br><br>
+                All fields are required and have to be filled in.
+                <br><br>
+                Create a strong 8 digit password making use of uppercase and lowercase letters as well as numbers and symbols.
+            </p>
         </div>
 
         <div class="right-form">
+            <h3 class="form-heading">PERSONAL INFORMATION</h3>
+
             <form asp-action="Create" method="post">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
@@ -50,7 +64,7 @@
                     <label asp-for="BphoneNumber" class="control-label">Phone Number:</label>
                 <input asp-for="BphoneNumber" class="form-control" />
                 <span asp-validation-for="BphoneNumber" class="text-danger"></span>
-\
+
                     <label asp-for="Bemail" class="control-label">Email Address:</label>
                 <input asp-for="Bemail" class="form-control" />
                 <span asp-validation-for="Bemail" class="text-danger"></span>
@@ -60,6 +74,14 @@
                 <span asp-validation-for="OrganizationName" class="text-danger"></span>
 
                 <div id="errorMsg" class="error-message"></div>
+
+                <label asp-for="BPassword" class="control-label">Password:</label>
+                <input asp-for="BPassword" class="form-control" />
+                <span asp-validation-for="BPassword" class="text-danger"></span>
+                <div class="password-cotainer">
+                    <input type="password" id="password" required>
+                    <span class="toggle-password" onclick="togglePassword('password')"></span>
+                </div>
 
                 <div class="button-row">
                     <button type="reset" class="clear-btn">CLEAR FORM</button>
@@ -73,19 +95,6 @@
                     ❗ Please correct the highlighted errors before submitting the form.
                 </div>
             }
-        </div>
-
-        <div class="left-box">
-            <h3 class="form-heading">NOTES</h3>
-            <p class="reg-words">
-                Create your buyer profile by entering your personal information within the fields
-                on the right hand side to gain access to all cows information listen for sale.
-                <br><br>
-                All fields are required and have to be filled in.
-                <br><br>
-                Create a strong 8 digit password making use of uppercase and lowercase letters as well as numbers and symbols.
-            </p>
-
         </div>
     </div>
 

@@ -18,6 +18,7 @@ public partial class Buyer
     public string? Bidnumber { get; set; }
 
     public string? OrganizationName { get; set; }
+    public string BPassword { get; set; } = null!;
 
     public virtual ICollection<CattleSaleRecord> CattleSaleRecords { get; set; } = new List<CattleSaleRecord>();
 }
