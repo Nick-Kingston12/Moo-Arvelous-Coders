@@ -14,47 +14,46 @@
         <a class="menu-button" href="/">MENU</a>
     </div>
 
-    <div class="farm-content">
-        <img src="~/images/Farm.png" class="farm-image" />
+    <div class="form-container">
+        <div class="farm-content">
+            <img src="~/images/Farm.png" class="farm-image" />
 
-        <form asp-action="Edit" method="post" class="farm-form">
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <form asp-action="Edit" method="post" class="farm-form">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-            <input type="hidden" asp-for="FarmId" />
+                <input type="hidden" asp-for="FarmId" />
 
-            <div class="form-box">
-                <div class="form-header">Edit Farm</div>
+                <div class="form-box">
+                    <div class="form-header">Edit Farm</div>
 
-                <label asp-for="FarmName"></label>
-                <input asp-for="FarmName" class="form-control" />
-                <span asp-validation-for="FarmName" class="text-danger"></span>
+                    <label asp-for="FarmName"></label>
+                    <input asp-for="FarmName" class="form-control" />
+                    <span asp-validation-for="FarmName" class="text-danger"></span>
 
-                <label asp-for="Location"></label>
-                <input asp-for="Location" class="form-control" />
-                <span asp-validation-for="Location" class="text-danger"></span>
+                    <label asp-for="Location"></label>
+                    <input asp-for="Location" class="form-control" />
+                    <span asp-validation-for="Location" class="text-danger"></span>
 
-                <label asp-for="FarmSize"></label>
-                <input asp-for="FarmSize" class="form-control" />
-                <span asp-validation-for="FarmSize" class="text-danger"></span>
+                    <label asp-for="FarmSize"></label>
+                    <input asp-for="FarmSize" class="form-control" />
+                    <span asp-validation-for="FarmSize" class="text-danger"></span>
 
-                <label asp-for="PriceBought"></label>
-                <input asp-for="PriceBought" class="form-control" />
-                <span asp-validation-for="PriceBought" class="text-danger"></span>
+                    <label asp-for="PriceBought"></label>
+                    <input asp-for="PriceBought" class="form-control" />
+                    <span asp-validation-for="PriceBought" class="text-danger"></span>
 
-                <label asp-for="Manager"></label>
-                <input asp-for="Manager" class="form-control" />
-                <span asp-validation-for="Manager" class="text-danger"></span>
-            </div>
+                    <label asp-for="Manager"></label>
+                    <input asp-for="Manager" class="form-control" />
+                    <span asp-validation-for="Manager" class="text-danger"></span>
+                </div>
 
-            <div class="herd-form-actions">
-                <button type="reset" class="home-button">CLEAR FORM</button>
-                <button type="submit" class="home-button">SAVE CHANGES</button>
-            </div>
-
-            
-        </form>
+                <div class="herd-form-actions">
+                    <button type="reset" class="home-button">CLEAR FORM</button>
+                    <button type="submit" class="home-button">SAVE CHANGES</button>
+                </div>
+            </form>
+        </div>
     </div>
 
     <p class="footer-text">Life isn’t perfect, but with HerdWise your farm can be.</p>
 </div>
-

@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="~/css/site.css" />
 
 <div class="farm-list-container">
+    <!-- Header -->
     <div class="farm-header">
         <img src="~/images/Logo.png" alt="HerdWise Logo" class="logo-top" />
         <h1 class="form-title">HERDS</h1>
@@ -14,10 +15,12 @@
         <a class="menu-button" href="/">MENU</a>
     </div>
 
+    <!-- Create Herd Button -->
     <div class="farm-center-button">
         <a class="btn create-btn" href="/Herds/Create">CREATE NEW HERD</a>
     </div>
 
+    <!-- Success Message -->
     @if (TempData["SuccessMessage"] != null)
     {
         <div class="success-message">
@@ -25,6 +28,7 @@
         </div>
     }
 
+    <!-- Herd List + Comment Panel -->
     <div style="display: flex; gap: 40px;">
         <!-- LEFT: Herd List -->
         <div style="flex: 1;">
@@ -46,7 +50,9 @@
 
         <!-- RIGHT: Comment Panel -->
         <div style="flex: 1;">
-            @await Html.PartialAsync("~/Views/HerdComments/create.cshtml", new Moo_Arvelous_Coders.Models.HerdComment())
+            @* Simply render the partial; ViewBag.Herds is already available *@
+            @await Html.PartialAsync("~/Views/HerdComments/CommentPanel.cshtml",
+            new Moo_Arvelous_Coders.Models.HerdComment())
         </div>
     </div>
 

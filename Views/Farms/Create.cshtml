@@ -16,52 +16,53 @@
     </div>
 
     <!-- Main Form Section -->
-    <div class="form-herd-container">
-        <!-- Left Image -->
-        <div class="image-container-herd">
-            <img src="~/images/sign.png" alt="Farm Sign" />
-        </div>
+    <div class="form-container">
+        <div class="form-herd-container">
+            <!-- Left Image -->
+            <div class="image-container-herd">
+                <img src="~/images/sign.png" alt="Farm Sign" />
+            </div>
 
-        <!-- Right Form -->
-        <div class="farm-content">
-            <!-- Green Tab -->
-            <div class="form-section-title">Farm information</div>
+            <!-- Right Form -->
+            <div class="farm-content">
+                <div class="form-section-title">Farm information</div>
 
-            <form asp-action="Create" method="post" class="farm-form">
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <form asp-action="Create" method="post" class="farm-form">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                <label asp-for="FarmName">Farm Name:</label>
-                <input asp-for="FarmName" class="form-control" placeholder="(Your farm name)" />
-                <span asp-validation-for="FarmName" class="text-danger"></span>
+                    <label asp-for="FarmName">Farm Name:</label>
+                    <input asp-for="FarmName" class="form-control" placeholder="(Your farm name)" />
+                    <span asp-validation-for="FarmName" class="text-danger"></span>
 
-                <label asp-for="FarmId">Farm ID:</label>
-                <input asp-for="FarmId" class="form-control" placeholder="(Create a unique farm ID)" />
-                <span asp-validation-for="FarmId" class="text-danger"></span>
+                    <label asp-for="FarmId">Farm ID:</label>
+                    <input asp-for="FarmId" class="form-control" placeholder="(Create a unique farm ID)" />
+                    <span asp-validation-for="FarmId" class="text-danger"></span>
 
-                <label asp-for="Location">Farm Location:</label>
-                <input asp-for="Location" class="form-control" placeholder="(Street, Suburb, City, Postal Code, Province, Country)" />
-                <span asp-validation-for="Location" class="text-danger"></span>
+                    <label asp-for="Location">Farm Location:</label>
+                    <input asp-for="Location" class="form-control" placeholder="(Street, Suburb, City, Postal Code, Province, Country)" />
+                    <span asp-validation-for="Location" class="text-danger"></span>
 
-                <label asp-for="FarmSize">Farm Size:</label>
-                <input asp-for="FarmSize" class="form-control" placeholder="(Farm size in hectares)" />
-                <span asp-validation-for="FarmSize" class="text-danger"></span>
+                    <label asp-for="FarmSize">Farm Size:</label>
+                    <input asp-for="FarmSize" class="form-control" placeholder="(Farm size in hectares)" />
+                    <span asp-validation-for="FarmSize" class="text-danger"></span>
 
-                <label asp-for="PriceBought">Farm Price:</label>
-                <div class="price-input">
-                    <span class="currency-symbol">R</span>
-                    <input asp-for="PriceBought" class="form-control" placeholder="(Purchase Price)" />
-                </div>
-                <span asp-validation-for="PriceBought" class="text-danger"></span>
+                    <label asp-for="PriceBought">Farm Price:</label>
+                    <div class="price-input">
+                        <span class="currency-symbol">R</span>
+                        <input asp-for="PriceBought" class="form-control" placeholder="(Purchase Price)" />
+                    </div>
+                    <span asp-validation-for="PriceBought" class="text-danger"></span>
 
-                <label asp-for="Manager">Farm Manager Name:</label>
-                <input asp-for="Manager" class="form-control" placeholder="(First and last name of the farm manager)" />
-                <span asp-validation-for="Manager" class="text-danger"></span>
+                    <label asp-for="Manager">Farm Manager Name:</label>
+                    <input asp-for="Manager" class="form-control" placeholder="(First and last name of the farm manager)" />
+                    <span asp-validation-for="Manager" class="text-danger"></span>
 
-                <div class="herd-form-actions">
-                    <button type="reset" class="home-button">CLEAR FORM</button>
-                    <button type="submit" class="home-button add-farm-btn">ADD FARM</button>
-                </div>
-            </form>
+                    <div class="herd-form-actions">
+                        <button type="reset" class="home-button">CLEAR FORM</button>
+                        <button type="submit" class="home-button add-farm-btn">ADD FARM</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
