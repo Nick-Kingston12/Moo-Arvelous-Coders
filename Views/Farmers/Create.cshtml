@@ -23,11 +23,11 @@
         <div class="left-box">
             <h3 class="form-heading">NOTES</h3>
             <p class="reg-words">
-                Create your farmer profile by entering your personal information within the fields on the right hand side.
+                Create your farmer profile by entering your personal information within the fields on the right-hand side.
                 <br><br>
                 All fields are required and have to be filled in.
                 <br><br>
-                Create a strong 8 digit password making use of uppercase and lowercase letters as well as numbers and symbols.
+                Create a strong password using uppercase, lowercase letters, numbers, and symbols.
             </p>
         </div>
 
@@ -46,52 +46,46 @@
 
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
+                <label asp-for="FirstName" class="control-label">First Name:</label>
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
 
-                    <label asp-for="FirstName" class="control-label">First Name:</label>
-                    <input asp-for="FirstName" class="form-control" />
-                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                <label asp-for="LastName" class="control-label">Last Name:</label>
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
 
-                    <label asp-for="LastName" class="control-label">Last Name:</label>
-                    <input asp-for="LastName" class="form-control" />
-                    <span asp-validation-for="LastName" class="text-danger"></span>
+                <label asp-for="Idnumber" class="control-label">ID Number:</label>
+                <input asp-for="Idnumber" class="form-control" />
+                <span asp-validation-for="Idnumber" class="text-danger"></span>
 
-                    <label asp-for="Idnumber" class="control-label">ID Number:</label>
-                    <input asp-for="Idnumber" class="form-control" />
-                    <span asp-validation-for="Idnumber" class="text-danger"></span>
+                <label asp-for="PhoneNumber" class="control-label">Phone Number:</label>
+                <input asp-for="PhoneNumber" class="form-control" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
 
-                    <label asp-for="PhoneNumber" class="control-label">Phone Number:</label>
-                    <input asp-for="PhoneNumber" class="form-control" />
-                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-                    <label asp-for="EmailAddress" class="control-label">Email Address:</label>
-                    <input asp-for="EmailAddress" class="form-control" />
-                    <span asp-validation-for="EmailAddress" class="text-danger"></span>
+                <label asp-for="EmailAddress" class="control-label">Email Address:</label>
+                <input asp-for="EmailAddress" class="form-control" />
+                <span asp-validation-for="EmailAddress" class="text-danger"></span>
 
-                    <label asp-for="Location" class="control-label">Location:</label>
-                    <input asp-for="Location" class="form-control" />
-                    <span asp-validation-for="Location" class="text-danger"></span>
+                <label asp-for="Location" class="control-label">Location:</label>
+                <input asp-for="Location" class="form-control" />
+                <span asp-validation-for="Location" class="text-danger"></span>
 
-                    <label asp-for="Password" class="control-label">Password:</label>
-                    <input asp-for="Password" class="form-control" />
+                <!-- Password field -->
+                <label asp-for="Password" class="control-label">Password:</label>
+                <div class="password-container">
+                    <input asp-for="Password" type="password" class="form-control" />
                     <span asp-validation-for="Password" class="text-danger"></span>
-                <div class="password-cotainer">
-                    <input type="password" id="password" required>
-                    <span class="toggle-password" onclick="togglePassword('password')"></span>
+
                 </div>
 
-                <label asp-for="Password" class="control-label">Confirm Password:</label>
-                <div class="password-cotainer">
-                    <input type="password" id="confirmPassword" required>
-                    <span class="toggle-password" onclick="togglePassword('confirmPassword')"></span>
-                </div>
 
-                <div id="errorMsg" class="error-message"></div>
-
+                <!-- Form Buttons -->
                 <div class="button-row">
                     <button type="reset" class="clear-btn">CLEAR FORM</button>
                     <button type="submit" class="submit-btn">CREATE ACCOUNT</button>
                 </div>
-
             </form>
+
             @if (!ViewData.ModelState.IsValid)
             {
                 <div class="text-danger" style="margin-top: 1rem;">
@@ -106,11 +100,17 @@
     <footer class="footer-text">
         <p>Life isn't perfect, but with HerdWise your farm can be.</p>
     </footer>
-
 </div>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+
+    <script>
+        // Toggle password visibility
+        function togglePassword(id) {
+            const input = document.getElementById(id);
+            input.type = input.type === "password" ? "text" : "password";
+        }
+    </script>
 }
+

@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Moo_Arvelous_Coders.Models;
 
 public partial class CattleHealthRecord
 {
+    [Key]
     public string RecordId { get; set; }
 
     public string? CattleId { get; set; }

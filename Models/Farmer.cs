@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Moo_Arvelous_Coders.Models;
 
@@ -19,7 +20,10 @@ public partial class Farmer
 
     public string Location { get; set; } = null!;
 
+    [Required(ErrorMessage = "Password is required")]
+    [DataType(DataType.Password)]
     public string Password { get; set; } = null!;
+
 
     public virtual ICollection<CattleSaleRecord> CattleSaleRecords { get; set; } = new List<CattleSaleRecord>();
 

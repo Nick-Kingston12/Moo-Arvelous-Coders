@@ -51,7 +51,8 @@ namespace Moo_Arvelous_Coders.Controllers
         // POST: Farmers/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("FarmerId,FirstName,LastName,Idnumber,PhoneNumber,EmailAddress,Location")] Farmer farmer)
+        public async Task<IActionResult> Create(Farmer farmer)
+
         {
             if (ModelState.IsValid)
             {

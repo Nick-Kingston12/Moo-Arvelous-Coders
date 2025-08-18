@@ -42,7 +42,8 @@
             <span asp-validation-for="Herdsize" class="text-danger"></span>
 
             <div class="animal-buttons">
-                <button type="button" class="animal-btn">Add Cattle</button>
+                    <button type="button" class="animal-btn" onclick="location.href='@Url.Action("Create", "Cattle")'">Add Cattle</button>
+
             </div>
 
             <div class="herd-form-actions">

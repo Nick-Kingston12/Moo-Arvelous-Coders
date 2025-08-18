@@ -1,4 +1,5 @@
-﻿@model Moo_Arvelous_Coders.Views.Cattle.AddModel
+﻿@model Moo_Arvelous_Coders.Models.CattleCreateViewModel
+
 
 <div class="cattle-container">
     <!-- Left: Photo Upload -->
@@ -29,7 +30,7 @@
         <h3 class="section-title">Cattle Information</h3>
         <form method="post" asp-page-handler="SaveCattle">
             <label>Cattle ID:</label>
-            <input asp-for="Cattle.CattleId" placeholder="( Enter unique cattle ID number )" />
+            <input asp-for="Cattle.CattleId" placeholder="Enter unique cattle ID number" />
 
             <label>Gender:</label>
             <input type="radio" asp-for="Cattle.Gender" value="Male" /> Male
@@ -38,32 +39,20 @@
             <label>Breed:</label>
             <select asp-for="Cattle.Breed">
                 <option>Select the correct breed option</option>
-                <!-- Add your breed list here -->
             </select>
 
             <label>Date of Birth:</label>
             <input type="date" asp-for="Cattle.DateOfBirth" />
 
-            <label>Type:</label>
-            <input type="radio" name="Type" value="Bull calf" /> Bull calf
-            <input type="radio" name="Type" value="Heifer calf" /> Heifer calf
-            <input type="radio" name="Type" value="Bull" /> Bull
-            <input type="radio" name="Type" value="Cow" /> Cow
-
-            <label>Weight:</label>
-            <input type="number" placeholder="kg" />
-
-            <label>Date of Death:</label>
-            <input type="date" asp-for="Cattle.DateOfDeath" />
-
             <label>Herd ID:</label>
-            <input asp-for="Cattle.HerdId" placeholder="( Confirm Herd ID number )" />
+            <input asp-for="Cattle.HerdId" placeholder="Confirm Herd ID number" />
 
             <label>Status:</label>
             <input type="radio" asp-for="Cattle.Status" value="Normal" /> Normal
             <input type="radio" asp-for="Cattle.Status" value="Prepping for sale" /> Prepping for sale
             <input type="radio" asp-for="Cattle.Status" value="Sell" /> Sell
             <input type="radio" asp-for="Cattle.Status" value="Sold" /> Sold
+
 
             <button type="submit" class="btn save-btn">SAVE</button>
         </form>
@@ -74,10 +63,10 @@
         <h3 class="section-title">Health Records</h3>
         <form method="post" asp-page-handler="SaveHealthRecord">
             <label>Health Record ID:</label>
-            <input asp-for="HealthRecord.RecordId" placeholder="( Enter unique record ID number )" />
+            <input asp-for="HealthRecord.RecordId" placeholder="Enter unique record ID number" />
 
             <label>Cattle ID:</label>
-            <input asp-for="HealthRecord.CattleId" placeholder="( Confirm ID )" />
+            <input asp-for="HealthRecord.CattleId" placeholder="Confirm ID" />
 
             <label>Date of Entry:</label>
             <input type="date" asp-for="HealthRecord.RecordDate" />
@@ -85,11 +74,11 @@
             <label>Treatment Type:</label>
             <select asp-for="HealthRecord.TreatmentType">
                 <option>Select correct treatment</option>
-                <!-- Add treatment list -->
             </select>
 
             <label>Details:</label>
-            <textarea asp-for="HealthRecord.Details" placeholder="Add extra health notes..."></textarea>
+<textarea asp-for="HealthRecord.Details" placeholder="Add extra health notes..."></textarea>
+
 
             <button type="submit" class="btn record-btn">RECORD HEALTH ENTRY</button>
         </form>

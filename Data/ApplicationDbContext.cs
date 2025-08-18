@@ -10,6 +10,7 @@ namespace Moo_Arvelous_Coders.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {        }
-       
+        public DbSet<Cattle> Cattle { get; set; }
+        public DbSet<CattleHealthRecord> CattleHealthRecords { get; set; }
     }
 }

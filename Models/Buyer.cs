@@ -5,6 +5,7 @@ namespace Moo_Arvelous_Coders.Models;
 
 public partial class Buyer
 {
+    
     public string BuyerId { get; set; }
 
     public string BfirstName { get; set; } = null!;
