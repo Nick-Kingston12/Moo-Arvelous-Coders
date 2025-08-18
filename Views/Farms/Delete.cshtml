@@ -16,25 +16,27 @@
     </div>
 
     <!-- Main Delete Box -->
-    <div class="delete-content">
-        <div class="farm-delete-card">
-            <img src="~/images/Farm.png" alt="Farm Image" class="farm-image" />
-            <div class="farm-info">
-                <p><strong>@Model.FarmName</strong></p>
-                <p>@Model.Location</p>
-                <p>Size: @Model.FarmSize</p>
-                <p>Price: R @Model.PriceBought</p>
+    <div class="form-container">
+        <div class="delete-content">
+            <div class="farm-delete-card">
+                <img src="~/images/Farm.png" alt="Farm Image" class="farm-image" />
+                <div class="farm-info">
+                    <p><strong>@Model.FarmName</strong></p>
+                    <p>@Model.Location</p>
+                    <p>Size: @Model.FarmSize</p>
+                    <p>Price: R @Model.PriceBought</p>
+                </div>
             </div>
-        </div>
 
-        <!-- Buttons -->
-        <div class="delete-actions">
-            <form asp-action="Delete" method="post">
-                @Html.AntiForgeryToken()
-                <input type="hidden" asp-for="FarmId" />
-                <button type="submit" class="delete-farm-button">YES, DELETE</button>
-            </form>
-            <a href="/Farms/Index" class="cancel-button">NO, GO BACK</a>
+            <!-- Buttons -->
+            <div class="delete-actions">
+                <form asp-action="Delete" method="post">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" asp-for="FarmId" />
+                    <button type="submit" class="delete-farm-button">YES, DELETE</button>
+                </form>
+                <a href="/Farms/Index" class="cancel-button">NO, GO BACK</a>
+            </div>
         </div>
     </div>
 

@@ -1,23 +1,24 @@
 ﻿@model Moo_Arvelous_Coders.Models.HerdComment
 
-<link rel="stylesheet" href="~/css/site.css" />
-
 <div class="comment-panel">
     <h3 class="comment-title">COMMENT ON HERD</h3>
     <p class="comment-subtitle">Use this as a digital notebook to keep important notes on your herd.</p>
 
-    <!-- Show model validation summary -->
+    @* Validation summary *@
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-    <!-- Ensure AntiForgeryToken is included -->
     <form asp-controller="HerdComments" asp-action="Create" method="post">
         @Html.AntiForgeryToken()
 
+        @* Herd Dropdown *@
+        @{
+            var herdsList = ViewBag.Herds as List<Moo_Arvelous_Coders.Models.Herd>;
+        }
         <div class="form-group">
             <label>Select a herd to comment on:</label>
             <select asp-for="HerdId" class="form-control comment-dropdown">
-                <option value="">( Select correct herd )</option>
-                @foreach (var herd in ViewBag.Herds as List<Moo_Arvelous_Coders.Models.Herd>)
+                <option value="">-- Select Herd --</option>
+                @foreach (var herd in herdsList)
                 {
                     <option value="@herd.HerdId">@herd.HerdName</option>
                 }
@@ -25,6 +26,7 @@
             <span asp-validation-for="HerdId" class="text-danger"></span>
         </div>
 
+        @* Comment Textarea *@
         <div class="form-group">
             <label>Create your herd comment:</label>
             <textarea asp-for="CommentDescription" class="form-control comment-textarea"
@@ -32,6 +34,7 @@
             <span asp-validation-for="CommentDescription" class="text-danger"></span>
         </div>
 
+        @* Buttons *@
         <div class="herd-form-actions" style="margin-top: 10px;">
             <button type="submit" class="btn btn-primary">RECORD COMMENT</button>
             <button type="reset" class="btn btn-secondary">CLEAR COMMENT</button>

@@ -6,8 +6,9 @@ namespace Moo_Arvelous_Coders.Models;
 
 public partial class HerdComment
 {
-    
-    public string CommentId { get; set; }
+
+    [Key]
+    public string CommentId { get; set; } = Guid.NewGuid().ToString().Substring(0, 8);
 
     [Required(ErrorMessage = "Comment is required.")]
     public string CommentDescription { get; set; }

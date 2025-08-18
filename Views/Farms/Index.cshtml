@@ -12,12 +12,12 @@
         <h1 class="form-title">FARMS</h1>
         <p class="subtitle">Welcome to your farm. Visit an existing farm or create a new one.</p>
         <a class="menu-button" href="/">MENU</a>
-
     </div>
 
-    <div class="farm-center-button">
+    <div class="form-container">
         <a class="btn create-btn" href="/Farms/Create">CREATE NEW FARM</a>
     </div>
+
     @if (TempData["SuccessMessage"] != null)
     {
         <div class="success-message">
@@ -25,31 +25,30 @@
         </div>
     }
 
+    <div class="form-container">
+        <div class="farm-list-box">
+            <div class="box-header">Visit Your Created Farm</div>
+            <p class="instruction">Click on one of the farm links below to select and access your farm.</p>
 
-    <div class="farm-list-box">
-        <div class="box-header">Visit Your Created Farm</div>
-        <p class="instruction">Click on one of the farm links below to select and access your farm.</p>
+            <ol class="farm-list">
+                @foreach (var farm in Model)
+                {
+                    <li>
+                        <a href="/Farms/Details/@farm.FarmId">@farm.FarmName</a>
+                        <span class="button-group">
+                            <a href="/Farms/Edit/@farm.FarmId" class="btn edit-btn">Edit</a>
+                            <a href="/Farms/Delete/@farm.FarmId" class="btn delete-btn">Delete</a>
+                        </span>
+                    </li>
+                }
+            </ol>
 
-        <ol class="farm-list">
-            @foreach (var farm in Model)
-            {
-                <li>
-                    <a href="/Farms/Details/@farm.FarmId">@farm.FarmName</a>
-                    <span class="button-group">
-                        <a href="/Farms/Edit/@farm.FarmId" class="btn edit-btn">Edit</a>
-                        <a href="/Farms/Delete/@farm.FarmId" class="btn delete-btn">Delete</a>
-                    </span>
-                </li>
-            }
-        </ol>
-
-
-        <div class="arrow-nav">
-            <span class="arrow left-arrow">←</span>
-            <span class="arrow right-arrow">→</span>
+            <div class="arrow-nav">
+                <span class="arrow left-arrow">←</span>
+                <span class="arrow right-arrow">→</span>
+            </div>
         </div>
     </div>
 
     <p class="footer-text">Life isn’t perfect, but with HerdWise your farm can be.</p>
 </div>
-
