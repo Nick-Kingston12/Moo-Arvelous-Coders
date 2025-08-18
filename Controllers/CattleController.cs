@@ -2,44 +2,44 @@
 using Moo_Arvelous_Coders.Data;
 using Moo_Arvelous_Coders.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Hosting;
 
 namespace Moo_Arvelous_Coders.Controllers
 {
     public class CattleController : Controller
     {
+        private readonly IWebHostEnvironment _env;
         private readonly ApplicationDbContext _context;
 
-        public CattleController(ApplicationDbContext context)
+        public CattleController(ApplicationDbContext context, IWebHostEnvironment env)
         {
             _context = context;
+            _env = env;
         }
 
-        // GET: Cattle/Index
         public IActionResult Index()
         {
             var cattleList = _context.Cattle.Include(c => c.CattleHealthRecords).ToList();
             return View(cattleList);
         }
 
-        // GET: Cattle/Create
         public IActionResult Create()
         {
             var vm = new CattleCreateViewModel();
             return View(vm);
         }
 
-        // POST: Cattle/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(CattleCreateViewModel vm)
         {
             if (ModelState.IsValid)
             {
-                // Save Cattle
+
                 _context.Cattle.Add(vm.Cattle);
                 _context.SaveChanges();
 
-                // Link HealthRecord to the newly saved Cattle
+   
                 if (vm.HealthRecord != null && !string.IsNullOrEmpty(vm.HealthRecord.RecordId))
                 {
                     vm.HealthRecord.CattleId = vm.Cattle.CattleId;
@@ -55,7 +55,7 @@ namespace Moo_Arvelous_Coders.Controllers
             return View(vm);
         }
 
-        // GET: Cattle/Edit/{id}
+
         public IActionResult Edit(string id)
         {
             if (string.IsNullOrEmpty(id))
@@ -77,7 +77,6 @@ namespace Moo_Arvelous_Coders.Controllers
             return View(vm);
         }
 
-        // POST: Cattle/Edit/{id}
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(CattleCreateViewModel vm)
@@ -123,7 +122,6 @@ namespace Moo_Arvelous_Coders.Controllers
             return View(cattle);
         }
 
-        // POST: Cattle/Delete/{id}
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(string id)
@@ -134,7 +132,6 @@ namespace Moo_Arvelous_Coders.Controllers
 
             if (cattle != null)
             {
-                // Delete related HealthRecords first
                 if (cattle.CattleHealthRecords.Any())
                 {
                     _context.CattleHealthRecords.RemoveRange(cattle.CattleHealthRecords);
@@ -146,6 +143,58 @@ namespace Moo_Arvelous_Coders.Controllers
 
             TempData["SuccessMessage"] = "Cattle deleted successfully!";
             return RedirectToAction("Index");
+
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(CattleCreateViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            if (string.IsNullOrWhiteSpace(model.Cattle.CattleId))
+                model.Cattle.CattleId = Guid.NewGuid().ToString();
+
+            if (string.IsNullOrWhiteSpace(model.Photo.PhotoId))
+                model.Photo.PhotoId = Guid.NewGuid().ToString();
+
+            model.Photo.CattleId = model.Cattle.CattleId;
+
+            if (model.PhotoFile != null && model.PhotoFile.Length > 0)
+            {
+                var uploadsRoot = Path.Combine(_env.WebRootPath, "uploads");
+                if (!Directory.Exists(uploadsRoot))
+                    Directory.CreateDirectory(uploadsRoot);
+
+                var fileName = Guid.NewGuid().ToString("N") + Path.GetExtension(model.PhotoFile.FileName);
+                var fullPath = Path.Combine(uploadsRoot, fileName);
+
+                using (var stream = new FileStream(fullPath, FileMode.Create))
+                {
+                    await model.PhotoFile.CopyToAsync(stream);
+                }
+
+                model.Photo.PhotoUrl = "/uploads/" + fileName;
+            }
+
+            _context.Cattle.Add(model.Cattle);                    
+            _context.CattlePhotos.Add(model.Photo);               
+
+            if (!string.IsNullOrWhiteSpace(model.HealthRecord?.TreatmentType) ||
+                !string.IsNullOrWhiteSpace(model.HealthRecord?.Details))
+            {
+                if (string.IsNullOrWhiteSpace(model.HealthRecord.RecordId))
+                    model.HealthRecord.RecordId = Guid.NewGuid().ToString();
+
+                model.HealthRecord.CattleId = model.Cattle.CattleId;
+                _context.CattleHealthRecords.Add(model.HealthRecord);
+            }
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index"); // or wherever you want to go after create
         }
     }
 }
