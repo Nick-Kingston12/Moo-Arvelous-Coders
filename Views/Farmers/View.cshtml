@@ -1,0 +1,64 @@
+﻿@model Moo_Arvelous_Coders.Models.Farmer
+
+@{
+    ViewData["Title"] = "View Account";
+}
+
+<link rel="stylesheet" href="~/css/site.css" />
+
+<div class="personal-account-container">
+    <div class="herd-header">
+        <img src="~/images/Logo.png" alt="HerdWise Logo" class="logo-top" />
+        <h1 class="welcome-title">PERSONAL ACCOUNT</h1>
+        <p class="subheading">View and manage your personal account</p>
+        <a class="menu-button" href="/">MENU</a>
+    </div>
+
+    <div class="account-container">
+        <div class="image-container">
+            <img src="~/images/farmer.png" alt="Cartoon Farmer" />
+        </div>
+
+        <div class="account-box">
+            <h3 class="form-heading">Personal Information</h3>
+
+            <div class="form-group">
+                <label>First Name:</label>
+                <input class="form-control" value="@Model.FirstName" readonly />
+            </div>
+
+            <div class="form-group">
+                <label>Surname:</label>
+                <input class="form-control" value="@Model.LastName" readonly />
+            </div>
+
+            <div class="form-group">
+                <label>Email Address:</label>
+                <input class="form-control" value="@Model.EmailAddress" readonly />
+            </div>
+
+            <div class="form-group">
+                <label>Contact Number:</label>
+                <input class="form-control" value="@Model.PhoneNumber" readonly />
+            </div>
+
+            <div class="form-group">
+                <label>ID Number:</label>
+                <input class="form-control" value="@Model.Idnumber" readonly />
+            </div>
+
+            <div class="form-group">
+                <label>View Password:</label>
+                <input class="form-control" type="password" value="@Model.Password" readonly />
+            </div>
+
+            <div class="button-row">
+                <a asp-action="Edit" asp-route-id="@Model.FarmerId" class="submit-btn">UPDATE ACCOUNT DETAILS</a>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer-text">
+        <p>Life isn't perfect, but with HerdWise your farm can be.</p>
+    </footer>
+</div>

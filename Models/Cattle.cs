@@ -13,13 +13,16 @@ public partial class Cattle
 
     public string Breed { get; set; } = null!;
 
+    public int Weight { get; set; } 
     public string? Health { get; set; }
 
     public DateOnly DateOfBirth { get; set; }
 
-    public DateOnly? DateOfDeath { get; set; }
+    public DateOnly? DateOfDeath { get; set; } = null;
 
     public string? HerdId { get; set; }
+
+
 
     public string? FarmerId { get; set; }
 

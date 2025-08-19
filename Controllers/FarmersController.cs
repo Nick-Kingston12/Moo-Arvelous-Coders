@@ -42,6 +42,14 @@ namespace Moo_Arvelous_Coders.Controllers
             return View(farmer);
         }
 
+        // GET: Farmer/View/5
+        public async Task<IActionResult> View(int id)
+        {
+            var farmer = await _context.Farmers.FindAsync(id);
+            if (farmer == null) return NotFound();
+            return View(farmer);
+        }
+
         // GET: Farmers/Create
         public IActionResult Create()
         {
@@ -76,6 +84,14 @@ namespace Moo_Arvelous_Coders.Controllers
             {
                 return NotFound();
             }
+            return View(farmer);
+        }
+
+        // GET: Farmer/Edit/5
+        public async Task<IActionResult> Edit(int id)
+        {
+            var farmer = await _context.Farmers.FindAsync(id);
+            if (farmer == null) return NotFound();
             return View(farmer);
         }
 

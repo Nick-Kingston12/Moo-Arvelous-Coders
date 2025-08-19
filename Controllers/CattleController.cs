@@ -2,60 +2,55 @@
 using Moo_Arvelous_Coders.Data;
 using Moo_Arvelous_Coders.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Hosting;
 
 namespace Moo_Arvelous_Coders.Controllers
 {
     public class CattleController : Controller
     {
+        private readonly IWebHostEnvironment _env;
         private readonly ApplicationDbContext _context;
 
-        public CattleController(ApplicationDbContext context)
+        public CattleController(ApplicationDbContext context, IWebHostEnvironment env)
         {
             _context = context;
+            _env = env;
         }
 
-        // GET: Cattle/Index
         public IActionResult Index()
         {
             var cattleList = _context.Cattle.Include(c => c.CattleHealthRecords).ToList();
             return View(cattleList);
         }
 
-        // GET: Cattle/Create
-        public IActionResult Create()
-        {
-            var vm = new CattleCreateViewModel();
-            return View(vm);
-        }
-
-        // POST: Cattle/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Create(CattleCreateViewModel vm)
+        public IActionResult Create(CattleCreateViewModel model)
         {
             if (ModelState.IsValid)
             {
-                // Save Cattle
-                _context.Cattle.Add(vm.Cattle);
-                _context.SaveChanges();
+                // Access individual models like:
+                var cattle = model.Cattle;
+                var photo = model.Photo;
+                var healthRecord = model.HealthRecord;
 
-                // Link HealthRecord to the newly saved Cattle
-                if (vm.HealthRecord != null && !string.IsNullOrEmpty(vm.HealthRecord.RecordId))
-                {
-                    vm.HealthRecord.CattleId = vm.Cattle.CattleId;
-                    _context.CattleHealthRecords.Add(vm.HealthRecord);
-                    _context.SaveChanges();
-                }
+                // TODO: Save to database (attach relations as needed)
 
-                TempData["SuccessMessage"] = "Cattle and Health Record saved successfully!";
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             }
 
-            // If validation fails, return the view with the same ViewModel
-            return View(vm);
+            return View(model);
         }
 
-        // GET: Cattle/Edit/{id}
+        public async Task<IActionResult> DeletePhoto(int id)
+        {
+            var photo = await _context.CattlePhotos.FindAsync(id);
+            if (photo != null)
+            {
+                _context.CattlePhotos.Remove(photo);
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction(nameof(Create));
+        }
+
         public IActionResult Edit(string id)
         {
             if (string.IsNullOrEmpty(id))
@@ -77,7 +72,6 @@ namespace Moo_Arvelous_Coders.Controllers
             return View(vm);
         }
 
-        // POST: Cattle/Edit/{id}
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(CattleCreateViewModel vm)
@@ -123,7 +117,6 @@ namespace Moo_Arvelous_Coders.Controllers
             return View(cattle);
         }
 
-        // POST: Cattle/Delete/{id}
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(string id)
@@ -134,7 +127,6 @@ namespace Moo_Arvelous_Coders.Controllers
 
             if (cattle != null)
             {
-                // Delete related HealthRecords first
                 if (cattle.CattleHealthRecords.Any())
                 {
                     _context.CattleHealthRecords.RemoveRange(cattle.CattleHealthRecords);
@@ -146,6 +138,7 @@ namespace Moo_Arvelous_Coders.Controllers
 
             TempData["SuccessMessage"] = "Cattle deleted successfully!";
             return RedirectToAction("Index");
+
         }
     }
 }
