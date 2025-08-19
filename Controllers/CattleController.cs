@@ -23,38 +23,33 @@ namespace Moo_Arvelous_Coders.Controllers
             return View(cattleList);
         }
 
-        public IActionResult Create()
-        {
-            var vm = new CattleCreateViewModel();
-            return View(vm);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Create(CattleCreateViewModel vm)
+        public IActionResult Create(CattleCreateViewModel model)
         {
             if (ModelState.IsValid)
             {
+                // Access individual models like:
+                var cattle = model.Cattle;
+                var photo = model.Photo;
+                var healthRecord = model.HealthRecord;
 
-                _context.Cattle.Add(vm.Cattle);
-                _context.SaveChanges();
+                // TODO: Save to database (attach relations as needed)
 
-   
-                if (vm.HealthRecord != null && !string.IsNullOrEmpty(vm.HealthRecord.RecordId))
-                {
-                    vm.HealthRecord.CattleId = vm.Cattle.CattleId;
-                    _context.CattleHealthRecords.Add(vm.HealthRecord);
-                    _context.SaveChanges();
-                }
-
-                TempData["SuccessMessage"] = "Cattle and Health Record saved successfully!";
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             }
 
-            // If validation fails, return the view with the same ViewModel
-            return View(vm);
+            return View(model);
         }
 
+        public async Task<IActionResult> DeletePhoto(int id)
+        {
+            var photo = await _context.CattlePhotos.FindAsync(id);
+            if (photo != null)
+            {
+                _context.CattlePhotos.Remove(photo);
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction(nameof(Create));
+        }
 
         public IActionResult Edit(string id)
         {
@@ -144,57 +139,6 @@ namespace Moo_Arvelous_Coders.Controllers
             TempData["SuccessMessage"] = "Cattle deleted successfully!";
             return RedirectToAction("Index");
 
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(CattleCreateViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
-            if (string.IsNullOrWhiteSpace(model.Cattle.CattleId))
-                model.Cattle.CattleId = Guid.NewGuid().ToString();
-
-            if (string.IsNullOrWhiteSpace(model.Photo.PhotoId))
-                model.Photo.PhotoId = Guid.NewGuid().ToString();
-
-            model.Photo.CattleId = model.Cattle.CattleId;
-
-            if (model.PhotoFile != null && model.PhotoFile.Length > 0)
-            {
-                var uploadsRoot = Path.Combine(_env.WebRootPath, "uploads");
-                if (!Directory.Exists(uploadsRoot))
-                    Directory.CreateDirectory(uploadsRoot);
-
-                var fileName = Guid.NewGuid().ToString("N") + Path.GetExtension(model.PhotoFile.FileName);
-                var fullPath = Path.Combine(uploadsRoot, fileName);
-
-                using (var stream = new FileStream(fullPath, FileMode.Create))
-                {
-                    await model.PhotoFile.CopyToAsync(stream);
-                }
-
-                model.Photo.PhotoUrl = "/uploads/" + fileName;
-            }
-
-            _context.Cattle.Add(model.Cattle);                    
-            _context.CattlePhotos.Add(model.Photo);               
-
-            if (!string.IsNullOrWhiteSpace(model.HealthRecord?.TreatmentType) ||
-                !string.IsNullOrWhiteSpace(model.HealthRecord?.Details))
-            {
-                if (string.IsNullOrWhiteSpace(model.HealthRecord.RecordId))
-                    model.HealthRecord.RecordId = Guid.NewGuid().ToString();
-
-                model.HealthRecord.CattleId = model.Cattle.CattleId;
-                _context.CattleHealthRecords.Add(model.HealthRecord);
-            }
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction("Index"); // or wherever you want to go after create
         }
     }
 }

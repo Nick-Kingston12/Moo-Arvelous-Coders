@@ -21,18 +21,15 @@
         <div class="photo-box">
             <i class="upload-icon">☁️</i>
         </div>
-        <form asp-action="Create" asp-controller="Cattle" method="post" enctype="multipart/form-data">
-            <div class="form-group">
-                <label for="photo">UPLOAD PHOTO</label>
-                <input type="file" name="PhotoFile" id="photo" class="form-control" accept="image/*" />
-            </div>
-            <button type="submit" class="upload-btn">UPLOAD PHOTO</button>
+        <form method="post" enctype="multipart/form-data" asp-page-handler="UploadPhoto">
+            <button type="submit" class="btn upload-btn">UPLOAD PHOTO</button>
         </form>
         <form method="post" asp-page-handler="DeletePhoto">
-            <button type="submit" class="delete-btn">DELETE PHOTO</button>
+            <button type="submit" class="btn delete-btn">DELETE PHOTO</button>
         </form>
+
         <div class="left-cattle">
-            <h3 class="form-heading">INSTRUCTIONS</h3>
+            <h3 class="form-headingC">INSTRUCTIONS</h3>
             <p class ="reg-words">
                 JPG or PNG format.<br />
                 Max file size: 5MB.<br />
@@ -44,15 +41,17 @@
     </div>
 
     <div class="cattle-info">
-        <h3 class="form-heading">CATTLE INFORMATION</h3>
-        <form method="post" asp-page-handler="SaveCattle" asp-controller="Cattle" method="post" enctype="multipart/form-data">
-            @Html.AntiForgeryToken() 
+        <h3 class="form-headingC">CATTLE INFORMATION</h3>
+        <form method="post" asp-page-handler="SaveCattle">
+
             <label class="reg-words">Cattle ID:</label>
             <input asp-for="Cattle.CattleId" placeholder="Enter unique cattle ID number" />
 
             <label class="reg-words">Gender:</label>
+            <div class="options">
             <input type="radio" asp-for="Cattle.Gender" value="Male" /> Male
             <input type="radio" asp-for="Cattle.Gender" value="Female" /> Female
+            </div>
 
             <label class="reg-words">Breed:</label>
             <select asp-for="Cattle.Breed" class="form-control">
@@ -72,14 +71,23 @@
             <label class="reg-words">Date of Birth:</label>
             <input type="date" asp-for="Cattle.DateOfBirth" />
 
+            <label class="reg-words">Weight: (in KG)</label>
+            <input asp-for="Cattle.Weight" placeholder="Enter weight of animal in kilograms" />
+
+
             <label class="reg-words">Herd ID:</label>
             <input asp-for="Cattle.HerdId" placeholder="Confirm Herd ID number" />
 
-            <label class="reg-words">Status:</label>
-            <input type="radio" asp-for="Cattle.Status" value="Normal" /> Normal
-            <input type="radio" asp-for="Cattle.Status" value="Prepping for sale" /> Prepping for sale
-            <input type="radio" asp-for="Cattle.Status" value="Sell" /> Sell
-            <input type="radio" asp-for="Cattle.Status" value="Sold" /> Sold
+            <label>Status:</label>
+            <div class="options">
+            <input type="radio" class="reg-words" asp-for="Cattle.Status" value="Normal" /> Normal
+            <input type="radio" class="reg-words" asp-for="Cattle.Status" value="Prepping for sale" /> Prepping for sale
+            <input type="radio" class="reg-words" asp-for="Cattle.Status" value="Sell" /> Sell
+            <input type="radio" class="reg-words" asp-for="Cattle.Status" value="Sold" /> Sold
+            </div>
+
+            <label class="reg-words">Date of Death:</label>
+            <input type="date" asp-for="Cattle.DateOfDeath" />
 
             <button type="reset" class="clear-btn">CLEAR FORM</button>
             <button type="submit" class="save-btn">SAVE</button>
@@ -87,7 +95,7 @@
     </div>
 
     <div class="health-section">
-        <h3 class="form-heading">HEALTH RECORDS</h3>
+        <h3 class="form-headingC">HEALTH RECORDS</h3>
         <form method="post" asp-page-handler="SaveHealthRecord">
             <label>Health Record ID:</label>
             <input asp-for="HealthRecord.RecordId" placeholder="Enter unique record ID number" />
@@ -129,3 +137,7 @@
         </form>
     </div>
 </div>
+
+<footer class="footer-text">
+    <p>Life isn't perfect, but with HerdWise your farm can be.</p>
+</footer>
