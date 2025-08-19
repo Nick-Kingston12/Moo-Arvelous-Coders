@@ -38,6 +38,17 @@ namespace Moo_Arvelous_Coders.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Herd model)
         {
+            ModelState.Remove("Cattle");
+            ModelState.Remove("FarmId");
+            ModelState.Remove("FarmerId");
+            foreach (var state in ModelState)
+            {
+                foreach (var error in state.Value.Errors)
+                {
+                    Console.WriteLine($"⚠️ Field: {state.Key} - Error: {error.ErrorMessage}");
+                }
+            }
+
             if (ModelState.IsValid)
             {
                 if (string.IsNullOrWhiteSpace(model.HerdId))
