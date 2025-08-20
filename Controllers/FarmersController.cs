@@ -42,18 +42,20 @@ namespace Moo_Arvelous_Coders.Controllers
             return View(farmer);
         }
 
-        // GET: Farmer/View/5
-        public async Task<IActionResult> View(int id)
-        {
-            var farmer = await _context.Farmers.FindAsync(id);
-            if (farmer == null) return NotFound();
-            return View(farmer);
-        }
-
         // GET: Farmers/Create
         public IActionResult Create()
         {
             return View();
+        }
+
+        public IActionResult View(string id)
+        {
+            var farmer = _context.Farmers.Find(id);
+            if (farmer == null)
+            {
+                return NotFound();
+            }
+            return View(farmer);
         }
 
         // POST: Farmers/Create

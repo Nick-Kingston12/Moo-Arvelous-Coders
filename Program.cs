@@ -20,6 +20,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddDbContext<MooArvelousDbContext>(options =>
     options.UseSqlServer(mooConnection));
 
+builder.Services.AddDbContext<MooArvelousDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("MooArvelousConnection")));
+
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 // Identity config

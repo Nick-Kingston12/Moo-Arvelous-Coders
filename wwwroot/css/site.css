@@ -1335,7 +1335,7 @@ button {
     margin-bottom: 1rem;
 }
 
-.upload-btn, .delete-btn, .save-btn, .update-btn, .record-btn, .clear-btn{
+.upload-btn, .delete-btn, .save-btn, .update-btn, .record-btn, .clear-btnC{
     display: block;
     width: 100%;
     margin: 0.5rem 0;
