@@ -55,7 +55,7 @@
                 <span asp-validation-for="LastName" class="text-danger"></span>
 
                 <label asp-for="Idnumber" class="control-label">ID Number:</label>
-                <input asp-for="Idnumber" class="form-control" />
+                <input asp-for="Idnumber" class="form-control" maxlength="13" pattern="\d{13}" title="ID Number must be exactly 13 digits" />
                 <span asp-validation-for="Idnumber" class="text-danger"></span>
 
                 <label asp-for="PhoneNumber" class="control-label">Phone Number:</label>
@@ -67,17 +67,39 @@
                 <span asp-validation-for="EmailAddress" class="text-danger"></span>
 
                 <label asp-for="Location" class="control-label">Location:</label>
-                <input asp-for="Location" class="form-control" />
+                <select asp-for="Location" class="form-control">
+                    <option value="">-- Select Province --</option>
+                    <option value="Eastern Cape">Eastern Cape</option>
+                    <option value="Free State">Free State</option>
+                    <option value="Gauteng">Gauteng</option>
+                    <option value="KwaZulu-Natal">KwaZulu-Natal</option>
+                    <option value="Limpopo">Limpopo</option>
+                    <option value="Mpumalanga">Mpumalanga</option>
+                    <option value="Northern Cape">Northern Cape</option>
+                    <option value="North West">North West</option>
+                    <option value="Western Cape">Western Cape</option>
+                </select>
                 <span asp-validation-for="Location" class="text-danger"></span>
+
 
                 <!-- Password field -->
                 <label asp-for="Password" class="control-label">Password:</label>
                 <div class="password-container">
-                    <input asp-for="Password" type="password" class="form-control" />
+                    <input asp-for="Password" type="password" class="form-control" id="Password" />
+                    <button type="button" class="toggle-password" onclick="togglePassword('Password')">
+                        👁
+                    </button>
                     <span asp-validation-for="Password" class="text-danger"></span>
-
                 </div>
 
+                <label asp-for="ConfirmPassword" class="control-label">Confirm Password:</label>
+                <div class="password-container">
+                    <input asp-for="ConfirmPassword" type="password" class="form-control" id="ConfirmPassword" />
+                    <button type="button" class="toggle-password" onclick="togglePassword('ConfirmPassword')">
+                        👁
+                    </button>
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
 
                 <!-- Form Buttons -->
                 <div class="button-row">
@@ -104,12 +126,14 @@
 
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")
-
     <script>
-        // Toggle password visibility
-        function togglePassword(id) {
-            const input = document.getElementById(id);
-            input.type = input.type === "password" ? "text" : "password";
+        function togglePassword(fieldId) {
+            var input = document.getElementById(fieldId);
+            if (input.type === "password") {
+                input.type = "text";
+            } else {
+                input.type = "password";
+            }
         }
     </script>
 }

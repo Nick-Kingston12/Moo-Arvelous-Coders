@@ -16,10 +16,6 @@ var mooConnection = builder.Configuration.GetConnectionString("MooArvelousConnec
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(identityConnection));
 
-// Moo-Arvelous business data database
-builder.Services.AddDbContext<MooArvelousDbContext>(options =>
-    options.UseSqlServer(mooConnection));
-
 builder.Services.AddDbContext<MooArvelousDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("MooArvelousConnection")));
 

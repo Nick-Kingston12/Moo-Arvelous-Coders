@@ -58,7 +58,7 @@
                 <span asp-validation-for="BlastName" class="text-danger"></span>
 
                     <label asp-for="Bidnumber" class="control-label">ID Number:</label>
-                <input asp-for="Bidnumber" class="form-control" />
+                <input asp-for="Bidnumber" class="form-control" maxlength="13" pattern="\d{13}" title="ID Number must be exactly 13 digits" />
                 <span asp-validation-for="Bidnumber" class="text-danger"></span>
 
                     <label asp-for="BphoneNumber" class="control-label">Phone Number:</label>
@@ -76,11 +76,21 @@
                 <div id="errorMsg" class="error-message"></div>
 
                 <label asp-for="BPassword" class="control-label">Password:</label>
-                <input asp-for="BPassword" class="form-control" />
-                <span asp-validation-for="BPassword" class="text-danger"></span>
-                <div class="password-cotainer">
-                    <input type="password" id="password" required>
-                    <span class="toggle-password" onclick="togglePassword('password')"></span>
+                <div class="password-container">
+                    <input asp-for="BPassword" type="password" class="form-control" id="Password" />
+                    <button type="button" class="toggle-password" onclick="togglePassword('Password')">
+                        👁
+                    </button>
+                    <span asp-validation-for="BPassword" class="text-danger"></span>
+                </div>
+
+                <label asp-for="BConfirmPassword" class="control-label">Confirm Password:</label>
+                <div class="password-container">
+                    <input asp-for="BConfirmPassword" type="password" class="form-control" id="ConfirmPassword" />
+                    <button type="button" class="toggle-password" onclick="togglePassword('ConfirmPassword')">
+                        👁
+                    </button>
+                    <span asp-validation-for="BConfirmPassword" class="text-danger"></span>
                 </div>
 
                 <div class="button-row">
@@ -107,5 +117,15 @@
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        <script>
+            function togglePassword(fieldId) {
+                var input = document.getElementById(fieldId);
+                if (input.type === "password") {
+                    input.type = "text";
+                } else {
+                    input.type = "password";
+                }
+            }
+        </script>
     }
 }
