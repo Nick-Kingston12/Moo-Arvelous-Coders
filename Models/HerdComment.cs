@@ -1,25 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Moo_Arvelous_Coders.Models;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Moo_Arvelous_Coders.Models;
-
-public partial class HerdComment
+namespace Moo_Arvelous_Coders.Models
 {
+    public partial class HerdComment
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int CommentId { get; set; }
 
-    [Key]
-    public string CommentId { get; set; } = Guid.NewGuid().ToString().Substring(0, 8);
+        [Required]
+        public string CommentDescription { get; set; } = null!;
 
-    [Required(ErrorMessage = "Comment is required.")]
-    public string CommentDescription { get; set; }
+        [Required]
+        public int HerdId { get; set; }
+        public int? FarmerId { get; set; }
 
-    [Required(ErrorMessage = "Please select a herd.")]
-    public string? HerdId { get; set; }
-
-    public string? FarmerId { get; set; }
-
-    public virtual Farmer? Farmer { get; set; }
-
-    public virtual Herd? Herd { get; set; }
-
+        public virtual Herd? Herd { get; set; }
+        public virtual Farmer? Farmer { get; set; }
+    }
 }

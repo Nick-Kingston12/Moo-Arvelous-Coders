@@ -3,6 +3,8 @@ using Moo_Arvelous_Coders.Data;
 using Moo_Arvelous_Coders.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Moo_Arvelous_Coders.Controllers
 {
@@ -19,7 +21,9 @@ namespace Moo_Arvelous_Coders.Controllers
 
         public IActionResult Index()
         {
-            var cattleList = _context.Cattle.Include(c => c.CattleHealthRecords).ToList();
+            var cattleList = _context.Cattle
+                .Include(c => c.CattleHealthRecords)
+                .ToList();
             return View(cattleList);
         }
 
@@ -27,12 +31,20 @@ namespace Moo_Arvelous_Coders.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Access individual models like:
                 var cattle = model.Cattle;
                 var photo = model.Photo;
                 var healthRecord = model.HealthRecord;
 
-                // TODO: Save to database (attach relations as needed)
+                // Database automatically assigns int IDs
+                _context.Cattle.Add(cattle);
+                _context.SaveChanges();
+
+                if (healthRecord != null)
+                {
+                    healthRecord.CattleId = cattle.CattleId;
+                    _context.CattleHealthRecords.Add(healthRecord);
+                    _context.SaveChanges();
+                }
 
                 return RedirectToAction(nameof(Index));
             }
@@ -51,17 +63,13 @@ namespace Moo_Arvelous_Coders.Controllers
             return RedirectToAction(nameof(Create));
         }
 
-        public IActionResult Edit(string id)
+        public IActionResult Edit(int id)
         {
-            if (string.IsNullOrEmpty(id))
-                return NotFound();
-
             var cattle = _context.Cattle
                 .Include(c => c.CattleHealthRecords)
                 .FirstOrDefault(c => c.CattleId == id);
 
-            if (cattle == null)
-                return NotFound();
+            if (cattle == null) return NotFound();
 
             var vm = new CattleCreateViewModel
             {
@@ -83,7 +91,7 @@ namespace Moo_Arvelous_Coders.Controllers
                     _context.Cattle.Update(vm.Cattle);
                     _context.SaveChanges();
 
-                    if (vm.HealthRecord != null && !string.IsNullOrEmpty(vm.HealthRecord.RecordId))
+                    if (vm.HealthRecord != null && vm.HealthRecord.RecordId != 0)
                     {
                         vm.HealthRecord.CattleId = vm.Cattle.CattleId;
                         _context.CattleHealthRecords.Update(vm.HealthRecord);
@@ -105,21 +113,17 @@ namespace Moo_Arvelous_Coders.Controllers
         }
 
         // GET: Cattle/Delete/{id}
-        public IActionResult Delete(string id)
+        public IActionResult Delete(int id)
         {
-            if (string.IsNullOrEmpty(id))
-                return NotFound();
-
             var cattle = _context.Cattle.FirstOrDefault(c => c.CattleId == id);
-            if (cattle == null)
-                return NotFound();
+            if (cattle == null) return NotFound();
 
             return View(cattle);
         }
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(string id)
+        public IActionResult DeleteConfirmed(int id)
         {
             var cattle = _context.Cattle
                 .Include(c => c.CattleHealthRecords)
@@ -138,9 +142,6 @@ namespace Moo_Arvelous_Coders.Controllers
 
             TempData["SuccessMessage"] = "Cattle deleted successfully!";
             return RedirectToAction("Index");
-
         }
     }
 }
-
-

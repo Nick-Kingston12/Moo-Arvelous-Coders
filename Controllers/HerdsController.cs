@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Moo_Arvelous_Coders.Models;
-using System;
 using System.Threading.Tasks;
 
 namespace Moo_Arvelous_Coders.Controllers
@@ -23,14 +22,22 @@ namespace Moo_Arvelous_Coders.Controllers
             return View(herds);
         }
 
+        // GET: Herds/Details/5
+        public async Task<IActionResult> Details(int id)
+        {
+            var herd = await _context.Herds
+                .Include(h => h.HerdComments) // Include comments
+                .FirstOrDefaultAsync(h => h.HerdId == id);
+
+            if (herd == null) return NotFound();
+
+            return View(herd);
+        }
+
         // GET: Herds/Create
         public IActionResult Create()
         {
-            var model = new Herd
-            {
-                HerdId = Guid.NewGuid().ToString().Substring(0, 8)
-            };
-            return View(model);
+            return View();
         }
 
         // POST: Herds/Create
@@ -38,24 +45,12 @@ namespace Moo_Arvelous_Coders.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Herd model)
         {
-            ModelState.Remove("Cattle");
+            ModelState.Remove("Cattles");
             ModelState.Remove("FarmId");
             ModelState.Remove("FarmerId");
-            foreach (var state in ModelState)
-            {
-                foreach (var error in state.Value.Errors)
-                {
-                    Console.WriteLine($"⚠️ Field: {state.Key} - Error: {error.ErrorMessage}");
-                }
-            }
 
             if (ModelState.IsValid)
             {
-                if (string.IsNullOrWhiteSpace(model.HerdId))
-                {
-                    model.HerdId = Guid.NewGuid().ToString().Substring(0, 8);
-                }
-
                 _context.Herds.Add(model);
                 await _context.SaveChangesAsync();
 
@@ -65,35 +60,18 @@ namespace Moo_Arvelous_Coders.Controllers
             return View(model);
         }
 
-        // GET: Herds/Details/{id}
-        public async Task<IActionResult> Details(string id)
+        // GET: Herds/Edit/5
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null) return NotFound();
-
-            var herd = await _context.Herds
-                .Include(h => h.HerdComments) // Include comments in the query
-                .FirstOrDefaultAsync(h => h.HerdId == id);
-
-            if (herd == null) return NotFound();
-
-            return View(herd);
-        }
-
-        // GET: Herds/Edit/{id}
-        public async Task<IActionResult> Edit(string id)
-        {
-            if (id == null) return NotFound();
-
             var herd = await _context.Herds.FindAsync(id);
             if (herd == null) return NotFound();
-
             return View(herd);
         }
 
-        // POST: Herds/Edit/{id}
+        // POST: Herds/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, Herd model)
+        public async Task<IActionResult> Edit(int id, Herd model)
         {
             if (id != model.HerdId) return NotFound();
 
@@ -118,21 +96,19 @@ namespace Moo_Arvelous_Coders.Controllers
             return View(model);
         }
 
-        // GET: Herds/Delete/{id}
-        public async Task<IActionResult> Delete(string id)
+        // GET: Herds/Delete/5
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null) return NotFound();
-
             var herd = await _context.Herds.FirstOrDefaultAsync(h => h.HerdId == id);
             if (herd == null) return NotFound();
 
             return View(herd);
         }
 
-        // POST: Herds/Delete/{id}
+        // POST: Herds/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var herd = await _context.Herds.FindAsync(id);
             if (herd != null)
@@ -144,11 +120,9 @@ namespace Moo_Arvelous_Coders.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private async Task<bool> HerdExists(string id)
+        private async Task<bool> HerdExists(int id)
         {
             return await _context.Herds.AnyAsync(h => h.HerdId == id);
         }
-       
-
     }
 }

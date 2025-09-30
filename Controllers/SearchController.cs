@@ -22,11 +22,9 @@ namespace Moo_Arvelous_Coders.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(SearchViewModel model)
         {
-            string id = model.SearchId?.Trim();
-
-            if (string.IsNullOrWhiteSpace(id))
+            if (!int.TryParse(model.SearchId, out int id))
             {
-                model.Message = "Please enter an ID.";
+                model.Message = "Please enter a valid numeric ID.";
                 return View(model);
             }
 
@@ -49,5 +47,3 @@ namespace Moo_Arvelous_Coders.Controllers
         }
     }
 }
-
-

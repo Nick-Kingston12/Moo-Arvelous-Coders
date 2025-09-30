@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Moo_Arvelous_Coders.Models;
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -24,31 +23,17 @@ namespace Moo_Arvelous_Coders.Controllers
         }
 
         // GET: Farms/Details/{id}
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
             var farm = await _context.Farms.FirstOrDefaultAsync(f => f.FarmId == id);
-            if (farm == null)
-            {
-                return NotFound();
-            }
-
+            if (farm == null) return NotFound();
             return View(farm);
         }
 
         // GET: Farms/Create
         public IActionResult Create()
         {
-            // Generate a new string ID for the view
-            var model = new Farm
-            {
-                FarmId = Guid.NewGuid().ToString().Substring(0, 8)
-            };
-            return View(model);
+            return View();
         }
 
         // POST: Farms/Create
@@ -58,12 +43,6 @@ namespace Moo_Arvelous_Coders.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Generate ID if missing (just in case)
-                if (string.IsNullOrWhiteSpace(model.FarmId))
-                {
-                    model.FarmId = Guid.NewGuid().ToString().Substring(0, 8);
-                }
-
                 // Check for duplicate FarmName
                 bool exists = await _context.Farms.AnyAsync(f => f.FarmName == model.FarmName);
                 if (exists)
@@ -81,30 +60,19 @@ namespace Moo_Arvelous_Coders.Controllers
         }
 
         // GET: Farms/Edit/{id}
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
             var farm = await _context.Farms.FindAsync(id);
-            if (farm == null)
-            {
-                return NotFound();
-            }
+            if (farm == null) return NotFound();
             return View(farm);
         }
 
         // POST: Farms/Edit/{id}
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, Farm model)
+        public async Task<IActionResult> Edit(int id, Farm model)
         {
-            if (id != model.FarmId)
-            {
-                return NotFound();
-            }
+            if (id != model.FarmId) return NotFound();
 
             if (ModelState.IsValid)
             {
@@ -131,25 +99,17 @@ namespace Moo_Arvelous_Coders.Controllers
         }
 
         // GET: Farms/Delete/{id}
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
             var farm = await _context.Farms.FirstOrDefaultAsync(f => f.FarmId == id);
-            if (farm == null)
-            {
-                return NotFound();
-            }
+            if (farm == null) return NotFound();
             return View(farm);
         }
 
         // POST: Farms/Delete/{id}
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var farm = await _context.Farms.FindAsync(id);
             if (farm != null)
@@ -161,7 +121,7 @@ namespace Moo_Arvelous_Coders.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private async Task<bool> FarmExists(string id)
+        private async Task<bool> FarmExists(int id)
         {
             return await _context.Farms.AnyAsync(f => f.FarmId == id);
         }

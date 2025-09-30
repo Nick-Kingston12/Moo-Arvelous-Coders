@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Moo_Arvelous_Coders.Models;
 
@@ -11,9 +12,11 @@ using Moo_Arvelous_Coders.Models;
 namespace Moo_Arvelous_Coders.Migrations
 {
     [DbContext(typeof(MooArvelousDbContext))]
-    partial class MooArvelousDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250930212705_RecreateDatabase")]
+    partial class RecreateDatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

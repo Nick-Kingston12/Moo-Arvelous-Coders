@@ -32,26 +32,19 @@ namespace Moo_Arvelous_Coders.Controllers
 
             if (ModelState.IsValid)
             {
-                // Generate CommentId if not already set
-                if (string.IsNullOrWhiteSpace(model.CommentId))
-                {
-                    model.CommentId = Guid.NewGuid().ToString().Substring(0, 8);
-                }
-
+                // No need to generate CommentId manually, database handles int identity
                 _context.HerdComments.Add(model);
                 await _context.SaveChangesAsync();
 
                 TempData["SuccessMessage"] = "Comment recorded!";
 
-                // ✅ Redirect straight to herd's details page
+                // Redirect to herd's details page
                 return RedirectToAction("Details", "Herds", new { id = model.HerdId });
             }
 
             // If model is invalid, stay on the page and show errors
             return View(model);
         }
-
     }
 }
-
 

@@ -1,35 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Moo_Arvelous_Coders.Models;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Moo_Arvelous_Coders.Models;
-
-public partial class Herd
+namespace Moo_Arvelous_Coders.Models
 {
-    [Key]
-    public string HerdId { get; set; } = Guid.NewGuid().ToString().Substring(0, 8); // auto-create on model creation
+    public partial class Herd
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int HerdId { get; set; }
 
+        [Required]
+        public string HerdName { get; set; } = null!;
 
-    [Required(ErrorMessage = "Herd name is required.")]
-    public string HerdName { get; set; }
+        public string? Bull { get; set; }
+        public string? Cattle { get; set; }
 
-    public string? Bull { get; set; } 
+        [Required]
+        public int Herdsize { get; set; }
 
-    public string? Cattle { get; set; } 
+        public int? FarmId { get; set; }
+        public int? FarmerId { get; set; }
 
-    [Required(ErrorMessage = "Herd size is required.")]
-    [Range(1, 1000, ErrorMessage = "Herd size must be a number between 1 and 1000.")]
-    public int Herdsize { get; set; }
-
-    public string? FarmId { get; set; }
-
-    public string? FarmerId { get; set; }
-
-    public virtual ICollection<Cattle> Cattles { get; set; } = new List<Cattle>();
-
-    public virtual Farm? Farm { get; set; }
-
-    public virtual Farmer? Farmer { get; set; }
-
-    public virtual ICollection<HerdComment> HerdComments { get; set; }
+        public virtual Farm? Farm { get; set; }
+        public virtual Farmer? Farmer { get; set; }
+        public virtual ICollection<Cattle> Cattles { get; set; } = new List<Cattle>();
+        public virtual ICollection<HerdComment> HerdComments { get; set; } = new List<HerdComment>();
+    }
 }
+

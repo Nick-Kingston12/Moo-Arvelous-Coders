@@ -1,19 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Moo_Arvelous_Coders.Models;
-
-public partial class CattlePhoto
+namespace Moo_Arvelous_Coders.Models
 {
-    [Key]
-    public string PhotoId { get; set; }
+    public partial class CattlePhoto
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int PhotoId { get; set; }  // Changed from string to int
 
-    public string? CattleId { get; set; }
+        public int? CattleId { get; set; }  // Changed from string to int
 
-    public string PhotoUrl { get; set; } = null!;
+        public string PhotoUrl { get; set; } = null!;
+        public string? Description { get; set; }
 
-    public string? Description { get; set; }
-
-    public virtual Cattle? Cattle { get; set; }
+        public virtual Cattle? Cattle { get; set; }
+    }
 }

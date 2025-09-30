@@ -1,25 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Moo_Arvelous_Coders.Models;
-
-public partial class CattleSaleRecord
+namespace Moo_Arvelous_Coders.Models
 {
-    public string SaleId { get; set; }
+    public partial class CattleSaleRecord
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int SaleId { get; set; }
 
-    public string? CattleId { get; set; }
+        public int? CattleId { get; set; }
+        public Cattle? Cattle { get; set; }
 
-    public string? FarmerId { get; set; }
+        public int? FarmerId { get; set; }
+        public Farmer? Farmer { get; set; }
 
-    public DateOnly SaleDate { get; set; }
+        public DateOnly SaleDate { get; set; }
 
-    public decimal SalePrice { get; set; }
+        [Column(TypeName = "decimal(10,2)")]
+        public decimal SalePrice { get; set; }
 
-    public string? BuyerId { get; set; }
-
-    public virtual Buyer? Buyer { get; set; }
-
-    public virtual Cattle? Cattle { get; set; }
-
-    public virtual Farmer? Farmer { get; set; }
+        public int? BuyerId { get; set; }
+        public Buyer? Buyer { get; set; }
+    }
 }

@@ -1,21 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Moo_Arvelous_Coders.Models;
-
-public partial class CattleHealthRecord
+namespace Moo_Arvelous_Coders.Models
 {
-    [Key]
-    public string RecordId { get; set; }
+    public partial class CattleHealthRecord
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int RecordId { get; set; }  // Changed from string to int
 
-    public string? CattleId { get; set; }
+        public int? CattleId { get; set; }  // Already int
 
-    public DateOnly RecordDate { get; set; }
+        public DateOnly RecordDate { get; set; }
 
-    public string TreatmentType { get; set; } = null!;
+        public string TreatmentType { get; set; } = null!;
+        public string Details { get; set; } = null!;
 
-    public string Details { get; set; } = null!;
-
-    public virtual Cattle? Cattle { get; set; }
+        public virtual Cattle? Cattle { get; set; }
+    }
 }
