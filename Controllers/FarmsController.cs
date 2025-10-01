@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Moo_Arvelous_Coders.Data;
 using Moo_Arvelous_Coders.Models;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,9 +9,9 @@ namespace Moo_Arvelous_Coders.Controllers
 {
     public class FarmsController : Controller
     {
-        private readonly MooArvelousDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public FarmsController(MooArvelousDbContext context)
+        public FarmsController( ApplicationDbContext context)
         {
             _context = context;
         }

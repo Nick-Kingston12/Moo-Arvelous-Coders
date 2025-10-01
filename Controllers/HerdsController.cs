@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Moo_Arvelous_Coders.Data;
 using Moo_Arvelous_Coders.Models;
 using System.Threading.Tasks;
 
@@ -7,9 +8,9 @@ namespace Moo_Arvelous_Coders.Controllers
 {
     public class HerdsController : Controller
     {
-        private readonly MooArvelousDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public HerdsController(MooArvelousDbContext context)
+        public HerdsController(ApplicationDbContext context)
         {
             _context = context;
         }

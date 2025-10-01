@@ -1,14 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Moo_Arvelous_Coders.Data;
 using Moo_Arvelous_Coders.Models;
 
 namespace Moo_Arvelous_Coders.Controllers
 {
     public class BuyerController : Controller
     {
-        private readonly MooArvelousDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public BuyerController(MooArvelousDbContext context)
+        public BuyerController(ApplicationDbContext context)
         {
             _context = context;
         }

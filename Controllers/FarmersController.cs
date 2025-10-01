@@ -1,18 +1,19 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Moo_Arvelous_Coders.Data;
+using Moo_Arvelous_Coders.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Moo_Arvelous_Coders.Models;
 
 namespace Moo_Arvelous_Coders.Controllers
 {
     public class FarmersController : Controller
     {
-        private readonly MooArvelousDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public FarmersController(MooArvelousDbContext context)
+        public FarmersController(ApplicationDbContext context )
         {
             _context = context;
         }
