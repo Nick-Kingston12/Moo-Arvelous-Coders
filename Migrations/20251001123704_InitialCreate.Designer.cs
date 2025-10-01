@@ -12,7 +12,7 @@ using Moo_Arvelous_Coders.Models;
 namespace Moo_Arvelous_Coders.Migrations
 {
     [DbContext(typeof(MooArvelousDbContext))]
-    [Migration("20250811161558_InitialCreate")]
+    [Migration("20251001123704_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -27,57 +27,55 @@ namespace Moo_Arvelous_Coders.Migrations
 
             modelBuilder.Entity("Moo_Arvelous_Coders.Models.Buyer", b =>
                 {
-                    b.Property<string>("BuyerId")
-                        .HasColumnType("nvarchar(450)")
-                        .HasColumnName("BuyerID");
+                    b.Property<int>("BuyerId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BuyerId"));
+
+                    b.Property<string>("BConfirmPassword")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("BPassword")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Bemail")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
-                        .HasColumnName("BEmail");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("BfirstName")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
-                        .HasColumnName("BFirstName");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Bidnumber")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)")
-                        .HasColumnName("BIDNumber");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("BlastName")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
-                        .HasColumnName("BLastName");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("BphoneNumber")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)")
-                        .HasColumnName("BPhoneNumber");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("OrganizationName")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("BuyerId")
-                        .HasName("PK__Buyer__4B81C1CA078A2677");
+                    b.HasKey("BuyerId");
 
-                    b.HasIndex(new[] { "Bidnumber" }, "UQ__Buyer__218A515C8481D745")
-                        .IsUnique()
-                        .HasFilter("[BIDNumber] IS NOT NULL");
-
-                    b.ToTable("Buyer", (string)null);
+                    b.ToTable("Buyers");
                 });
 
             modelBuilder.Entity("Moo_Arvelous_Coders.Models.Cattle", b =>
                 {
-                    b.Property<string>("CattleId")
-                        .HasColumnType("nvarchar(450)")
-                        .HasColumnName("CattleID");
+                    b.Property<int>("CattleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CattleId"));
 
                     b.Property<string>("Breed")
                         .IsRequired()
@@ -90,9 +88,8 @@ namespace Moo_Arvelous_Coders.Migrations
                     b.Property<DateOnly?>("DateOfDeath")
                         .HasColumnType("date");
 
-                    b.Property<string>("FarmerId")
-                        .HasColumnType("nvarchar(450)")
-                        .HasColumnName("FarmerID");
+                    b.Property<int?>("FarmerId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Gender")
                         .HasMaxLength(10)
@@ -102,109 +99,103 @@ namespace Moo_Arvelous_Coders.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("HerdId")
-                        .HasColumnType("nvarchar(450)")
-                        .HasColumnName("HerdID");
+                    b.Property<int?>("HerdId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Status")
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.HasKey("CattleId")
-                        .HasName("PK__Cattle__E375C63CBAD731FD");
+                    b.Property<int>("Weight")
+                        .HasColumnType("int");
+
+                    b.HasKey("CattleId");
 
                     b.HasIndex("FarmerId");
 
                     b.HasIndex("HerdId");
 
-                    b.ToTable("Cattle", (string)null);
+                    b.ToTable("Cattles");
                 });
 
             modelBuilder.Entity("Moo_Arvelous_Coders.Models.CattleHealthRecord", b =>
                 {
-                    b.Property<string>("RecordId")
-                        .HasColumnType("nvarchar(450)")
-                        .HasColumnName("RecordID");
+                    b.Property<int>("RecordId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<string>("CattleId")
-                        .HasColumnType("nvarchar(450)")
-                        .HasColumnName("CattleID");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RecordId"));
+
+                    b.Property<int?>("CattleId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Details")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateOnly>("RecordDate")
                         .HasColumnType("date");
 
                     b.Property<string>("TreatmentType")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("RecordId")
-                        .HasName("PK__CattleHe__FBDF78C921E20F58");
+                    b.HasKey("RecordId");
 
                     b.HasIndex("CattleId");
 
-                    b.ToTable("CattleHealthRecord", (string)null);
+                    b.ToTable("CattleHealthRecords");
                 });
 
             modelBuilder.Entity("Moo_Arvelous_Coders.Models.CattlePhoto", b =>
                 {
-                    b.Property<string>("PhotoId")
-                        .HasColumnType("nvarchar(450)")
-                        .HasColumnName("PhotoID");
+                    b.Property<int>("PhotoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<string>("CattleId")
-                        .HasColumnType("nvarchar(450)")
-                        .HasColumnName("CattleID");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PhotoId"));
+
+                    b.Property<int?>("CattleId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Description")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhotoUrl")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)")
-                        .HasColumnName("PhotoURL");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("PhotoId")
-                        .HasName("PK__CattlePh__21B7B5826EA21737");
+                    b.HasKey("PhotoId");
 
                     b.HasIndex("CattleId");
 
-                    b.ToTable("CattlePhoto", (string)null);
+                    b.ToTable("CattlePhotos");
                 });
 
             modelBuilder.Entity("Moo_Arvelous_Coders.Models.CattleSaleRecord", b =>
                 {
-                    b.Property<string>("SaleId")
-                        .HasColumnType("nvarchar(450)")
-                        .HasColumnName("SaleID");
+                    b.Property<int>("SaleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<string>("BuyerId")
-                        .HasColumnType("nvarchar(450)")
-                        .HasColumnName("BuyerID");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SaleId"));
 
-                    b.Property<string>("CattleId")
-                        .HasColumnType("nvarchar(450)")
-                        .HasColumnName("CattleID");
+                    b.Property<int?>("BuyerId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("FarmerId")
-                        .HasColumnType("nvarchar(450)")
-                        .HasColumnName("FarmerID");
+                    b.Property<int?>("CattleId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("FarmerId")
+                        .HasColumnType("int");
 
                     b.Property<DateOnly>("SaleDate")
                         .HasColumnType("date");
 
                     b.Property<decimal>("SalePrice")
-                        .HasColumnType("decimal(10, 2)");
+                        .HasColumnType("decimal(10,2)");
 
-                    b.HasKey("SaleId")
-                        .HasName("PK__CattleSa__1EE3C41F136A9DDC");
+                    b.HasKey("SaleId");
 
                     b.HasIndex("BuyerId");
 
@@ -212,14 +203,16 @@ namespace Moo_Arvelous_Coders.Migrations
 
                     b.HasIndex("FarmerId");
 
-                    b.ToTable("CattleSaleRecord", (string)null);
+                    b.ToTable("CattleSaleRecords");
                 });
 
             modelBuilder.Entity("Moo_Arvelous_Coders.Models.Farm", b =>
                 {
-                    b.Property<string>("FarmId")
-                        .HasColumnType("nvarchar(450)")
-                        .HasColumnName("FarmID");
+                    b.Property<int>("FarmId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FarmId"));
 
                     b.Property<string>("FarmName")
                         .IsRequired()
@@ -229,9 +222,8 @@ namespace Moo_Arvelous_Coders.Migrations
                     b.Property<double>("FarmSize")
                         .HasColumnType("float");
 
-                    b.Property<string>("FarmerId")
-                        .HasColumnType("nvarchar(450)")
-                        .HasColumnName("FarmerID");
+                    b.Property<int?>("FarmerId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Location")
                         .IsRequired()
@@ -244,21 +236,26 @@ namespace Moo_Arvelous_Coders.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<decimal>("PriceBought")
-                        .HasColumnType("decimal(10, 2)");
+                        .HasColumnType("decimal(10,2)");
 
-                    b.HasKey("FarmId")
-                        .HasName("PK__Farm__ED7BBA99F98F561A");
+                    b.HasKey("FarmId");
 
                     b.HasIndex("FarmerId");
 
-                    b.ToTable("Farm", (string)null);
+                    b.ToTable("Farms");
                 });
 
             modelBuilder.Entity("Moo_Arvelous_Coders.Models.Farmer", b =>
                 {
-                    b.Property<string>("FarmerId")
-                        .HasColumnType("nvarchar(450)")
-                        .HasColumnName("FarmerID");
+                    b.Property<int>("FarmerId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FarmerId"));
+
+                    b.Property<string>("ConfirmPassword")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("EmailAddress")
                         .IsRequired()
@@ -273,8 +270,7 @@ namespace Moo_Arvelous_Coders.Migrations
                     b.Property<string>("Idnumber")
                         .IsRequired()
                         .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)")
-                        .HasColumnName("IDNumber");
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -286,28 +282,33 @@ namespace Moo_Arvelous_Coders.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.HasKey("FarmerId")
-                        .HasName("PK__Farmer__731B88E8CB2BC6CA");
+                    b.HasKey("FarmerId");
 
-                    b.HasIndex(new[] { "EmailAddress" }, "UQ__Farmer__49A147408D2FB0FE")
+                    b.HasIndex("EmailAddress")
                         .IsUnique();
 
-                    b.HasIndex(new[] { "Idnumber" }, "UQ__Farmer__564DB08AE2C54990")
+                    b.HasIndex("Idnumber")
                         .IsUnique();
 
-                    b.ToTable("Farmer", (string)null);
+                    b.ToTable("Farmers");
                 });
 
             modelBuilder.Entity("Moo_Arvelous_Coders.Models.Herd", b =>
                 {
-                    b.Property<string>("HerdId")
-                        .HasColumnType("nvarchar(450)")
-                        .HasColumnName("HerdID");
+                    b.Property<int>("HerdId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("HerdId"));
 
                     b.Property<string>("Bull")
                         .HasMaxLength(50)
@@ -317,13 +318,11 @@ namespace Moo_Arvelous_Coders.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("FarmId")
-                        .HasColumnType("nvarchar(450)")
-                        .HasColumnName("FarmID");
+                    b.Property<int?>("FarmId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("FarmerId")
-                        .HasColumnType("nvarchar(450)")
-                        .HasColumnName("FarmerID");
+                    b.Property<int?>("FarmerId")
+                        .HasColumnType("int");
 
                     b.Property<string>("HerdName")
                         .IsRequired()
@@ -333,58 +332,53 @@ namespace Moo_Arvelous_Coders.Migrations
                     b.Property<int>("Herdsize")
                         .HasColumnType("int");
 
-                    b.HasKey("HerdId")
-                        .HasName("PK__Herd__0889874A8A2B7728");
+                    b.HasKey("HerdId");
 
                     b.HasIndex("FarmId");
 
                     b.HasIndex("FarmerId");
 
-                    b.ToTable("Herd", (string)null);
+                    b.ToTable("Herds");
                 });
 
             modelBuilder.Entity("Moo_Arvelous_Coders.Models.HerdComment", b =>
                 {
-                    b.Property<string>("CommentId")
-                        .HasColumnType("nvarchar(450)")
-                        .HasColumnName("CommentID");
+                    b.Property<int>("CommentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CommentId"));
 
                     b.Property<string>("CommentDescription")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<string>("FarmerId")
-                        .HasColumnType("nvarchar(450)")
-                        .HasColumnName("FarmerID");
+                    b.Property<int?>("FarmerId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("HerdId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)")
-                        .HasColumnName("HerdID");
+                    b.Property<int>("HerdId")
+                        .HasColumnType("int");
 
-                    b.HasKey("CommentId")
-                        .HasName("PK__HerdComm__C3B4DFAA66060F54");
+                    b.HasKey("CommentId");
 
                     b.HasIndex("FarmerId");
 
                     b.HasIndex("HerdId");
 
-                    b.ToTable("HerdComment", (string)null);
+                    b.ToTable("HerdComments");
                 });
 
             modelBuilder.Entity("Moo_Arvelous_Coders.Models.Cattle", b =>
                 {
                     b.HasOne("Moo_Arvelous_Coders.Models.Farmer", "Farmer")
                         .WithMany("Cattles")
-                        .HasForeignKey("FarmerId")
-                        .HasConstraintName("FK__Cattle__FarmerID__44FF419A");
+                        .HasForeignKey("FarmerId");
 
                     b.HasOne("Moo_Arvelous_Coders.Models.Herd", "Herd")
                         .WithMany("Cattles")
                         .HasForeignKey("HerdId")
-                        .OnDelete(DeleteBehavior.SetNull)
-                        .HasConstraintName("FK__Cattle__HerdID__440B1D61");
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Farmer");
 
@@ -395,9 +389,7 @@ namespace Moo_Arvelous_Coders.Migrations
                 {
                     b.HasOne("Moo_Arvelous_Coders.Models.Cattle", "Cattle")
                         .WithMany("CattleHealthRecords")
-                        .HasForeignKey("CattleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .HasConstraintName("FK__CattleHea__Cattl__4AB81AF0");
+                        .HasForeignKey("CattleId");
 
                     b.Navigation("Cattle");
                 });
@@ -406,9 +398,7 @@ namespace Moo_Arvelous_Coders.Migrations
                 {
                     b.HasOne("Moo_Arvelous_Coders.Models.Cattle", "Cattle")
                         .WithMany("CattlePhotos")
-                        .HasForeignKey("CattleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .HasConstraintName("FK__CattlePho__Cattl__47DBAE45");
+                        .HasForeignKey("CattleId");
 
                     b.Navigation("Cattle");
                 });
@@ -418,19 +408,16 @@ namespace Moo_Arvelous_Coders.Migrations
                     b.HasOne("Moo_Arvelous_Coders.Models.Buyer", "Buyer")
                         .WithMany("CattleSaleRecords")
                         .HasForeignKey("BuyerId")
-                        .OnDelete(DeleteBehavior.SetNull)
-                        .HasConstraintName("FK__CattleSal__Buyer__52593CB8");
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Moo_Arvelous_Coders.Models.Cattle", "Cattle")
                         .WithMany("CattleSaleRecords")
                         .HasForeignKey("CattleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .HasConstraintName("FK__CattleSal__Cattl__5070F446");
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Moo_Arvelous_Coders.Models.Farmer", "Farmer")
                         .WithMany("CattleSaleRecords")
-                        .HasForeignKey("FarmerId")
-                        .HasConstraintName("FK__CattleSal__Farme__5165187F");
+                        .HasForeignKey("FarmerId");
 
                     b.Navigation("Buyer");
 
@@ -444,8 +431,7 @@ namespace Moo_Arvelous_Coders.Migrations
                     b.HasOne("Moo_Arvelous_Coders.Models.Farmer", "Farmer")
                         .WithMany("Farms")
                         .HasForeignKey("FarmerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .HasConstraintName("FK__Farm__FarmerID__3B75D760");
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Farmer");
                 });
@@ -455,13 +441,11 @@ namespace Moo_Arvelous_Coders.Migrations
                     b.HasOne("Moo_Arvelous_Coders.Models.Farm", "Farm")
                         .WithMany("Herds")
                         .HasForeignKey("FarmId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .HasConstraintName("FK__Herd__FarmID__3E52440B");
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Moo_Arvelous_Coders.Models.Farmer", "Farmer")
                         .WithMany("Herds")
-                        .HasForeignKey("FarmerId")
-                        .HasConstraintName("FK__Herd__FarmerID__3F466844");
+                        .HasForeignKey("FarmerId");
 
                     b.Navigation("Farm");
 
@@ -472,15 +456,13 @@ namespace Moo_Arvelous_Coders.Migrations
                 {
                     b.HasOne("Moo_Arvelous_Coders.Models.Farmer", "Farmer")
                         .WithMany("HerdComments")
-                        .HasForeignKey("FarmerId")
-                        .HasConstraintName("FK__HerdComme__Farme__5629CD9C");
+                        .HasForeignKey("FarmerId");
 
                     b.HasOne("Moo_Arvelous_Coders.Models.Herd", "Herd")
                         .WithMany("HerdComments")
                         .HasForeignKey("HerdId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK__HerdComme__HerdI__5535A963");
+                        .IsRequired();
 
                     b.Navigation("Farmer");
 
