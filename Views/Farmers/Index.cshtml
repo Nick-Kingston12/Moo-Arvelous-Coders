@@ -1,65 +1,50 @@
 ﻿@model IEnumerable<Moo_Arvelous_Coders.Models.Farmer>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Farmers";
 }
 
-<h1>Index</h1>
+<div class="landing-wrapper">
+    <div class="left-color-block">
+        <img src="~/images/Logo.png" alt="HerdWise Logo" class="logo-image" />
+    </div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Idnumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PhoneNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EmailAddress)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Location)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Idnumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhoneNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EmailAddress)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Location)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.FarmerId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.FarmerId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.FarmerId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <div class="right-content">
+        <h2>Farmers List</h2>
+        <p>Manage your farmers below:</p>
+
+        <a asp-action="Create" class="home-button">Create New Farmer</a>
+
+        <table class="table custom-table">
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>ID Number</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Location</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var farmer in Model)
+                {
+                    <tr>
+                        <td>@farmer.FirstName</td>
+                        <td>@farmer.LastName</td>
+                        <td>@farmer.Idnumber</td>
+                        <td>@farmer.PhoneNumber</td>
+                        <td>@farmer.EmailAddress</td>
+                        <td>@farmer.Location</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@farmer.FarmerId" class="home-button">Edit</a>
+                            <a asp-action="Details" asp-route-id="@farmer.FarmerId" class="home-button">Details</a>
+                            <a asp-action="Delete" asp-route-id="@farmer.FarmerId" class="home-button btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

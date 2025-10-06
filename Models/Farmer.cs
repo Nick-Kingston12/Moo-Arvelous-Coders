@@ -38,6 +38,8 @@ namespace Moo_Arvelous_Coders.Models
         [Compare("Password", ErrorMessage = "Passwords do not match")]
         public string ConfirmPassword { get; set; } = null!;
 
+        public string? IdentityUserId { get; set; }
+
 
         public virtual ICollection<CattleSaleRecord> CattleSaleRecords { get; set; } = new List<CattleSaleRecord>();
 
