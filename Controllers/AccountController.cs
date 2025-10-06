@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Moo_Arvelous_Coders.Models;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
+using Moo_Arvelous_Coders.ViewModels;
 
 namespace Moo_Arvelous_Coders.Controllers
 {
@@ -25,21 +26,25 @@ namespace Moo_Arvelous_Coders.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
             if (!ModelState.IsValid)
-                return View(model);
+                return View(model); // preserves input
 
-            var result = await _signInManager.PasswordSignInAsync(model.EmailAddress, model.Password, false, lockoutOnFailure: false);
+            var result = await _signInManager.PasswordSignInAsync(
+                model.EmailAddress, model.Password, isPersistent: false, lockoutOnFailure: false);
 
             if (result.Succeeded)
-            {
-                return RedirectToAction("Index", "Home"); // Redirect after login
-            }
+                return RedirectToAction("Index", "Home"); // redirect after successful login
 
-            ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-            return View(model);
+            ModelState.AddModelError("", "Invalid login attempt");
+            return View(model); // preserves input on failure
         }
+
+
+
+
 
         // ===== Logout =====
         [HttpGet]
@@ -114,14 +119,7 @@ namespace Moo_Arvelous_Coders.Controllers
 
     // ===== ViewModels =====
 
-    public class LoginViewModel
-    {
-        [Required, EmailAddress]
-        public string EmailAddress { get; set; }
-
-        [Required, DataType(DataType.Password)]
-        public string Password { get; set; }
-    }
+  
 
     public class RegisterFarmerViewModel
     {

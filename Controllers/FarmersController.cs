@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Moo_Arvelous_Coders.Data;
 using Moo_Arvelous_Coders.Models;
@@ -12,10 +13,12 @@ namespace Moo_Arvelous_Coders.Controllers
     public class FarmersController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public FarmersController(ApplicationDbContext context )
+        public FarmersController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Farmers
@@ -48,14 +51,34 @@ namespace Moo_Arvelous_Coders.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("FirstName,LastName,Idnumber,PhoneNumber,EmailAddress,Location,Password,ConfirmPassword")] Farmer farmer)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
+                return View(farmer);
+
+            // Add farmer profile to your custom table
+            _context.Add(farmer);
+            await _context.SaveChangesAsync();
+
+            // Create Identity user for login
+            var user = new IdentityUser { UserName = farmer.EmailAddress, Email = farmer.EmailAddress };
+            var result = await _userManager.CreateAsync(user, farmer.Password);
+
+            if (!result.Succeeded)
             {
-                _context.Add(farmer);
+                // Remove the farmer from your custom table if Identity user creation failed
+                _context.Farmers.Remove(farmer);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+                return View(farmer);
             }
-            return View(farmer);
+
+            // Redirect to Login page after successful registration
+            return RedirectToAction("Login", "Account");
         }
+
 
         // GET: Farmers/Edit/5
         public async Task<IActionResult> Edit(int? id)
