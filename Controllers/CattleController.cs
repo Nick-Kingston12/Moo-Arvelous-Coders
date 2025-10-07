@@ -19,104 +19,100 @@ namespace Moo_Arvelous_Coders.Controllers
             _env = env;
         }
 
+        // ======================
+        // LIST ALL CATTLE
+        // ======================
         public IActionResult Index()
         {
-            var cattleList = _context.Cattle
-                .Include(c => c.CattleHealthRecords)
-                .ToList();
+            var cattleList = _context.Cattle.ToList();
             return View(cattleList);
         }
 
-        public IActionResult Create(CattleCreateViewModel model)
+        // ======================
+        // CREATE CATTLE
+        // ======================
+        [HttpGet]
+        [HttpGet]
+        public IActionResult Create()
+        {
+            // Get all herds to populate dropdown
+            var herds = _context.Herds.ToList();
+            ViewBag.Herds = herds;
+
+            return View(new Cattle());
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Cattle cattle)
         {
             if (ModelState.IsValid)
             {
-                var cattle = model.Cattle;
-                var photo = model.Photo;
-                var healthRecord = model.HealthRecord;
-
-                // Database automatically assigns int IDs
                 _context.Cattle.Add(cattle);
                 _context.SaveChanges();
-
-                if (healthRecord != null)
-                {
-                    healthRecord.CattleId = cattle.CattleId;
-                    _context.CattleHealthRecords.Add(healthRecord);
-                    _context.SaveChanges();
-                }
-
+                TempData["SuccessMessage"] = "Cattle created successfully!";
                 return RedirectToAction(nameof(Index));
             }
 
-            return View(model);
+            // Repopulate the herds dropdown if model is invalid
+            ViewBag.Herds = _context.Herds.ToList();
+            return View(cattle);
         }
 
-        public async Task<IActionResult> DeletePhoto(int id)
-        {
-            var photo = await _context.CattlePhotos.FindAsync(id);
-            if (photo != null)
-            {
-                _context.CattlePhotos.Remove(photo);
-                await _context.SaveChangesAsync();
-            }
-            return RedirectToAction(nameof(Create));
-        }
 
-        public IActionResult Edit(int id)
+        // ======================
+        // VIEW CATTLE DETAILS
+        // ======================
+        public IActionResult Details(int id)
         {
             var cattle = _context.Cattle
                 .Include(c => c.CattleHealthRecords)
                 .FirstOrDefault(c => c.CattleId == id);
 
-            if (cattle == null) return NotFound();
+            if (cattle == null)
+                return NotFound();
 
-            var vm = new CattleCreateViewModel
-            {
-                Cattle = cattle,
-                HealthRecord = cattle.CattleHealthRecords.FirstOrDefault() ?? new CattleHealthRecord()
-            };
+            return View(cattle);
+        }
 
-            return View(vm);
+        // ======================
+        // EDIT CATTLE
+        // ======================
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var cattle = _context.Cattle.Find(id);
+            if (cattle == null)
+                return NotFound();
+
+            return View(cattle);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(CattleCreateViewModel vm)
+        public IActionResult Edit(Cattle cattle)
         {
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Cattle.Update(vm.Cattle);
-                    _context.SaveChanges();
-
-                    if (vm.HealthRecord != null && vm.HealthRecord.RecordId != 0)
-                    {
-                        vm.HealthRecord.CattleId = vm.Cattle.CattleId;
-                        _context.CattleHealthRecords.Update(vm.HealthRecord);
-                        _context.SaveChanges();
-                    }
-
-                    TempData["SuccessMessage"] = "Cattle and Health Record updated successfully!";
-                    return RedirectToAction("Index");
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!_context.Cattle.Any(c => c.CattleId == vm.Cattle.CattleId))
-                        return NotFound();
-                    throw;
-                }
+                _context.Cattle.Update(cattle);
+                _context.SaveChanges();
+                TempData["SuccessMessage"] = "Cattle updated successfully!";
+                return RedirectToAction(nameof(Index));
             }
 
-            return View(vm);
+            return View(cattle);
         }
 
-        // GET: Cattle/Delete/{id}
+        // ======================
+        // DELETE CATTLE
+        // ======================
+        [HttpGet]
         public IActionResult Delete(int id)
         {
             var cattle = _context.Cattle.FirstOrDefault(c => c.CattleId == id);
-            if (cattle == null) return NotFound();
+            if (cattle == null)
+                return NotFound();
 
             return View(cattle);
         }
@@ -138,10 +134,56 @@ namespace Moo_Arvelous_Coders.Controllers
 
                 _context.Cattle.Remove(cattle);
                 _context.SaveChanges();
+                TempData["SuccessMessage"] = "Cattle deleted successfully!";
             }
 
-            TempData["SuccessMessage"] = "Cattle deleted successfully!";
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
         }
+
+        // ======================
+        // LINK TO HEALTH RECORDS PAGE
+        // ======================
+        public IActionResult HealthRecords(int id)
+        {
+            // Redirects to the HealthRecords controller/view
+            return RedirectToAction("Index", "HealthRecords", new { cattleId = id });
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UploadPhoto(int cattleId, IFormFile photo)
+        {
+            if (photo != null && photo.Length > 0)
+            {
+                // 1. Generate a unique filename
+                var fileName = $"{Guid.NewGuid()}{Path.GetExtension(photo.FileName)}";
+
+                // 2. Combine path to wwwroot/images/cattle
+                var filePath = Path.Combine(_env.WebRootPath, "images", "cattle", fileName);
+
+                // 3. Save the file
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await photo.CopyToAsync(stream);
+                }
+
+                // 4. Save the photo record to the database
+                var cattlePhoto = new CattlePhoto
+                {
+                    CattleId = cattleId,
+                    PhotoUrl = $"/images/cattle/{fileName}"
+                };
+                _context.CattlePhotos.Add(cattlePhoto);
+                await _context.SaveChangesAsync();
+
+                TempData["SuccessMessage"] = "Photo uploaded successfully!";
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Please select a photo to upload.";
+            }
+
+            return RedirectToAction("Edit", new { id = cattleId });
+        }
+
     }
 }

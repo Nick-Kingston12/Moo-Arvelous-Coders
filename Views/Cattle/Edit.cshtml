@@ -1,0 +1,51 @@
+﻿@model Moo_Arvelous_Coders.Models.Cattle
+@{
+    ViewData["Title"] = "Edit Cattle";
+}
+<link rel="stylesheet" href="~/css/site.css" />
+
+<div class="edit-container">
+    <div class="herd-header">
+        <img src="~/images/Logo.png" class="logo-top" alt="Logo" />
+        <h1 class="welcome-title">EDIT CATTLE</h1>
+        <a class="menu-button" href="/">MENU</a>
+    </div>
+    <div class="photo-gallery">
+        @foreach (var photo in Model.CattlePhotos)
+        {
+            <div class="photo-box">
+                <img src="@photo.PhotoUrl" alt="Cattle Photo" width="150" />
+            </div>
+        }
+    </div>
+
+    <!-- Upload new photo -->
+    <form asp-action="UploadPhoto" asp-controller="Cattle" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="cattleId" value="@Model.CattleId" />
+        <input type="file" name="photo" />
+        <button type="submit" class="btn">Upload Photo</button>
+    </form>
+
+    <form asp-action="Edit" method="post">
+        <input type="hidden" asp-for="CattleId" />
+
+        <label>Gender:</label>
+        <input asp-for="Gender" />
+
+        <label>Breed:</label>
+        <input asp-for="Breed" />
+
+        <label>Weight (kg):</label>
+        <input asp-for="Weight" />
+
+        <label>Status:</label>
+        <input asp-for="Status" />
+
+        <button type="submit" class="save-btn">UPDATE</button>
+        <a asp-action="Index" class="btn back-btn">CANCEL</a>
+    </form>
+</div>
+
+<footer class="footer-text">
+    <p>Keep your herd info up to date with HerdWise.</p>
+</footer>

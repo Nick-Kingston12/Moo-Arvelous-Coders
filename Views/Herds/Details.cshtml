@@ -14,18 +14,56 @@
         <a class="menu-button" href="/Herds">BACK TO HERDS</a>
     </div>
 
-    <div class="farm-content">
-        <img src="~/images/cows-group.png" class="herd-image" />
-
-        <div class="form-box">
-            <div class="form-header">Herd Info</div>
-
-            <p><strong>Herd ID:</strong> @Model.HerdId</p>
-            <p><strong>Herd Name:</strong> @Model.HerdName</p>
-            <p><strong>Herd Size:</strong> @Model.Herdsize</p>
-        </div>
+    <!-- Herd Info -->
+    <div class="form-box">
+        <div class="form-header">Herd Info</div>
+        <p><strong>Herd ID:</strong> @Model.HerdId</p>
+        <p><strong>Herd Name:</strong> @Model.HerdName</p>
+        <p><strong>Bull:</strong> @Model.Bull</p>
+        <p><strong>Cattle:</strong> @Model.Cattle</p>
+        <p><strong>Herd Size:</strong> @Model.Herdsize</p>
     </div>
 
+    <!-- Cattle List -->
+    <div class="form-box">
+        <div class="form-header">Cattle in this Herd</div>
+        @if (Model.Cattles != null && Model.Cattles.Any())
+        {
+            <table class="records-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Breed</th>
+                        <th>Gender</th>
+                        <th>Weight</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var cattle in Model.Cattles)
+                    {
+                        <tr>
+                            <td>@cattle.CattleId</td>
+                            <td>@cattle.Breed</td>
+                            <td>@cattle.Gender</td>
+                            <td>@cattle.Weight</td>
+                            <td>@cattle.Status</td>
+                            <td>
+                                <a asp-controller="Cattle" asp-action="Details" asp-route-id="@cattle.CattleId" class="btn">View</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>No cattle in this herd yet.</p>
+        }
+    </div>
+
+    <!-- Herd Comments -->
     <div class="form-box">
         <div class="form-header">Herd Comments</div>
         @if (Model.HerdComments != null && Model.HerdComments.Any())
@@ -42,7 +80,6 @@
             <p>No comments yet.</p>
         }
     </div>
-
 
     <p class="footer-text">Life isn’t perfect, but with HerdWise your herd can be.</p>
 </div>

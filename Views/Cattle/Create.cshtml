@@ -1,141 +1,69 @@
-﻿@model Moo_Arvelous_Coders.Models.CattleCreateViewModel
-
+﻿@model Moo_Arvelous_Coders.Models.Cattle
 @{
     ViewData["Title"] = "Create Cattle";
 }
-
 <link rel="stylesheet" href="~/css/site.css" />
 
 <div class="create-farmer-container">
     <div class="herd-header">
-        <img src="~/images/Logo.png" alt="HerdWise Logo" class="logo-top" />
+        <img src="~/images/Logo.png" alt="Logo" class="logo-top" />
         <h1 class="welcome-title">CREATE COW PROFILE</h1>
-        <p class="subheading">CREATE AND MANAGE YOUR INDIVIDUAL COW INFORMATION BELOW.</p>
         <a class="menu-button" href="/">MENU</a>
     </div>
 </div>
 
 <div class="cattle-container">
-
-    <div class="photo-section">
-        <div class="photo-box">
-            <i class="upload-icon">☁️</i>
-        </div>
-        <form method="post" enctype="multipart/form-data" asp-page-handler="UploadPhoto">
-            <button type="submit" class="btn upload-btn">UPLOAD PHOTO</button>
-        </form>
-        <form method="post" asp-page-handler="DeletePhoto">
-            <button type="submit" class="btn delete-btn">DELETE PHOTO</button>
-        </form>
-
-        <div class="left-cattle">
-            <h3 class="form-headingC">INSTRUCTIONS</h3>
-            <p class ="reg-words">
-                JPG or PNG format.<br />
-                Max file size: 5MB.<br />
-                Full body photo.<br />
-                Use natural lighting.<br />
-                One animal per photo<br />
-            </p>
-        </div>
-    </div>
-
-    <div class="cattle-info">
+    <form asp-action="Create" method="post">
         <h3 class="form-headingC">CATTLE INFORMATION</h3>
-        <form method="post" asp-page-handler="SaveCattle">
 
-            <label class="reg-words">Cattle ID:</label>
-            <input asp-for="Cattle.CattleId" placeholder="Enter unique cattle ID number" />
+        <label>Gender:</label>
+        <div class="options">
+            <input type="radio" asp-for="Gender" value="Male" /> Male
+            <input type="radio" asp-for="Gender" value="Female" /> Female
+        </div>
 
-            <label class="reg-words">Gender:</label>
-            <div class="options">
-            <input type="radio" asp-for="Cattle.Gender" value="Male" /> Male
-            <input type="radio" asp-for="Cattle.Gender" value="Female" /> Female
-            </div>
+        <label>Breed:</label>
+        <select asp-for="Breed">
+            <option value="">-- Select Breed --</option>
+            <option>Afrikaner</option>
+            <option>Beefmaster</option>
+            <option>Bonsmara</option>
+            <option>Brahman</option>
+            <option>Hereford</option>
+            <option>Nguni</option>
+            <option>Simmentaler</option>
+        </select>
 
-            <label class="reg-words">Breed:</label>
-            <select asp-for="Cattle.Breed" class="form-control">
-                <option>- Select the correct breed option --</option>
-                <option>Afrikaner</option>
-                <option>Beefmaster</option>
-                <option>Bonsmara</option>
-                <option>Brahman</option>
-                <option>Charolais</option>
-                <option>Hereford</option>
-                <option>Limousin</option>
-                <option>Nguni</option>
-                <option>Santa Gertrudis</option>
-                <option>Simmentaler</option>
-            </select>
+        <label>Date of Birth:</label>
+        <input type="date" asp-for="DateOfBirth" />
 
-            <label class="reg-words">Date of Birth:</label>
-            <input type="date" asp-for="Cattle.DateOfBirth" />
+        <label>Weight (kg):</label>
+        <input asp-for="Weight" />
 
-            <label class="reg-words">Weight: (in KG)</label>
-            <input asp-for="Cattle.Weight" placeholder="Enter weight of animal in kilograms" />
-
-
-            <label class="reg-words">Herd ID:</label>
-            <input asp-for="Cattle.HerdId" placeholder="Confirm Herd ID number" />
-
-            <label>Status:</label>
-            <div class="options">
-            <input type="radio" class="reg-words" asp-for="Cattle.Status" value="Normal" /> Normal
-            <input type="radio" class="reg-words" asp-for="Cattle.Status" value="Prepping for sale" /> Prepping for sale
-            <input type="radio" class="reg-words" asp-for="Cattle.Status" value="Sell" /> Sell
-            <input type="radio" class="reg-words" asp-for="Cattle.Status" value="Sold" /> Sold
-            </div>
-
-            <label class="reg-words">Date of Death:</label>
-            <input type="date" asp-for="Cattle.DateOfDeath" />
-
-            <button type="reset" class="clear-btn">CLEAR FORM</button>
-            <button type="submit" class="save-btn">SAVE</button>
-        </form>
-    </div>
-
-    <div class="health-section">
-        <h3 class="form-headingC">HEALTH RECORDS</h3>
-        <form method="post" asp-page-handler="SaveHealthRecord">
-            <label>Health Record ID:</label>
-            <input asp-for="HealthRecord.RecordId" placeholder="Enter unique record ID number" />
-
-            <label>Cattle ID:</label>
-            <input asp-for="HealthRecord.CattleId" placeholder="Confirm ID" />
-
-            <label>Date of Entry:</label>
-            <input type="date" asp-for="HealthRecord.RecordDate" />
-
-            <label>Treatment Type:</label>
-            <select asp-for="HealthRecord.TreatmentType" class="form-control">
-                <option value="">-- Select a treatment --</option>
-                <option>Flu Vaccination</option>
-                <option>Worm Medicine / Deworming</option>
-                <option>Lice & Tick Dip / Flea Dip</option>
-                <option>Vitamin Injection</option>
-                <option>Antibiotic Treatment</option>
-                <option>Foot Rot Treatment</option>
-                <option>Mastitis Treatment</option>
-                <option>Rabies Vaccination</option>
-                <option>Brucellosis Vaccine</option>
-                <option>Pinkeye Treatment</option>
-                <option>Injury Treatment (Wound Care)</option>
-                <option>Reproductive Health Treatment</option>
-                <option>Hoof Trimming</option>
-                <option>Pregnancy Diagnosis (Vet Check)</option>
-                <option>General Health Check / Annual Vet Visit</option>
-            </select>
-
-            <label>Details:</label>
-            <textarea asp-for="HealthRecord.Details" placeholder="Add extra health notes..."></textarea>
+        <label class="reg-words">Select Herd:</label>
+        <select asp-for="HerdId" class="form-control">
+            <option value="">-- Select a Herd --</option>
+            @foreach (var herd in ViewBag.Herds)
+            {
+                <option value="@herd.HerdId">@herd.HerdName</option>
+            }
+        </select>
 
 
-            <button type="submit" class="record-btn">RECORD HEALTH ENTRY</button>
-        </form>
-        <form method="post" asp-page-handler="UpdateHealthRecord">
-            <button type="submit" class="update-btn">EDIT + UPDATE</button>
-        </form>
-    </div>
+        <label>Status:</label>
+        <div class="options">
+            <input type="radio" asp-for="Status" value="Normal" /> Normal
+            <input type="radio" asp-for="Status" value="Prepping for sale" /> Prepping for sale
+            <input type="radio" asp-for="Status" value="Sell" /> Sell
+            <input type="radio" asp-for="Status" value="Sold" /> Sold
+        </div>
+
+        <label>Date of Death:</label>
+        <input type="date" asp-for="DateOfDeath" />
+
+        <button type="submit" class="save-btn">SAVE</button>
+        <a asp-action="Index" class="btn back-btn">CANCEL</a>
+    </form>
 </div>
 
 <footer class="footer-text">

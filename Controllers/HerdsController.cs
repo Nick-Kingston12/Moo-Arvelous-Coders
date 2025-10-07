@@ -27,7 +27,8 @@ namespace Moo_Arvelous_Coders.Controllers
         public async Task<IActionResult> Details(int id)
         {
             var herd = await _context.Herds
-                .Include(h => h.HerdComments) // Include comments
+                .Include(h => h.HerdComments)// Include comments
+                .Include(h => h.Cattles)// Load all cattle in this herd
                 .FirstOrDefaultAsync(h => h.HerdId == id);
 
             if (herd == null) return NotFound();

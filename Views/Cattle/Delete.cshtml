@@ -1,0 +1,26 @@
+﻿@model Moo_Arvelous_Coders.Models.Cattle
+@{
+    ViewData["Title"] = "Delete Cattle";
+}
+<link rel="stylesheet" href="~/css/site.css" />
+
+<div class="delete-container">
+    <div class="herd-header">
+        <img src="~/images/Logo.png" class="logo-top" alt="Logo" />
+        <h1 class="welcome-title">DELETE CATTLE</h1>
+        <a class="menu-button" href="/">MENU</a>
+    </div>
+
+    <p>Are you sure you want to delete this cow?</p>
+    <p><strong>@Model.Breed (@Model.Gender)</strong></p>
+
+    <form asp-action="DeleteConfirmed" method="post">
+        <input type="hidden" asp-for="CattleId" />
+        <button type="submit" class="delete-btn">CONFIRM DELETE</button>
+        <a asp-action="Index" class="btn back-btn">CANCEL</a>
+    </form>
+</div>
+
+<footer class="footer-text">
+    <p>Careful decisions keep your herd thriving.</p>
+</footer>

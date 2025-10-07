@@ -1,0 +1,36 @@
+﻿@model Moo_Arvelous_Coders.Models.Cattle
+@{
+    ViewData["Title"] = "Cattle Details";
+}
+<link rel="stylesheet" href="~/css/site.css" />
+
+<div class="details-container">
+    <div class="herd-header">
+        <img src="~/images/Logo.png" class="logo-top" alt="Logo" />
+        <h1 class="welcome-title">CATTLE DETAILS</h1>
+        <a class="menu-button" href="/">MENU</a>
+    </div>
+
+    <div class="details-content">
+        <h3 class="form-headingC">CATTLE INFORMATION</h3>
+
+        <p><strong>Cattle ID:</strong> @Model.CattleId</p>
+        <p><strong>Breed:</strong> @Model.Breed</p>
+        <p><strong>Gender:</strong> @Model.Gender</p>
+        <p><strong>Date of Birth:</strong> @Model.DateOfBirth.ToString("yyyy-MM-dd")</p>
+        <p><strong>Weight:</strong> @Model.Weight kg</p>
+        <p><strong>Herd ID:</strong> @Model.HerdId</p>
+        <p><strong>Status:</strong> @Model.Status</p>
+        <p><strong>Date of Death:</strong> @Model.DateOfDeath?.ToString("yyyy-MM-dd")</p>
+
+        <div class="details-buttons">
+            <a asp-action="Edit" asp-route-id="@Model.CattleId" class="btn edit-btn">EDIT CATTLE</a>
+            <a asp-action="HealthRecords" asp-route-id="@Model.CattleId" class="btn record-btn">View Health Records</a>
+            <a asp-action="Index" class="btn back-btn">BACK</a>
+        </div>
+    </div>
+</div>
+
+<footer class="footer-text">
+    <p>Healthy cows, happy farmers — powered by HerdWise.</p>
+</footer>
