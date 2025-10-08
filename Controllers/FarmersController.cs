@@ -5,6 +5,7 @@ using Moo_Arvelous_Coders.Data;
 using Moo_Arvelous_Coders.Models;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Moo_Arvelous_Coders.Controllers
 {
@@ -12,11 +13,20 @@ namespace Moo_Arvelous_Coders.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public FarmersController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
+        public FarmersController(ApplicationDbContext context, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _context = context;
             _userManager = userManager;
+            _roleManager = roleManager;
+        }
+
+        [Authorize(Roles = "Farmer")]
+        public IActionResult Dashboard()
+        {
+            // You can pass data to the view if needed, e.g., farmer info
+            return View();
         }
 
         // GET: Farmers
@@ -39,7 +49,6 @@ namespace Moo_Arvelous_Coders.Controllers
             if (!ModelState.IsValid)
                 return View(farmer);
 
-            // Create Identity user for login
             var user = new IdentityUser
             {
                 UserName = farmer.EmailAddress,
@@ -50,9 +59,15 @@ namespace Moo_Arvelous_Coders.Controllers
 
             if (result.Succeeded)
             {
+                // Ensure Farmer role exists
+                if (!await _roleManager.RoleExistsAsync("Farmer"))
+                    await _roleManager.CreateAsync(new IdentityRole("Farmer"));
+
+                // Assign Farmer role
+                await _userManager.AddToRoleAsync(user, "Farmer");
+
                 // Link IdentityUser to Farmer profile
                 farmer.IdentityUserId = user.Id;
-
                 _context.Add(farmer);
                 await _context.SaveChangesAsync();
 
@@ -60,7 +75,6 @@ namespace Moo_Arvelous_Coders.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
-            // If Identity creation failed, display errors
             foreach (var error in result.Errors)
             {
                 ModelState.AddModelError(string.Empty, error.Description);
@@ -69,7 +83,7 @@ namespace Moo_Arvelous_Coders.Controllers
             return View(farmer);
         }
 
-        // Other actions (Edit, Delete, etc.) remain unchanged
+        // GET: Farmers/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null) return NotFound();
@@ -80,10 +94,6 @@ namespace Moo_Arvelous_Coders.Controllers
             return View(farmer);
         }
 
-        private bool FarmerExists(int id)
-        {
-            return _context.Farmers.Any(e => e.FarmerId == id);
-        }
         // GET: Farmers/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -100,15 +110,13 @@ namespace Moo_Arvelous_Coders.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Farmer model)
         {
-            if (!ModelState.IsValid)
-                return View(model);
+            if (!ModelState.IsValid) return View(model);
 
             try
             {
                 var farmer = await _context.Farmers.FindAsync(model.FarmerId);
                 if (farmer == null) return NotFound();
 
-                // Update fields
                 farmer.FirstName = model.FirstName;
                 farmer.LastName = model.LastName;
                 farmer.EmailAddress = model.EmailAddress;
@@ -124,12 +132,10 @@ namespace Moo_Arvelous_Coders.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!FarmerExists(model.FarmerId)) return NotFound();
+                if (!_context.Farmers.Any(e => e.FarmerId == model.FarmerId)) return NotFound();
                 else throw;
             }
         }
-
-
 
         // GET: Farmers/Delete/5
         public async Task<IActionResult> Delete(int? id)
@@ -150,7 +156,6 @@ namespace Moo_Arvelous_Coders.Controllers
             var farmer = await _context.Farmers.FindAsync(id);
             if (farmer == null) return NotFound();
 
-            // Delete linked IdentityUser
             if (!string.IsNullOrEmpty(farmer.IdentityUserId))
             {
                 var user = await _userManager.FindByIdAsync(farmer.IdentityUserId);
@@ -166,11 +171,5 @@ namespace Moo_Arvelous_Coders.Controllers
             TempData["SuccessMessage"] = "Farmer deleted successfully!";
             return RedirectToAction(nameof(Index));
         }
-
-
     }
 }
-
-
-
-

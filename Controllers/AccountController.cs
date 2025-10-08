@@ -30,17 +30,30 @@ namespace Moo_Arvelous_Coders.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
-            var result = await _signInManager.PasswordSignInAsync(
-                model.EmailAddress, model.Password, isPersistent: false, lockoutOnFailure: false);
+            var user = await _userManager.FindByEmailAsync(model.EmailAddress);
 
-            if (result.Succeeded)
+            if (user != null)
             {
-                return RedirectToAction("Index", "Home");
+                var result = await _signInManager.PasswordSignInAsync(user, model.Password, false, false);
+
+                if (result.Succeeded)
+                {
+                    // Check user roles
+                    if (await _userManager.IsInRoleAsync(user, "Farmer"))
+                    {
+                        return RedirectToAction("Dashboard", "Farmers");
+                    }
+                    else if (await _userManager.IsInRoleAsync(user, "Buyer"))
+                    {
+                        return RedirectToAction("Dashboard", "Buyer");
+                    }
+                }
             }
 
             ModelState.AddModelError("", "Invalid login attempt");
             return View(model);
         }
+
 
         // ===== Logout =====
         [HttpGet]

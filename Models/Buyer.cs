@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -34,6 +35,11 @@ namespace Moo_Arvelous_Coders.Models
         [Compare("BPassword", ErrorMessage = "Passwords do not match")]
         public string BConfirmPassword { get; set; } = null!;
 
+
+        // Link to ASP.NET Identity user
+        public string? IdentityUserId { get; set; }
+        [ForeignKey("IdentityUserId")]
+        public virtual IdentityUser? IdentityUser { get; set; }
         public virtual ICollection<CattleSaleRecord> CattleSaleRecords { get; set; } = new List<CattleSaleRecord>();
     }
 }

@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Moo_Arvelous_Coders.Models.Buyer>
+
+@{
+    ViewData["Title"] = "Buyers";
+}
+
+<div class="landing-wrapper">
+    <div class="left-color-block">
+        <img src="~/images/Logo.png" alt="HerdWise Logo" class="logo-image" />
+    </div>
+
+    <div class="right-content">
+        <h2>Buyers List</h2>
+        <p>Manage your buyers below:</p>
+
+        <a asp-action="Create" class="home-button">Create New Buyer</a>
+
+        <table class="table custom-table">
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>ID Number</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Organization</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var buyer in Model)
+                {
+                    <tr>
+                        <td>@buyer.BfirstName</td>
+                        <td>@buyer.BlastName</td>
+                        <td>@buyer.Bidnumber</td>
+                        <td>@buyer.BphoneNumber</td>
+                        <td>@buyer.Bemail</td>
+                        <td>@buyer.OrganizationName</td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@buyer.BuyerId" class="home-button">Details</a>
+                            <a asp-action="Delete" asp-route-id="@buyer.BuyerId" class="home-button btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

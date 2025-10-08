@@ -4,27 +4,54 @@ using Moo_Arvelous_Coders.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Single database connection
+// -----------------------
+// Database connection
+// -----------------------
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 
+// Enable database developer page for errors in development
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+// -----------------------
+// Identity setup with roles
+// -----------------------
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
 })
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+.AddEntityFrameworkStores<ApplicationDbContext>()
+.AddDefaultTokenProviders();
 
+// -----------------------
+// Add MVC and Razor Pages
+// -----------------------
 builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
-// ... rest of your Program.cs remains the same
+// -----------------------
+// Seed roles if they don’t exist
+// -----------------------
+using (var scope = app.Services.CreateScope())
+{
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    string[] roles = new[] { "Farmer", "Buyer" };
 
+    foreach (var role in roles)
+    {
+        if (!await roleManager.RoleExistsAsync(role))
+        {
+            await roleManager.CreateAsync(new IdentityRole(role));
+        }
+    }
+}
 
+// -----------------------
+// Middleware
+// -----------------------
 if (app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();
@@ -42,9 +69,13 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+// -----------------------
+// Routes
+// -----------------------
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index1}/{id?}");
 
-app.MapRazorPages();
+app.MapRazorPages(); // Required for Identity pages like Login/Register
+
 app.Run();

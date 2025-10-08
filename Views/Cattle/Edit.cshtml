@@ -4,48 +4,76 @@
 }
 <link rel="stylesheet" href="~/css/site.css" />
 
-<div class="edit-container">
-    <div class="herd-header">
-        <img src="~/images/Logo.png" class="logo-top" alt="Logo" />
-        <h1 class="welcome-title">EDIT CATTLE</h1>
-        <a class="menu-button" href="/">MENU</a>
-    </div>
-    <div class="photo-gallery">
-        @foreach (var photo in Model.CattlePhotos)
-        {
-            <div class="photo-box">
-                <img src="@photo.PhotoUrl" alt="Cattle Photo" width="150" />
-            </div>
-        }
+<div class="landing-wrapper">
+    <div class="left-color-block">
+        <img src="~/images/Logo.png" alt="HerdWise Logo" class="logo-image" />
     </div>
 
-    <!-- Upload new photo -->
-    <form asp-action="UploadPhoto" asp-controller="Cattle" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="cattleId" value="@Model.CattleId" />
-        <input type="file" name="photo" />
-        <button type="submit" class="btn">Upload Photo</button>
-    </form>
+    <div class="right-content">
+        <h2 class="welcome-title">EDIT CATTLE</h2>
+        <p>Update your cow’s details below.</p>
 
-    <form asp-action="Edit" method="post">
-        <input type="hidden" asp-for="CattleId" />
+        <div class="account-box">
+            <form asp-action="Edit" method="post">
+                @Html.AntiForgeryToken()
+                <input type="hidden" asp-for="CattleId" />
 
-        <label>Gender:</label>
-        <input asp-for="Gender" />
+                <div class="form-group">
+                    <label>Gender:</label>
+                    <div class="options">
+                        <input type="radio" asp-for="Gender" value="Male" /> Male
+                        <input type="radio" asp-for="Gender" value="Female" /> Female
+                    </div>
+                </div>
 
-        <label>Breed:</label>
-        <input asp-for="Breed" />
+                <div class="form-group">
+                    <label>Breed:</label>
+                    <select asp-for="Breed" class="form-control">
+                        <option value="">-- Select Breed --</option>
+                        <option>Afrikaner</option>
+                        <option>Beefmaster</option>
+                        <option>Bonsmara</option>
+                        <option>Brahman</option>
+                        <option>Hereford</option>
+                        <option>Nguni</option>
+                        <option>Simmentaler</option>
+                    </select>
+                </div>
 
-        <label>Weight (kg):</label>
-        <input asp-for="Weight" />
+                <div class="form-group">
+                    <label>Date of Birth:</label>
+                    <input type="date" asp-for="DateOfBirth" class="form-control" />
+                </div>
 
-        <label>Status:</label>
-        <input asp-for="Status" />
+                <div class="form-group">
+                    <label>Weight (kg):</label>
+                    <input asp-for="Weight" class="form-control" />
+                </div>
 
-        <button type="submit" class="save-btn">UPDATE</button>
-        <a asp-action="Index" class="btn back-btn">CANCEL</a>
-    </form>
+                <div class="form-group">
+                    <label>Status:</label>
+                    <div class="options">
+                        <input type="radio" asp-for="Status" value="Normal" /> Normal
+                        <input type="radio" asp-for="Status" value="Prepping for sale" /> Prepping for sale
+                        <input type="radio" asp-for="Status" value="Sell" /> Sell
+                        <input type="radio" asp-for="Status" value="Sold" /> Sold
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Date of Death:</label>
+                    <input type="date" asp-for="DateOfDeath" class="form-control" />
+                </div>
+
+                <div class="button-row">
+                    <button type="submit" class="home-button">SAVE CHANGES</button>
+                    <a asp-action="Index" class="home-button btn-secondary">CANCEL</a>
+                </div>
+            </form>
+        </div>
+
+        <footer class="footer-text">
+            <p>Healthy cows, happy farmers — powered by HerdWise.</p>
+        </footer>
+    </div>
 </div>
-
-<footer class="footer-text">
-    <p>Keep your herd info up to date with HerdWise.</p>
-</footer>
