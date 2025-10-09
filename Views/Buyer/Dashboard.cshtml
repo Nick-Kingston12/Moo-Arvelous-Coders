@@ -1,6 +1,58 @@
 ﻿@{
-    ViewData["Title"] = "Buyer Dashboard";
+    ViewData["Title"] = "Welcome to HerdWise Buyer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Welcome to your Buyer Dashboard</h1>
-<p>Here you can browse available cattle, view auctions, and manage your buyer profile.</p>
+<link rel="stylesheet" href="~/css/site.css" />
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+
+<div class="landing-wrapper">
+
+    <!-- LEFT BROWN PANEL -->
+    <div class="left-color-block">
+        <img src="~/images/Logo.png" alt="HerdWise Logo" class="logo-image" />
+    </div>
+
+    <!-- RIGHT CONTENT -->
+    <div class="right-content">
+        <div class="top-heading">
+            <h1 class="welcome-title">Welcome to HerdWise Buyer!</h1>
+            <div class="top-line"></div>
+        </div>
+
+        <div class="right-text">
+            <div class="heading-group">
+                <strong>Your<br> Buyer<br /></strong>
+                <span class="managed">Experience.</span>
+            </div>
+
+            <!-- BUTTONS -->
+            <div class="button-group">
+                <div class="button-item">
+                    <a href="/Buyer/Index" class="home-button">PERSONAL ACCOUNT</a>
+                    <p class="button-description">View and edit your buyer account details.</p>
+                </div>            
+
+                <div class="button-item">
+                    <a href="/Herds/ForSale" class="home-button">FOR SALE</a>
+                    <p class="button-description">View all cattle listed for sale.</p>
+                </div>
+
+                <div class="button-item">
+                    <a href="/Farmers/Index" class="home-button">FARMERS</a>
+                    <p class="button-description">See all registered farmers and contact details.</p>
+                </div>
+
+                <div class="button-item">
+                    <a href="/Account/Logout" class="home-button logout">LOGOUT</a>
+                    <p class="button-description">Ready to logout and hit the hay?</p>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer-text">
+            <p>Life isn't perfect, but with HerdWise your farm can be.</p>
+        </footer>
+    </div>
+
+</div>

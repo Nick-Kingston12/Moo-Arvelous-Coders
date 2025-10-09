@@ -60,7 +60,13 @@ namespace Moo_Arvelous_Coders.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Login", "Account");
+            return RedirectToAction("LoggedOut", "Account");
         }
+
+        public IActionResult LoggedOut()
+        {
+            return View();
+        }
+
     }
 }

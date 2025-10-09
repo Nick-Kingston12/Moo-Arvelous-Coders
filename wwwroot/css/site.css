@@ -1,30 +1,227 @@
 /* ==================================================
-   GLOBAL STYLES
+   LANDING PAGE (Refined Layout – balanced proportions)
    ================================================== */
 html {
-    font-size: 14px;
-    position: relative;
-    min-height: 100%;
+    overflow-y: scroll;
 }
 
-@media (min-width: 768px) {
-    html {
-        font-size: 16px;
+.landing-wrapper {
+    display: flex;
+    min-height: 100vh;
+    font-family: "Poppins", sans-serif;
+    background-color: #E5EDDF;
+    position: relative;
+}
+
+/* Left brown panel - now narrower */
+.left-color-block {
+    display: flex;
+    justify-content: center; /* horizontal center */
+    align-items: center; /* vertical center */
+    background-color: #A44A2C;
+    flex: 0 0 25%;
+}
+
+/* Right side with cow background */
+.right-content {
+    flex: 1;
+    background-image: url('../images/cows.jfif');
+    background-size: cover;
+    background-position: center;
+    color: #3e2b1d;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    padding: 60px 80px;
+    overflow: hidden; /* make sure overlay doesn’t spill out */
+}
+
+    /* Add a translucent overlay */
+    .right-content::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.5); /* white overlay with 50% transparency */
+        z-index: 0;
+    }
+
+    /* Bring the content above the overlay */
+    .right-content > * {
+        position: relative;
+        z-index: 1;
+    }
+
+
+/* Center overlapping circular logo - now larger */
+
+.logo-image {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: white;
+}
+/* Welcome heading */
+.top-heading {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.welcome-title {
+    font-family: "Libre Baskerville", serif;
+    font-size: 1.7rem;
+    font-weight: 400;
+    color: #3e2b1d;
+    margin-bottom: 8px;
+}
+
+.top-line {
+    height: 1px;
+    width: 50%;
+    background-color: #3e2b1d;
+    margin: 0 auto 25px;
+}
+
+/* Hero slogan */
+.right-text {
+    text-align: center;
+}
+
+.heading-group {
+    margin-bottom: 40px;
+}
+
+    .heading-group strong {
+        font-size: 3.4rem;
+        font-weight: 600;
+        line-height: 1.1;
+        color: #2f1a0d;
+    }
+
+.managed {
+    font-size: 3.4rem;
+    font-weight: 300;
+    color: #2f1a0d;
+}
+
+/* Horizontal button layout */
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 44px; /* space between each button */
+    margin-top: 30px;
+    flex-wrap: nowrap;
+    white-space: nowrap; /* prevents button text from wrapping */
+}
+
+.button-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex-wrap: nowrap;
+    white-space: nowrap; /* prevents button text from wrapping */
+}
+
+.button-description {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #3e2b1d; /* matches your brown tone */
+    font-family: 'Poppins', sans-serif;
+}
+
+
+.home-button {
+    display: inline-block;
+    background-color: #A44A2C;
+    color: #fff;
+    padding: 12px 32px;
+    border-radius: 6px;
+    width: 220px; /* FIXED WIDTH for all buttons */
+    text-align: center;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    letter-spacing: 0.5px;
+    font-size: 0.95rem;
+    white-space: nowrap; /* prevents button text from wrapping */
+}
+
+    .home-button:hover {
+        background-color: #873e25;
+        transform: scale(1.05);
+    }
+
+/* Stack buttons vertically along left of right-content */
+.button-group-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* left-aligned in container */
+    gap: 20px;
+    margin-top: 0; /* adjust spacing if needed */
+}
+
+/* Each button with text to its right */
+.button-item-horizontal {
+    display: flex;
+    align-items: center; /* vertical center with text */
+    gap: 20px; /* space between button and description */
+}
+
+/* Description next to button */
+.button-description {
+    margin: 0;
+    font-size: 14px;
+    color: #3e2b1d;
+    flex: 1; /* take remaining space */
+}
+
+
+
+
+/* Footer tagline */
+.footer-text {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #3e2b1d;
+    font-style: italic;
+    margin-top: 70px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1000px) {
+    .landing-wrapper {
+        flex-direction: column;
+    }
+
+    .left-color-block {
+        flex: 0 0 auto;
+        height: 200px;
+    }
+
+    .logo-image {
+        position: static;
+        transform: none;
+        margin: 0 auto;
+        width: 200px;
+        height: 200px;
+    }
+
+    .heading-group strong,
+    .managed {
+        font-size: 2.5rem;
+    }
+
+    .button-group {
+        flex-direction: column;
+        gap: 15px;
     }
 }
 
-body {
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    overflow-x: hidden;
-    width: 100%;
-    height: 100%;
-    background-color: #e9f1e4;
-}
-
-* {
-    box-sizing: border-box;
-}
 
 /* Focus & Active States */
 .btn:focus, .btn:active:focus,
@@ -153,65 +350,7 @@ button, .btn, .submit-btn, .clear-btn, .add-farm-btn, .add-herd-btn,
     margin-top: 20px;
 }
 
-/* ==================================================
-   HOME / LANDING PAGE
-   ================================================== */
-.home-container {
-    height: 100vh;
-    width: 100%;
-    position: relative;
-    overflow: hidden;
-}
 
-.home-left {
-    width: 40%;
-    background: #b75524;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-}
-
-.home-logo {
-    width: 80%;
-    max-width: 300px;
-}
-
-.home-right {
-    width: 60%;
-    padding: 3rem;
-    background: url('/images/cows-background.jpg') no-repeat center center;
-    background-size: cover;
-    position: relative;
-    overflow-y: auto;
-}
-
-.home-buttons .btn, .home-button {
-    background-color: #984b28;
-    color: white;
-    border-radius: 5px;
-    padding: 0.7rem 1.5rem;
-    font-weight: bold;
-}
-
-    .home-buttons .btn:hover, .home-button:hover {
-        background: #94451e;
-    }
-
-.logout {
-    background-color: #d65c1e;
-}
-
-.menu-button {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: #b75524;
-    color: white;
-    border-radius: 4px;
-    padding: 0.5rem 1rem;
-    font-weight: bold;
-}
 
 /* ==================================================
    FORMS & INPUTS

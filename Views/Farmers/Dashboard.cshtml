@@ -1,6 +1,63 @@
 ﻿@{
-    ViewData["Title"] = "Farmer Dashboard";
+    ViewData["Title"] = "Welcome to HerdWise Farmer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Welcome to your Farmer Dashboard</h1>
-<p>Here you can manage your herd, view your farms, and more.</p>
+<link rel="stylesheet" href="~/css/site.css" />
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+
+<div class="landing-wrapper">
+
+    <!-- LEFT BROWN PANEL -->
+    <div class="left-color-block">
+        <img src="~/images/Logo.png" alt="HerdWise Logo" class="logo-image" />      
+     </div>
+
+    <!-- RIGHT CONTENT -->
+    <div class="right-content">
+        <div class="top-heading">
+            <h1 class="welcome-title">Welcome to HerdWise Farmer!</h1>
+            <div class="top-line"></div>
+        </div>
+
+        <div class="right-text">
+            <div class="heading-group">
+                <strong>Your<br> Herd,<br /></strong>
+                <span class="managed">Managed.</span>
+            </div>
+
+            <!-- BUTTONS STACKED VERTICALLY, LEFT-ALIGNED -->
+            <div class="button-group-left">
+                <div class="button-item-horizontal">
+                    <a href="/Farmers/Index" class="home-button">PERSONAL ACCOUNT</a>
+                    <p class="button-description">View and edit your personal account details.</p>
+                </div>
+
+                <div class="button-item-horizontal">
+                    <a href="/Farms/Index" class="home-button">FARMS</a>
+                    <p class="button-description">Create and manage your farms. Edit and update farm details.</p>
+                </div>
+
+                <div class="button-item-horizontal">
+                    <a href="/Herds/Index" class="home-button">HERDS</a>
+                    <p class="button-description">Create and manage herds. Add, edit, and delete cattle.</p>
+                </div>
+
+                <div class="button-item-horizontal">
+                    <a href="/Cattle/Index" class="home-button">CATTLE</a>
+                    <p class="button-description">Add and manage your cattle records.</p>
+                </div>
+
+                <div class="button-item-horizontal">
+                    <a href="/Account/Logout" class="home-button logout">LOGOUT</a>
+                    <p class="button-description">Ready to logout and hit the hay?</p>
+                </div>
+            </div>
+
+
+        <footer class="footer-text">
+            <p>Life isn't perfect, but with HerdWise your farm can be.</p>
+        </footer>
+    </div>
+
+</div>
