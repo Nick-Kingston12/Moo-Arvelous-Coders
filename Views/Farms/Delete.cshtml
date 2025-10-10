@@ -5,40 +5,39 @@
 }
 
 <link rel="stylesheet" href="~/css/site.css" />
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
 
 <div class="farm-create-container">
-    <!-- Header -->
-    <div class="farm-header">
+    <div class="farm-header" style="text-align:center;">
         <img src="~/images/Logo.png" alt="HerdWise Logo" class="logo-top" />
         <h1 class="form-title">DELETE FARM</h1>
-        <p class="subtitle">Are you sure you want to delete this farm?</p>
+        <p class="subtitle">Are you sure you want to remove this farm?</p>
         <a class="menu-button" href="/">MENU</a>
     </div>
 
-    <!-- Main Delete Box -->
-    <div class="form-container">
-        <div class="delete-content">
-            <div class="farm-delete-card">
-                <img src="~/images/Farm.png" alt="Farm Image" class="farm-image" />
-                <div class="farm-info">
-                    <p><strong>@Model.FarmName</strong></p>
-                    <p>@Model.Location</p>
-                    <p>Size: @Model.FarmSize</p>
-                    <p>Price: R @Model.PriceBought</p>
-                </div>
-            </div>
-
-            <!-- Buttons -->
-            <div class="delete-actions">
-                <form asp-action="Delete" method="post">
-                    @Html.AntiForgeryToken()
-                    <input type="hidden" asp-for="FarmId" />
-                    <button type="submit" class="delete-farm-button">YES, DELETE</button>
-                </form>
-                <a href="/Farms/Index" class="cancel-button">NO, GO BACK</a>
+    <div class="delete-box">
+        <div class="farm-delete-card">
+            <img src="~/images/Farm.png" alt="Farm Image" class="farm-image" />
+            <div class="farm-info">
+                <p><strong>@Model.FarmName</strong></p>
+                <p>@Model.Location</p>
+                <p>Size: @Model.FarmSize hectares</p>
+                <p>Value: R @Model.PriceBought</p>
             </div>
         </div>
+
+        <form asp-action="Delete" method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="FarmId" />
+
+            <div class="button-row" style="justify-content:center; gap:20px;">
+                <button type="submit" class="delete-btn">YES, DELETE</button>
+                <a href="/Farms/Index" class="cancel-btn">NO, CANCEL</a>
+            </div>
+        </form>
     </div>
 
-    <p class="footer-text">Life isn’t perfect, but with HerdWise your farm can be.</p>
+    <footer class="footer-text">
+        <p>Life isn’t perfect, but with HerdWise your farm can be.</p>
+    </footer>
 </div>

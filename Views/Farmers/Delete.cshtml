@@ -1,47 +1,42 @@
 ﻿@model Moo_Arvelous_Coders.Models.Farmer
 
 @{
-    ViewData["Title"] = "Delete Account";
+    ViewData["Title"] = "Delete Farmer";
 }
 
 <link rel="stylesheet" href="~/css/site.css" />
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
 
 <div class="personal-account-container">
-    <div class="herd-header">
+    <div class="herd-header" style="text-align:center;">
         <img src="~/images/Logo.png" alt="HerdWise Logo" class="logo-top" />
-        <h1 class="welcome-title">DELETE ACCOUNT</h1>
-        <p class="subheading">Confirm if you want to remove this farmer</p>
+        <h1 class="form-title">DELETE FARMER</h1>
+        <p class="subtitle">Are you sure you want to remove this farmer profile?</p>
         <a class="menu-button" href="/">MENU</a>
     </div>
 
     <div class="account-container">
-        <div class="account-box">
-            <h3 class="form-heading">Farmer Information</h3>
-
-            <dl class="row">
-                <dt class="col-sm-3">First Name:</dt>
-                <dd class="col-sm-9">@Model.FirstName</dd>
-
-                <dt class="col-sm-3">Surname:</dt>
-                <dd class="col-sm-9">@Model.LastName</dd>
-
-                <dt class="col-sm-3">ID Number:</dt>
-                <dd class="col-sm-9">@Model.Idnumber</dd>
-
-                <dt class="col-sm-3">Phone Number:</dt>
-                <dd class="col-sm-9">@Model.PhoneNumber</dd>
-
-                <dt class="col-sm-3">Email Address:</dt>
-                <dd class="col-sm-9">@Model.EmailAddress</dd>
-
-                <dt class="col-sm-3">Location:</dt>
-                <dd class="col-sm-9">@Model.Location</dd>
+        <div class="account-box" style="background-color:#faeae5;">
+            <h3 class="form-heading" style="color:#9E5333;">Farmer Information</h3>
+            <dl>
+                <dt>First Name:</dt>
+                <dd>@Model.FirstName</dd>
+                <dt>Last Name:</dt>
+                <dd>@Model.LastName</dd>
+                <dt>ID Number:</dt>
+                <dd>@Model.Idnumber</dd>
+                <dt>Phone Number:</dt>
+                <dd>@Model.PhoneNumber</dd>
+                <dt>Email:</dt>
+                <dd>@Model.EmailAddress</dd>
+                <dt>Location:</dt>
+                <dd>@Model.Location</dd>
             </dl>
 
             <form asp-action="Delete" asp-route-id="@Model.FarmerId" method="post">
                 @Html.AntiForgeryToken()
                 <input type="hidden" asp-for="FarmerId" />
-                <div class="button-row">
+                <div class="button-row" style="justify-content:center; gap:20px;">
                     <button type="submit" class="delete-btn">DELETE ACCOUNT</button>
                     <a asp-action="Index" class="cancel-btn">CANCEL</a>
                 </div>

@@ -5,62 +5,69 @@
 }
 
 <link rel="stylesheet" href="~/css/site.css" />
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
 
-<div class="landing-wrapper">
-    <div class="left-color-block">
-        <img src="~/images/Logo.png" alt="HerdWise Logo" class="logo-image" />
+<div class="personal-account-container">
+    <div class="herd-header" style="text-align:center;">
+        <img src="~/images/Logo.png" alt="HerdWise Logo" class="logo-top" />
+        <h1 class="form-title">EDIT FARMER</h1>
+        <p class="subtitle">Update your personal farmer information below.</p>
+        <a class="menu-button" href="/">MENU</a>
     </div>
 
-    <div class="right-content">
-        <h2 class="welcome-title">Edit Farmer</h2>
-        <p>Update your personal information below.</p>
-
+    <div class="account-container">
         <div class="account-box">
             <form asp-action="Edit" method="post">
                 @Html.AntiForgeryToken()
                 <input type="hidden" asp-for="FarmerId" />
 
-                <dl class="row">
-                    <dt class="col-sm-4">First Name:</dt>
-                    <dd class="col-sm-8"><input asp-for="FirstName" class="form-control" /></dd>
+                <h3 class="form-heading">Edit Information</h3>
 
-                    <dt class="col-sm-4">Surname:</dt>
-                    <dd class="col-sm-8"><input asp-for="LastName" class="form-control" /></dd>
+                <label asp-for="FirstName">First Name:</label>
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
 
-                    <dt class="col-sm-4">Email Address:</dt>
-                    <dd class="col-sm-8"><input asp-for="EmailAddress" class="form-control" /></dd>
+                <label asp-for="LastName">Surname:</label>
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
 
-                    <dt class="col-sm-4">Phone Number:</dt>
-                    <dd class="col-sm-8"><input asp-for="PhoneNumber" class="form-control" /></dd>
+                <label asp-for="EmailAddress">Email Address:</label>
+                <input asp-for="EmailAddress" class="form-control" />
+                <span asp-validation-for="EmailAddress" class="text-danger"></span>
 
-                    <dt class="col-sm-4">ID Number:</dt>
-                    <dd class="col-sm-8"><input asp-for="Idnumber" class="form-control" /></dd>
+                <label asp-for="PhoneNumber">Phone Number:</label>
+                <input asp-for="PhoneNumber" class="form-control" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
 
-                    <dt class="col-sm-4">Location:</dt>
-                    <dd class="col-sm-8"><input asp-for="Location" class="form-control" /></dd>
+                <label asp-for="Idnumber">ID Number:</label>
+                <input asp-for="Idnumber" class="form-control" />
+                <span asp-validation-for="Idnumber" class="text-danger"></span>
 
-                    <dt class="col-sm-4">Password:</dt>
-                    <dd class="col-sm-8"><input asp-for="Password" class="form-control" /></dd>
+                <label asp-for="Location">Location:</label>
+                <input asp-for="Location" class="form-control" />
+                <span asp-validation-for="Location" class="text-danger"></span>
 
-                    <dt class="col-sm-4">Confirm Password:</dt>
-                    <dd class="col-sm-8"><input asp-for="ConfirmPassword" class="form-control" /></dd>
-                </dl>
+                <label asp-for="Password">Password:</label>
+                <input asp-for="Password" type="password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+
+                <label asp-for="ConfirmPassword">Confirm Password:</label>
+                <input asp-for="ConfirmPassword" type="password" class="form-control" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
 
                 <div class="button-row">
-                    <button type="submit" class="home-button">SAVE CHANGES</button>
-                    <a asp-action="Details" asp-route-id="@Model.FarmerId" class="home-button btn-secondary">Cancel</a>
+                    <button type="submit" class="submit-btn">SAVE CHANGES</button>
+                    <a asp-action="Details" asp-route-id="@Model.FarmerId" class="clear-btn">CANCEL</a>
                 </div>
             </form>
         </div>
-
-        <footer class="footer-text">
-            <p>Life isn't perfect, but with HerdWise your farm can be.</p>
-        </footer>
     </div>
+
+    <footer class="footer-text">
+        <p>Life isn't perfect, but with HerdWise your farm can be.</p>
+    </footer>
 </div>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    @await Html.PartialAsync("_ValidationScriptsPartial")
 }

@@ -5,52 +5,61 @@
 }
 
 <link rel="stylesheet" href="~/css/site.css" />
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
 
 <div class="farm-list-container">
     <!-- Header -->
-    <div class="farm-header">
+    <div class="farm-header" style="text-align: center;">
         <img src="~/images/Logo.png" alt="HerdWise Logo" class="logo-top" />
         <h1 class="form-title">HERDS</h1>
-        <p class="subtitle">Manage your herds. Edit, delete, view, or create new ones.</p>
+        <p class="subtitle">Welcome to your farm. Visit an existing herd or create a new one.</p>
         <a class="menu-button" href="/">MENU</a>
     </div>
 
-    <!-- Create Herd Button -->
-    <div class="farm-center-button">
+    <!-- Centered Create Herd Button -->
+    <div class="form-container" style="justify-content: center; margin-top: 1rem;">
         <a class="btn create-btn" href="/Herds/Create">CREATE NEW HERD</a>
     </div>
 
     <!-- Success Message -->
     @if (TempData["SuccessMessage"] != null)
     {
-        <div class="success-message">
+        <div class="success-message" style="text-align:center; margin-top:10px;">
             @TempData["SuccessMessage"]
         </div>
     }
 
-    <!-- Herd List + Comment Panel -->
-    <div style="display: flex; gap: 40px;">
+    <!-- Two-Panel Section -->
+    <div class="dashboard-container">
         <!-- LEFT: Herd List -->
-        <div style="flex: 1;">
-            <div class="farm-list-box">
-                <div class="box-header">Your Herds</div>
-                <ol class="farm-list">
-                    @foreach (var herd in Model)
-                    {
-                        <li>
-                            <strong>@herd.HerdName</strong> 
-                            <a href="/Herds/Details/@herd.HerdId" class="btn details-btn">Details</a>
-                            <a href="/Herds/Edit/@herd.HerdId" class="btn edit-btn">Edit</a>
-                            <a href="/Herds/Delete/@herd.HerdId" class="btn delete-btn">Delete</a>
-                        </li>
-                    }
-                </ol>
+        <div class="dashboard-box herd-box">
+            <h3>Your Herds</h3>
+            <p class="instruction">Click on a herd below to manage or update details.</p>
+
+            <ol class="herd-list">
+                @foreach (var herd in Model)
+                {
+                    <li>
+                        <span class="herd-name">@herd.HerdName</span>
+                        <div class="button-group" style="margin-top:8px;">
+                            <a href="/Herds/Edit/@herd.HerdId" class="btn edit-btn">EDIT</a>
+                            <a href="/Herds/Delete/@herd.HerdId" class="btn delete-btn">DELETE</a>
+                        </div>
+                    </li>
+                }
+            </ol>
+
+            <!-- Arrows (like your design) -->
+            <div class="arrow-nav" style="text-align: center; margin-top: 15px;">
+                <span class="arrow left-arrow">←</span>
+                <span class="arrow right-arrow">→</span>
             </div>
         </div>
 
         <!-- RIGHT: Comment Panel -->
-        <div style="flex: 1;">
-            @* Simply render the partial; ViewBag.Herds is already available *@
+        <div class="comment-box">
+            <h3>COMMENT ON HERD</h3>
+            <p>Use this as a digital notebook to keep important notes on your herd.</p>
             @await Html.PartialAsync("~/Views/HerdComments/CommentPanel.cshtml",
             new Moo_Arvelous_Coders.Models.HerdComment())
         </div>

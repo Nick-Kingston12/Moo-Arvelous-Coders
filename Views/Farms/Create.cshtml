@@ -5,27 +5,28 @@
 }
 
 <link rel="stylesheet" href="~/css/site.css" />
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
 
 <div class="farm-create-container">
-    <!-- Header Section -->
-    <div class="farm-header">
+    <!-- HEADER -->
+    <div class="farm-header" style="text-align: center;">
         <img src="~/images/Logo.png" alt="HerdWise Logo" class="logo-top" />
         <h1 class="form-title">CREATE FARM</h1>
-        <p class="subheading">Personal farmer profile has been created. Create your farm.</p>
+        <p class="subtitle">Your farmer profile is ready — now create your farm below.</p>
         <a class="menu-button" href="/">MENU</a>
     </div>
 
-    <!-- Main Form Section -->
+    <!-- MAIN CONTENT -->
     <div class="form-container">
         <div class="form-herd-container">
-            <!-- Left Image -->
+            <!-- LEFT SIDE IMAGE -->
             <div class="image-container-herd">
                 <img src="~/images/sign.png" alt="Farm Sign" />
             </div>
 
-            <!-- Right Form -->
+            <!-- RIGHT SIDE FORM -->
             <div class="farm-content">
-                <div class="form-section-title">Farm information</div>
+                <h3 class="form-section-title">Farm Information</h3>
 
                 <form asp-action="Create" method="post" class="farm-form">
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -34,7 +35,6 @@
                     <input asp-for="FarmName" class="form-control" placeholder="(Your farm name)" />
                     <span asp-validation-for="FarmName" class="text-danger"></span>
 
-                  
                     <label asp-for="Location">Farm Location:</label>
                     <input asp-for="Location" class="form-control" placeholder="(Street, Suburb, City, Postal Code, Province, Country)" />
                     <span asp-validation-for="Location" class="text-danger"></span>
@@ -54,15 +54,17 @@
                     <input asp-for="Manager" class="form-control" placeholder="(First and last name of the farm manager)" />
                     <span asp-validation-for="Manager" class="text-danger"></span>
 
-                    <div class="herd-form-actions">
-                        <button type="reset" class="home-button">CLEAR FORM</button>
-                        <button type="submit" class="home-button add-farm-btn">ADD FARM</button>
+                    <div class="button-row">
+                        <button type="reset" class="clear-btn">CLEAR FORM</button>
+                        <button type="submit" class="submit-btn">ADD FARM</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 
-    <!-- Footer -->
-    <p class="footer-text">Life isn’t perfect, but with HerdWise your farm can be.</p>
+    <!-- FOOTER -->
+    <footer class="footer-text">
+        <p>Life isn’t perfect, but with HerdWise your farm can be.</p>
+    </footer>
 </div>

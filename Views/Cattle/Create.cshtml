@@ -2,38 +2,39 @@
 @{
     ViewData["Title"] = "Create Cattle";
 }
+
 <link rel="stylesheet" href="~/css/site.css" />
 
 <div class="page-container">
-    <div class="header-section">
-        <img src="~/images/Logo.png" alt="Logo" class="logo-top" />
-        <h1 class="welcome-title">CREATE COW PROFILE</h1>
+    <div class="farm-header" style="text-align: center;">
+        <img src="~/images/Logo.png" alt="HerdWise Logo" class="logo-top" />
+        <h1 class="form-title">CREATE COW PROFILE</h1>
+        <p class="subtitle">Add a new cow to your herd records.</p>
         <a class="menu-button" href="/">MENU</a>
     </div>
 
     <div class="main-cattle-container">
-        <div class="photo-section">
-            <div class="photo-placeholder">
-                <i class="fa fa-cloud-upload upload-icon"></i>
+        <form asp-action="Create" method="post" enctype="multipart/form-data" class="cattle-form">
+            @Html.AntiForgeryToken()
+
+            <!-- PHOTO UPLOAD -->
+            <div class="photo-section">
+                <img src="~/images/cattle-placeholder.png" alt="Photo Preview" class="photo-display" id="photoPreview" />
+
+                <label class="upload-label">Upload Photo</label>
+                <input type="file" name="photo" id="photoInput" class="form-control" accept=".jpg,.png" />
+
+                <div class="photo-instructions">
+                    <ul>
+                        <li>• JPG or PNG format</li>
+                        <li>• Max file size: 5MB</li>
+                        <li>• Full body photo</li>
+                        <li>• One animal per photo</li>
+                    </ul>
+                </div>
             </div>
 
-            <div class="photo-buttons">
-                <button type="button" class="upload-btn">UPLOAD PHOTO</button>
-                <button type="button" class="delete-btn">DELETE PHOTO</button>
-            </div>
-
-            <div class="photo-instructions">
-                <ul>
-                    <li>• JPG or PNG format</li>
-                    <li>• Max file size: 5MB</li>
-                    <li>• Full body photo</li>
-                    <li>• Use natural lighting</li>
-                    <li>• One animal per photo</li>
-                </ul>
-            </div>
-        </div>
-
-        <form asp-action="Create" method="post" class="cattle-form">
+            <!-- CATTLE INFO -->
             <h3 class="form-headingC">Cattle Information</h3>
 
             <label>Gender:</label>
@@ -43,7 +44,7 @@
             </div>
 
             <label>Breed:</label>
-            <select asp-for="Breed">
+            <select asp-for="Breed" class="form-control">
                 <option value="">-- Select Breed --</option>
                 <option>Afrikaner</option>
                 <option>Beefmaster</option>
@@ -55,10 +56,10 @@
             </select>
 
             <label>Date of Birth:</label>
-            <input type="date" asp-for="DateOfBirth" />
+            <input type="date" asp-for="DateOfBirth" class="form-control" />
 
             <label>Weight (kg):</label>
-            <input asp-for="Weight" />
+            <input asp-for="Weight" class="form-control" />
 
             <label>Select Herd:</label>
             <select asp-for="HerdId" class="form-control">
@@ -78,16 +79,30 @@
             </div>
 
             <label>Date of Death:</label>
-            <input type="date" asp-for="DateOfDeath" />
+            <input type="date" asp-for="DateOfDeath" class="form-control" />
 
             <div class="button-row">
                 <button type="submit" class="save-btn">SAVE</button>
-                <a asp-action="Index" class="cancel-btn">CANCEL</a>
+                <a asp-action="Index" class="btn cancel-btn">CANCEL</a>
             </div>
         </form>
-    </div>
 
-    <footer class="footer-text">
-        <p>Life isn't perfect, but with HerdWise your farm can be.</p>
-    </footer>
+    </div>
 </div>
+
+<script>
+    // Show image preview
+    const photoInput = document.getElementById("photoInput");
+    const photoPreview = document.getElementById("photoPreview");
+
+    photoInput.addEventListener("change", function () {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                photoPreview.src = e.target.result;
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+</script>

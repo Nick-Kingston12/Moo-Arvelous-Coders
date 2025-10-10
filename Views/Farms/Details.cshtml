@@ -5,29 +5,38 @@
 }
 
 <link rel="stylesheet" href="~/css/site.css" />
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
 
 <div class="farm-details-container">
-    <div class="farm-header">
+    <div class="farm-header" style="text-align:center;">
         <img src="~/images/Logo.png" alt="HerdWise Logo" class="logo-top" />
         <h1 class="form-title">@Model.FarmName</h1>
-        <p class="subtitle">Here’s your farm’s profile and information.</p>
+        <p class="subtitle">Here’s your farm’s profile and details.</p>
         <a class="menu-button" href="/Farms/Index">BACK TO FARMS</a>
     </div>
 
-    <div class="form-container">
     <div class="farm-details-box">
-        <div class="box-header">Farm Information</div>
-        <p><strong>Farm ID:</strong> @Model.FarmId</p>
-        <p><strong>Location:</strong> @Model.Location</p>
-        <p><strong>Size:</strong> @Model.FarmSize acres</p>
-        <p><strong>Price Bought:</strong> @Model.PriceBought</p>
-        <p><strong>Farm Manager:</strong> @Model.Manager</p>
+        <h3 class="form-section-title">Farm Information</h3>
+        <dl>
+            <dt>Farm ID:</dt>
+            <dd>@Model.FarmId</dd>
+            <dt>Location:</dt>
+            <dd>@Model.Location</dd>
+            <dt>Size:</dt>
+            <dd>@Model.FarmSize hectares</dd>
+            <dt>Value:</dt>
+            <dd>R @Model.PriceBought</dd>
+            <dt>Manager:</dt>
+            <dd>@Model.Manager</dd>
+        </dl>
+
+        <div class="button-row">
+            <a href="/Farms/Edit/@Model.FarmId" class="submit-btn">EDIT</a>
+            <a href="/Farms/Delete/@Model.FarmId" class="clear-btn">DELETE</a>
+        </div>
     </div>
 
-    <div class="farm-details-actions">
-        <a href="/Farms/Edit/@Model.FarmId" class="btn edit-btn">Edit</a>
-        <a href="/Farms/Delete/@Model.FarmId" class="btn delete-btn">Delete</a>
-    </div>
-
-    <p class="footer-text">Life isn’t perfect, but with HerdWise your farm can be.</p>
+    <footer class="footer-text">
+        <p>Life isn’t perfect, but with HerdWise your farm can be.</p>
+    </footer>
 </div>

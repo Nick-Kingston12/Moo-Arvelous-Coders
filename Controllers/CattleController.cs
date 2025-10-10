@@ -45,20 +45,45 @@ namespace Moo_Arvelous_Coders.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Cattle cattle)
+        public async Task<IActionResult> Create(Cattle cattle, IFormFile photo)
         {
             if (ModelState.IsValid)
             {
+                // 1. Add cattle record first
                 _context.Cattle.Add(cattle);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
+
+                // 2. Handle photo upload
+                if (photo != null && photo.Length > 0)
+                {
+                    // Generate unique filename
+                    var fileName = $"{Guid.NewGuid()}{Path.GetExtension(photo.FileName)}";
+                    var filePath = Path.Combine(_env.WebRootPath, "images", "cattle", fileName);
+
+                    // Save file
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await photo.CopyToAsync(stream);
+                    }
+
+                    // Save photo record in database
+                    var cattlePhoto = new CattlePhoto
+                    {
+                        CattleId = cattle.CattleId,
+                        PhotoUrl = $"/images/cattle/{fileName}"
+                    };
+                    _context.CattlePhotos.Add(cattlePhoto);
+                    await _context.SaveChangesAsync();
+                }
+
                 TempData["SuccessMessage"] = "Cattle created successfully!";
                 return RedirectToAction(nameof(Index));
             }
 
-            // Repopulate the herds dropdown if model is invalid
             ViewBag.Herds = _context.Herds.ToList();
             return View(cattle);
         }
+
 
 
         // ======================
@@ -68,6 +93,7 @@ namespace Moo_Arvelous_Coders.Controllers
         {
             var cattle = _context.Cattle
                 .Include(c => c.CattleHealthRecords)
+                .Include(c => c.CattlePhotos)   // <-- Add this line
                 .FirstOrDefault(c => c.CattleId == id);
 
             if (cattle == null)
@@ -76,13 +102,17 @@ namespace Moo_Arvelous_Coders.Controllers
             return View(cattle);
         }
 
+
         // ======================
         // EDIT CATTLE
         // ======================
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            var cattle = _context.Cattle.Find(id);
+            var cattle = _context.Cattle
+                .Include(c => c.CattlePhotos)   // Include photos!
+                .FirstOrDefault(c => c.CattleId == id);
+
             if (cattle == null)
                 return NotFound();
 
@@ -91,18 +121,53 @@ namespace Moo_Arvelous_Coders.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Cattle cattle)
+        public async Task<IActionResult> Edit(Cattle cattle, IFormFile photo)
         {
             if (ModelState.IsValid)
             {
+                // 1. Update cattle info
                 _context.Cattle.Update(cattle);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
+
+                // 2. Handle new photo
+                if (photo != null && photo.Length > 0)
+                {
+                    // Delete old photo if exists
+                    var oldPhoto = _context.CattlePhotos.FirstOrDefault(p => p.CattleId == cattle.CattleId);
+                    if (oldPhoto != null)
+                    {
+                        var oldFilePath = Path.Combine(_env.WebRootPath, oldPhoto.PhotoUrl.TrimStart('/').Replace("/", "\\"));
+                        if (System.IO.File.Exists(oldFilePath))
+                            System.IO.File.Delete(oldFilePath);
+
+                        _context.CattlePhotos.Remove(oldPhoto);
+                    }
+
+                    // Save new photo
+                    var fileName = $"{Guid.NewGuid()}{Path.GetExtension(photo.FileName)}";
+                    var filePath = Path.Combine(_env.WebRootPath, "images", "cattle", fileName);
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await photo.CopyToAsync(stream);
+                    }
+
+                    var newPhoto = new CattlePhoto
+                    {
+                        CattleId = cattle.CattleId,
+                        PhotoUrl = $"/images/cattle/{fileName}"
+                    };
+                    _context.CattlePhotos.Add(newPhoto);
+                    await _context.SaveChangesAsync();
+                }
+
                 TempData["SuccessMessage"] = "Cattle updated successfully!";
                 return RedirectToAction(nameof(Index));
             }
 
             return View(cattle);
         }
+
 
         // ======================
         // DELETE CATTLE

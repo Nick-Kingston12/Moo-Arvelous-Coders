@@ -1,6 +1,5 @@
 ﻿@model Moo_Arvelous_Coders.Models.LoginViewModel
 
-
 @{
     ViewData["Title"] = "Login";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,6 +7,8 @@
 
 @section Styles {
     <link rel="stylesheet" href="~/css/site.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&display=swap" rel="stylesheet">
+
 }
 
 <div class="account-wrapper">
@@ -16,10 +17,10 @@
     </div>
 
     <div class="right-content">
-        <h2 class="welcome-title">LOGIN</h2>
-        <p>Access your farm and herd profile</p>
-
         <form method="post" asp-controller="Account" asp-action="Login" class="account-box">
+            <h2 class="welcome-title">LOGIN</h2>
+            <p>Access your farm and herd profile</p>
+
             <label asp-for="EmailAddress">Email Address</label>
             <input asp-for="EmailAddress" placeholder="Enter your email address" class="form-control" />
             <span asp-validation-for="EmailAddress" class="text-danger"></span>
@@ -29,17 +30,17 @@
             <span asp-validation-for="Password" class="text-danger"></span>
 
             <button type="submit" class="home-button">LOGIN 🔒</button>
-
             <span asp-validation-summary="All" class="text-danger"></span>
-        </form>
 
-        <p class="footer-text">Life isn't perfect, but with HerdWise your farm can be.</p>
+            <p class="footer-text">Life isn't perfect, but with HerdWise your farm can be.</p>
+        </form>
     </div>
 </div>
 
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")
 }
+
 
 
        

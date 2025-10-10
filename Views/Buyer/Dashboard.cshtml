@@ -5,6 +5,7 @@
 
 <link rel="stylesheet" href="~/css/site.css" />
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <div class="landing-wrapper">
 
@@ -25,25 +26,30 @@
                 <strong>Your<br> Buyer<br /></strong>
                 <span class="managed">Experience.</span>
             </div>
+            <!-- SEARCH BAR -->
+            <div class="search-bar">
+                <input type="text" placeholder="Search..." />
+                <button><i class="fas fa-search"></i></button>
+            </div>
 
-            <!-- BUTTONS -->
-            <div class="button-group">
-                <div class="button-item">
+            <!-- BUTTONS STACKED VERTICALLY WITH TEXT NEXT TO BUTTON -->
+            <div class="button-group-left">
+                <div class="button-item-horizontal">
                     <a href="/Buyer/Index" class="home-button">PERSONAL ACCOUNT</a>
                     <p class="button-description">View and edit your buyer account details.</p>
-                </div>            
+                </div>
 
-                <div class="button-item">
+                <div class="button-item-horizontal">
                     <a href="/Herds/ForSale" class="home-button">FOR SALE</a>
                     <p class="button-description">View all cattle listed for sale.</p>
                 </div>
 
-                <div class="button-item">
+                <div class="button-item-horizontal">
                     <a href="/Farmers/Index" class="home-button">FARMERS</a>
                     <p class="button-description">See all registered farmers and contact details.</p>
                 </div>
 
-                <div class="button-item">
+                <div class="button-item-horizontal">
                     <a href="/Account/Logout" class="home-button logout">LOGOUT</a>
                     <p class="button-description">Ready to logout and hit the hay?</p>
                 </div>
@@ -54,5 +60,4 @@
             <p>Life isn't perfect, but with HerdWise your farm can be.</p>
         </footer>
     </div>
-
 </div>

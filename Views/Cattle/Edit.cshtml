@@ -2,6 +2,7 @@
 @{
     ViewData["Title"] = "Edit Cattle";
 }
+
 <link rel="stylesheet" href="~/css/site.css" />
 
 <div class="landing-wrapper">
@@ -13,67 +14,78 @@
         <h2 class="welcome-title">EDIT CATTLE</h2>
         <p>Update your cow’s details below.</p>
 
-        <div class="account-box">
-            <form asp-action="Edit" method="post">
-                @Html.AntiForgeryToken()
-                <input type="hidden" asp-for="CattleId" />
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="CattleId" />
 
-                <div class="form-group">
-                    <label>Gender:</label>
-                    <div class="options">
-                        <input type="radio" asp-for="Gender" value="Male" /> Male
-                        <input type="radio" asp-for="Gender" value="Female" /> Female
-                    </div>
-                </div>
+            <!-- PHOTO -->
+            <div class="photo-section">
+                <img src="@(Model.CattlePhotos.FirstOrDefault()?.PhotoUrl ?? "/images/cattle-placeholder.png")"
+                     alt="Cattle Photo"
+                     id="photoPreview"
+                     class="photo-display" />
 
-                <div class="form-group">
-                    <label>Breed:</label>
-                    <select asp-for="Breed" class="form-control">
-                        <option value="">-- Select Breed --</option>
-                        <option>Afrikaner</option>
-                        <option>Beefmaster</option>
-                        <option>Bonsmara</option>
-                        <option>Brahman</option>
-                        <option>Hereford</option>
-                        <option>Nguni</option>
-                        <option>Simmentaler</option>
-                    </select>
-                </div>
+                <label>Change Photo:</label>
+                <input type="file" name="photo" id="photoInput" class="form-control" accept=".jpg,.png" />
+            </div>
 
-                <div class="form-group">
-                    <label>Date of Birth:</label>
-                    <input type="date" asp-for="DateOfBirth" class="form-control" />
-                </div>
+            <!-- CATTLE INFO -->
+            <label>Gender:</label>
+            <div class="options">
+                <input type="radio" asp-for="Gender" value="Male" /> Male
+                <input type="radio" asp-for="Gender" value="Female" /> Female
+            </div>
 
-                <div class="form-group">
-                    <label>Weight (kg):</label>
-                    <input asp-for="Weight" class="form-control" />
-                </div>
+            <label>Breed:</label>
+            <select asp-for="Breed" class="form-control">
+                <option value="">-- Select Breed --</option>
+                <option>Afrikaner</option>
+                <option>Beefmaster</option>
+                <option>Bonsmara</option>
+                <option>Brahman</option>
+                <option>Hereford</option>
+                <option>Nguni</option>
+                <option>Simmentaler</option>
+            </select>
 
-                <div class="form-group">
-                    <label>Status:</label>
-                    <div class="options">
-                        <input type="radio" asp-for="Status" value="Normal" /> Normal
-                        <input type="radio" asp-for="Status" value="Prepping for sale" /> Prepping for sale
-                        <input type="radio" asp-for="Status" value="Sell" /> Sell
-                        <input type="radio" asp-for="Status" value="Sold" /> Sold
-                    </div>
-                </div>
+            <label>Date of Birth:</label>
+            <input type="date" asp-for="DateOfBirth" class="form-control" />
 
-                <div class="form-group">
-                    <label>Date of Death:</label>
-                    <input type="date" asp-for="DateOfDeath" class="form-control" />
-                </div>
+            <label>Weight (kg):</label>
+            <input asp-for="Weight" class="form-control" />
 
-                <div class="button-row">
-                    <button type="submit" class="home-button">SAVE CHANGES</button>
-                    <a asp-action="Index" class="home-button btn-secondary">CANCEL</a>
-                </div>
-            </form>
-        </div>
+            <label>Status:</label>
+            <div class="options">
+                <input type="radio" asp-for="Status" value="Normal" /> Normal
+                <input type="radio" asp-for="Status" value="Prepping for sale" /> Prepping for sale
+                <input type="radio" asp-for="Status" value="Sell" /> Sell
+                <input type="radio" asp-for="Status" value="Sold" /> Sold
+            </div>
 
-        <footer class="footer-text">
-            <p>Healthy cows, happy farmers — powered by HerdWise.</p>
-        </footer>
+            <label>Date of Death:</label>
+            <input type="date" asp-for="DateOfDeath" class="form-control" />
+
+            <div class="button-row">
+                <button type="submit" class="home-button">SAVE CHANGES</button>
+                <a asp-action="Index" class="home-button btn-secondary">CANCEL</a>
+            </div>
+        </form>
     </div>
 </div>
+
+<script>
+    // Live preview when changing photo
+    const photoInput = document.getElementById("photoInput");
+    const photoPreview = document.getElementById("photoPreview");
+
+    photoInput.addEventListener("change", function () {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                photoPreview.src = e.target.result;
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+</script>

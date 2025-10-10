@@ -4,18 +4,28 @@
     ViewData["Title"] = "Farmers";
 }
 
-<div class="landing-wrapper">
-    <div class="left-color-block">
-        <img src="~/images/Logo.png" alt="HerdWise Logo" class="logo-image" />
+<link rel="stylesheet" href="~/css/site.css" />
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+
+<div class="page-container">
+    <!-- HEADER -->
+    <div class="farm-header" style="text-align: center;">
+        <img src="~/images/Logo.png" alt="HerdWise Logo" class="logo-top" />
+        <h1 class="form-title">FARMERS</h1>
+        <p class="subtitle">Manage registered farmers. View details, or remove from the system.</p>
+        <a class="menu-button" href="/">MENU</a>
     </div>
 
-    <div class="right-content">
-        <h2>Farmers List</h2>
-        <p>Manage your farmers below:</p>
+    <!-- CREATE BUTTON -->
+    <div class="form-container" style="justify-content: center; margin-top: 1rem;">
+        <a asp-action="Create" class="btn create-btn">CREATE NEW FARMER</a>
+    </div>
 
-        <a asp-action="Create" class="home-button">Create New Farmer</a>
+    <!-- TABLE SECTION -->
+    <div class="farm-list-box" style="margin-top: 2rem;">
+        <div class="box-header">Farmers List</div>
 
-        <table class="table custom-table">
+        <table class="records-table">
             <thead>
                 <tr>
                     <th>First Name</th>
@@ -37,13 +47,17 @@
                         <td>@farmer.PhoneNumber</td>
                         <td>@farmer.EmailAddress</td>
                         <td>@farmer.Location</td>
-                        <td>                            
-                            <a asp-action="Details" asp-route-id="@farmer.FarmerId" class="home-button">Details</a>
-                            <a asp-action="Delete" asp-route-id="@farmer.FarmerId" class="home-button btn-danger">Delete</a>
+                        <td>
+                            <div style="display:flex; gap:8px; justify-content:center;">
+                                <a asp-action="Details" asp-route-id="@farmer.FarmerId" class="btn save-btn">DETAILS</a>
+                                <a asp-action="Delete" asp-route-id="@farmer.FarmerId" class="btn delete-btn">DELETE</a>
+                            </div>
                         </td>
                     </tr>
                 }
             </tbody>
         </table>
     </div>
+
+    <p class="footer-text">Life isn’t perfect, but with HerdWise your farm can be.</p>
 </div>

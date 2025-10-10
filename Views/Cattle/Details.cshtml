@@ -2,35 +2,30 @@
 @{
     ViewData["Title"] = "Cattle Details";
 }
+
 <link rel="stylesheet" href="~/css/site.css" />
 
 <div class="page-container">
+    <!-- HEADER -->
     <div class="header-section">
         <img src="~/images/Logo.png" alt="Logo" class="logo-top" />
         <h1 class="welcome-title">VIEW CATTLE INFORMATION</h1>
         <a class="menu-button" href="/">MENU</a>
     </div>
 
+    <!-- MAIN CONTENT -->
     <div class="main-cattle-container">
+        <!-- PHOTO SECTION -->
         <div class="photo-section">
-            <img src="~/images/cattle-placeholder.png" alt="Cattle photo" class="photo-display" />
+            <img src="@(Model.CattlePhotos.FirstOrDefault()?.PhotoUrl ?? "/images/cattle-placeholder.png")"
+                 alt="Cattle Photo"
+                 class="photo-display"
+                 width="250"
+                 height="250" />
 
-            <div class="photo-buttons">
-                <button type="button" class="upload-btn">UPLOAD PHOTO</button>
-                <button type="button" class="delete-btn">DELETE PHOTO</button>
-            </div>
-
-            <div class="photo-instructions">
-                <ul>
-                    <li>• JPG or PNG format</li>
-                    <li>• Max file size: 5MB</li>
-                    <li>• Full body photo</li>
-                    <li>• Use natural lighting</li>
-                    <li>• One animal per photo</li>
-                </ul>
-            </div>
         </div>
 
+        <!-- CATTLE INFO -->
         <div class="cattle-form cattle-details">
             <h3 class="form-headingC">Cattle Information</h3>
 
@@ -50,6 +45,9 @@
             </div>
         </div>
     </div>
+
+
+
 
     <footer class="footer-text">
         <p>Life isn't perfect, but with HerdWise your farm can be.</p>
