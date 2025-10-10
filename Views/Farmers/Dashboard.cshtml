@@ -27,14 +27,18 @@
                 <span class="managed">Managed.</span>
             </div>
 
+           
             <!-- SEARCH BAR -->
-            <div class="search-bar">
-                <input type="text" placeholder="Search..." />
-                <button type="submit" class="search-btn">
-                    <i class="fas fa-search"></i>
-                </button>
+            <form method="get" asp-action="Index" asp-controller="Search">
+                <div class="search-bar">
+                    <input type="text" name="query" placeholder="Search by farmer, farm, herd, status, Cattle ID or Treatment type..." />
+                    <button type="submit" class="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </form>
 
-            </div>
+
             <!-- BUTTONS STACKED VERTICALLY, LEFT-ALIGNED -->
             <div class="button-group-left">
                 <div class="button-item-horizontal">
