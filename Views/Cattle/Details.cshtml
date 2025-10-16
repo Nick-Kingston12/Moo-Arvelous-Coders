@@ -1,4 +1,8 @@
-﻿@model Moo_Arvelous_Coders.Models.Cattle
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@model Moo_Arvelous_Coders.Models.Cattle
 @{
     ViewData["Title"] = "Cattle Details";
 }
@@ -39,10 +43,23 @@
             <p><strong>Date of Death:</strong> @Model.DateOfDeath?.ToString("yyyy-MM-dd")</p>
 
             <div class="button-row">
-                <a asp-action="Edit" asp-route-id="@Model.CattleId" class="save-btn">EDIT + UPDATE</a>
-                <a asp-action="HealthRecords" asp-route-id="@Model.CattleId" class="health-btn">HEALTH RECORDS</a>
+                @if (User.IsInRole("Farmer"))
+                {
+                    <a asp-action="Edit" asp-route-id="@Model.CattleId" class="save-btn">EDIT + UPDATE</a>
+                    <a asp-action="Index" asp-controller="HealthRecords" asp-route-cattleId="@Model.CattleId" class="health-btn">
+                        MANAGE HEALTH RECORDS
+                    </a>
+                }
+                else if (User.IsInRole("Buyer"))
+                {
+                    <a asp-action="BuyerHealthRecords" asp-controller="HealthRecords" asp-route-cattleId="@Model.CattleId" class="health-btn">
+                        VIEW HEALTH RECORDS
+                    </a>
+                }
+
                 <a asp-action="Index" class="cancel-btn">BACK</a>
             </div>
+
         </div>
     </div>
 

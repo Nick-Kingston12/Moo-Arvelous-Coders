@@ -1146,3 +1146,68 @@ input[type="text"], input[type="email"], input[type="password"], select, textare
     .records-table tr:hover {
         background-color: #f9f3ea;
     }
+.cattle-sale-container {
+    font-family: 'Poppins', sans-serif;
+    margin: 30px auto;
+    width: 90%;
+    background-color: #F8F9F6;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.sale-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+    .sale-table th, .sale-table td {
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: left;
+    }
+
+    .sale-table th {
+        background-color: #D1C7B7;
+        color: #333;
+    }
+
+.btn-details {
+    background-color: #806C49;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+}
+
+    .btn-details:hover {
+        background-color: #5e5137;
+    }
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    font-size: 0.95rem;
+}
+
+    .styled-table th {
+        background-color: #8B6E4A;
+        color: white;
+        padding: 10px;
+        text-align: left;
+    }
+
+    .styled-table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    .styled-table tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .styled-table tr:hover {
+        background-color: #f1f1f1;
+    }
+

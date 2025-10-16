@@ -81,6 +81,27 @@ namespace Moo_Arvelous_Coders.Controllers
 
             return View("Index", model);
         }
+        // ======================
+        // BUYER VIEW ONLY
+        // ======================
+        [HttpGet]
+        public IActionResult BuyerHealthRecords(int cattleId)
+        {
+            var cattle = _context.Cattle.Find(cattleId);
+            if (cattle == null)
+                return NotFound();
+
+            var records = _context.CattleHealthRecords
+                .Where(h => h.CattleId == cattleId)
+                .OrderByDescending(h => h.RecordDate)
+                .ToList();
+
+            ViewBag.CattleId = cattleId;
+            ViewBag.CattleName = cattle.Breed + " (" + cattle.CattleId + ")";
+
+            return View(records);
+        }
+
 
     }
 }

@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Moo_Arvelous_Coders.Models.Cattle>
+
+@{
+    ViewData["Title"] = "Cattle for Sale";
+}
+
+<link rel="stylesheet" href="~/css/site.css" />
+
+<div class="cattle-sale-container">
+    <h2>Cattle Available for Sale</h2>
+
+    @if (!Model.Any())
+    {
+        <p>No cattle currently available for sale.</p>
+    }
+    else
+    {
+        <table class="sale-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Breed</th>
+                    <th>Gender</th>
+                    <th>Weight (kg)</th>
+                    <th>Status</th>
+                    <th>Herd</th>
+                    
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var cattle in Model)
+                {
+                    <tr>
+                        <td>@cattle.CattleId</td>
+                        <td>@cattle.Breed</td>
+                        <td>@cattle.Gender</td>
+                        <td>@cattle.Weight</td>
+                        <td>@cattle.Status</td>
+                        <td>@cattle.Herd?.HerdName</td>
+                        
+                        <td>
+                            <a asp-action="Details" asp-route-id="@cattle.CattleId" class="btn-details">View</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+
+

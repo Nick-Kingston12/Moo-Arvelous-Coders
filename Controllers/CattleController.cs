@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace Moo_Arvelous_Coders.Controllers
 {
@@ -106,6 +108,8 @@ namespace Moo_Arvelous_Coders.Controllers
         // ======================
         // EDIT CATTLE
         // ======================
+        [Authorize(Roles = "Farmer")]
+
         [HttpGet]
         public IActionResult Edit(int id)
         {
@@ -119,6 +123,7 @@ namespace Moo_Arvelous_Coders.Controllers
             return View(cattle);
         }
 
+        [Authorize(Roles = "Farmer")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Cattle cattle, IFormFile photo)
@@ -248,6 +253,19 @@ namespace Moo_Arvelous_Coders.Controllers
             }
 
             return RedirectToAction("Edit", new { id = cattleId });
+        }
+        // ======================
+        // VIEW CATTLE FOR SALE
+        // ======================
+        public async Task<IActionResult> ForSale()
+        {
+            var forSaleCattle = await _context.Cattle
+                .Include(c => c.Herd)
+                .Include(c => c.Farmer)
+                .Where(c => c.Status == "Sell" || c.Status == "Prepping for Sale")
+                .ToListAsync();
+
+            return View(forSaleCattle);
         }
 
     }

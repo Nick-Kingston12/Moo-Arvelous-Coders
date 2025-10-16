@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Moo_Arvelous_Coders.Models.CattleHealthRecord>
+
+<link rel="stylesheet" href="~/css/site.css" />
+
+<div class="page-container">
+    <div class="header-section">
+        <img src="~/images/Logo.png" alt="Logo" class="logo-top" />
+        <h1 class="welcome-title">Cattle Health Records</h1>
+        <a class="menu-button" href="/">MENU</a>
+    </div>
+
+    <div class="main-cattle-container">
+        <div class="cattle-form cattle-details">
+            <h3 class="form-headingC">Health Records for @ViewBag.CattleName</h3>
+
+            @if (!Model.Any())
+            {
+                <p class="text-muted">No health records found for this cattle.</p>
+            }
+            else
+            {
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Treatment Type</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var record in Model)
+                        {
+                            <tr>
+                                <td>@record.RecordDate.ToString("yyyy-MM-dd")</td>
+                                <td>@record.TreatmentType</td>
+                                <td>@record.Details</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+
+            <div class="button-row">
+                <a asp-action="Index" asp-controller="Cattle" class="cancel-btn">BACK</a>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer-text">
+        <p>Life isn't perfect, but with HerdWise your farm can be.</p>
+    </footer>
+</div>
