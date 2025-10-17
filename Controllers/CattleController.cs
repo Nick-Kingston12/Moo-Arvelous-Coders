@@ -41,8 +41,15 @@ namespace Moo_Arvelous_Coders.Controllers
             var herds = _context.Herds.ToList();
             ViewBag.Herds = herds;
 
-            return View(new Cattle());
+            // ✅ Default DateOfBirth = today
+            var newCattle = new Cattle
+            {
+                DateOfBirth = DateOnly.FromDateTime(DateTime.Today)
+            };
+
+            return View(newCattle);
         }
+
 
 
         [HttpPost]

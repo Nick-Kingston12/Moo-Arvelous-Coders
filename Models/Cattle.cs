@@ -15,7 +15,14 @@ namespace Moo_Arvelous_Coders.Models
         public string Breed { get; set; } = null!;
         public int Weight { get; set; }
         public string? Health { get; set; }
+
+        [Display(Name = "Date of Birth")]
+        [DataType(DataType.Date)]
         public DateOnly DateOfBirth { get; set; }
+
+
+        [Display(Name = "Date of Death")]
+        [DataType(DataType.Date)]
         public DateOnly? DateOfDeath { get; set; } = null;
 
         public int? HerdId { get; set; }
@@ -26,6 +33,13 @@ namespace Moo_Arvelous_Coders.Models
         public virtual ICollection<CattleHealthRecord> CattleHealthRecords { get; set; } = new List<CattleHealthRecord>();
         public virtual ICollection<CattlePhoto> CattlePhotos { get; set; } = new List<CattlePhoto>();
         public virtual ICollection<CattleSaleRecord> CattleSaleRecords { get; set; } = new List<CattleSaleRecord>();
+        
+        public Cattle()
+        {
+            DateOfBirth = DateOnly.FromDateTime(DateTime.Today);
+        }
     }
 }
+
+
 

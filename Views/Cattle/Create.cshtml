@@ -56,7 +56,8 @@
             </select>
 
             <label>Date of Birth:</label>
-            <input type="date" asp-for="DateOfBirth" class="form-control" />
+            <input asp-for="DateOfBirth" type="date" class="form-control"
+                   value="@(Model.DateOfBirth == default ? DateTime.Today.ToString("yyyy-MM-dd") : Model.DateOfBirth.ToDateTime(TimeOnly.MinValue).ToString("yyyy-MM-dd"))" />
 
             <label>Weight (kg):</label>
             <input asp-for="Weight" class="form-control" />
@@ -79,7 +80,8 @@
             </div>
 
             <label>Date of Death:</label>
-            <input type="date" asp-for="DateOfDeath" class="form-control" />
+            <input asp-for="DateOfDeath" type="date" class="form-control"
+                   value="@(Model.DateOfDeath.HasValue? Model.DateOfDeath.Value.ToDateTime(TimeOnly.MinValue).ToString("yyyy-MM-dd") : "")" />
 
             <div class="button-row">
                 <button type="submit" class="save-btn">SAVE</button>

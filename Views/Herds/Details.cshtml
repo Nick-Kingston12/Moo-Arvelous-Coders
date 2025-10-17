@@ -71,7 +71,13 @@
             <ul>
                 @foreach (var comment in Model.HerdComments)
                 {
-                    <li>@comment.CommentDescription</li>
+                    <li style="display:flex; justify-content:space-between; align-items:center;">
+                        <span>@comment.CommentDescription</span>
+                        <form asp-controller="HerdComments" asp-action="Delete" method="post" style="margin:0;">
+                            <input type="hidden" name="id" value="@comment.CommentId" />
+                            <button type="submit" class="btn delete-btn" style="padding:4px 10px;">Delete</button>
+                        </form>
+                    </li>
                 }
             </ul>
         }
@@ -80,6 +86,7 @@
             <p>No comments yet.</p>
         }
     </div>
+
 
     <p class="footer-text">Life isn’t perfect, but with HerdWise your herd can be.</p>
 </div>

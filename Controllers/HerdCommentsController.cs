@@ -46,6 +46,23 @@ namespace Moo_Arvelous_Coders.Controllers
             // If model is invalid, stay on the page and show errors
             return View(model);
         }
+        // POST: HerdComments/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var comment = await _context.HerdComments.FindAsync(id);
+            if (comment == null) return NotFound();
+
+            int herdId = comment.HerdId;
+
+            _context.HerdComments.Remove(comment);
+            await _context.SaveChangesAsync();
+
+            TempData["SuccessMessage"] = "Comment deleted successfully!";
+            return RedirectToAction("Details", "Herds", new { id = herdId });
+        }
+
     }
 }
 
