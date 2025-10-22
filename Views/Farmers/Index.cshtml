@@ -37,10 +37,10 @@
                     <th>Actions</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="farmerList">
                 @foreach (var farmer in Model)
                 {
-                    <tr>
+                    <tr class="farmer-item">
                         <td>@farmer.FirstName</td>
                         <td>@farmer.LastName</td>
                         <td>@farmer.Idnumber</td>
@@ -57,7 +57,20 @@
                 }
             </tbody>
         </table>
+
+        <!-- Arrows for pagination -->
+        <div class="arrow-nav" style="margin-top:10px;">
+            <span class="arrow left-arrow" id="farmerPrevArrow">←</span>
+            <span class="arrow right-arrow" id="farmerNextArrow">→</span>
+        </div>
     </div>
+
 
     <p class="footer-text">Life isn’t perfect, but with HerdWise your farm can be.</p>
 </div>
+@section Scripts {
+    <script src="~/js/pagination.js"></script>
+    <script>
+        setupPagination("#farmerList tr", "#farmerPrevArrow", "#farmerNextArrow", 5);
+    </script>
+}

@@ -49,6 +49,20 @@
 
         <button type="button" onclick="history.back()" class="btn btn-secondary my-2">← Back</button>
 
+        @if (User.Identity.IsAuthenticated)
+        {
+            // Check if user is a Farmer
+            if (User.IsInRole("Farmer"))
+            {
+                <a asp-controller="Farmers" asp-action="Dashboard" class="btn btn-success">Farmer Dashboard</a>
+            }
+            // Check if user is a Buyer
+            else if (User.IsInRole("Buyer"))
+            {
+                <a asp-controller="Buyer" asp-action="Dashboard" class="btn btn-success">Buyer Dashboard</a>
+            }
+        }
+
         <main role="main" class="pb-3">
             @RenderBody()
         </main>

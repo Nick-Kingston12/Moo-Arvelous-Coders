@@ -17,6 +17,7 @@ namespace Moo_Arvelous_Coders.Models
         public string? Cattle { get; set; }
 
         [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "Herd size must be at least 1.")]
         public int Herdsize { get; set; }
 
         public int? FarmId { get; set; }

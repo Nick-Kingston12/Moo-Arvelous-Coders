@@ -18,30 +18,35 @@
             @Html.AntiForgeryToken()
 
             <!-- PHOTO UPLOAD -->
-            <div class="photo-section">
-                <img src="~/images/cattle-placeholder.png" alt="Photo Preview" class="photo-display" id="photoPreview" />
-
-                <label class="upload-label">Upload Photo</label>
-                <input type="file" name="photo" id="photoInput" class="form-control" accept=".jpg,.png" />
-
-                <div class="photo-instructions">
-                    <ul>
-                        <li>• JPG or PNG format</li>
-                        <li>• Max file size: 5MB</li>
-                        <li>• Full body photo</li>
-                        <li>• One animal per photo</li>
+            
+            <div class="photo-section" style="display: flex; align-items: flex-start; gap: 20px;">
+                <div class="photo-instructions" style="margin-top: 10px;">
+                    <ul style="list-style: disc; padding-left: 20px; margin: 0;">
+                        <li>JPG or PNG format</li>
+                        <li>Max file size: 5MB</li>
+                        <li>Full body photo</li>
+                        <li>One animal per photo</li>
                     </ul>
                 </div>
+                <div class="photo-preview-container">
+                    <img src="~/images/cattle-placeholder.png" alt="Photo Preview" class="photo-display" id="photoPreview" />
+                    <label class="upload-label">Upload Photo</label>
+                    <input type="file" name="photo" id="photoInput" class="form-control" accept=".jpg,.png" />
+                </div>
+
+                
             </div>
+
 
             <!-- CATTLE INFO -->
             <h3 class="form-headingC">Cattle Information</h3>
 
             <label>Gender:</label>
-            <div class="options">
-                <input type="radio" asp-for="Gender" value="Male" /> Male
-                <input type="radio" asp-for="Gender" value="Female" /> Female
+            <div class="gender-options">
+                <label><input type="radio" asp-for="Gender" value="Male" /> Male</label>
+                <label><input type="radio" asp-for="Gender" value="Female" /> Female</label>
             </div>
+
 
             <label>Breed:</label>
             <select asp-for="Breed" class="form-control">
@@ -72,12 +77,13 @@
             </select>
 
             <label>Status:</label>
-            <div class="options">
-                <input type="radio" asp-for="Status" value="Normal" /> Normal
-                <input type="radio" asp-for="Status" value="Prepping for sale" /> Prepping for sale
-                <input type="radio" asp-for="Status" value="Sell" /> Sell
-                <input type="radio" asp-for="Status" value="Sold" /> Sold
+            <div class="options" style="display: flex; gap: 15px; align-items: center;">
+                <label><input type="radio" asp-for="Status" value="Normal" /> Normal</label>
+                <label><input type="radio" asp-for="Status" value="Prepping for sale" /> Prepping for sale</label>
+                <label><input type="radio" asp-for="Status" value="Sell" /> Sell</label>
+                <label><input type="radio" asp-for="Status" value="Sold" /> Sold</label>
             </div>
+
 
             <label>Date of Death:</label>
             <input asp-for="DateOfDeath" type="date" class="form-control"

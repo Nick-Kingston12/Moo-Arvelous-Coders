@@ -303,11 +303,11 @@ body {
         background-color: #7e3d27;
     }
 
-.delete-btn {
+.delete-btn, .details-btn {
     background-color: #B03E2B;
 }
 
-    .delete-btn:hover {
+    .delete-btn:hover, .details-btn {
         background-color: #822c1f;
     }
 
@@ -612,6 +612,24 @@ label {
     font-weight: 600;
     cursor: pointer;
 }
+/* Standard action buttons for details/edit/health */
+.action-btn, .save-btn, .health-btn {
+    background-color: #A97142; /* brownish color to match your theme */
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none; /* remove underline */
+    display: inline-block;
+    transition: 0.2s;
+    font-weight: 500;
+}
+
+    .action-btn:hover, .save-btn:hover, .health-btn:hover {
+        background-color: #8c5c36; /* darker brown on hover */
+        color: white;
+        text-decoration: none;
+    }
 
 /* Responsive adjustments */
 @media (max-width: 1000px) {
@@ -1211,7 +1229,7 @@ input[type="text"], input[type="email"], input[type="password"], select, textare
         background-color: #f1f1f1;
     }
 .details-btn {
-    background-color: #4CAF50;
+    background-color: #8B5E3C; /* Brown color */
     color: white;
     border: none;
     padding: 6px 12px;
@@ -1221,6 +1239,146 @@ input[type="text"], input[type="email"], input[type="password"], select, textare
 }
 
     .details-btn:hover {
-        background-color: #45a049;
+        background-color: #A6764D; /* Slightly lighter brown on hover */
     }
+
+
+/* ================================
+   FARM LIST LINK STYLING
+   ================================ */
+.farm-link {
+    text-decoration: none;
+    color: #3B4D2C; /* your earthy brown/green tone */
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+    .farm-link:hover {
+        color: #6B8E23;
+        transform: scale(1.03);
+    }
+
+.farm-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #d9d9d9;
+    padding: 10px 0;
+}
+/* ================================
+   DELETE FARM PAGE
+   ================================ */
+.farm-delete-container {
+    max-width: 700px;
+    margin: 40px auto;
+    background-color: #F7F9F4;
+    border-radius: 16px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+}
+
+.farm-confirm-box {
+    text-align: center;
+    padding: 20px;
+}
+
+.confirm-details {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+    .confirm-details p {
+        margin: 8px 0;
+        font-size: 1.05rem;
+        color: #3B4D2C;
+    }
+
+.confirm-form .button-row {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.delete-btn {
+    background-color: #B83A3A;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+    .delete-btn:hover {
+        background-color: #992f2f;
+    }
+
+.cancel-btn {
+    background-color: #ccc;
+    color: #333;
+    padding: 10px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+    .cancel-btn:hover {
+        background-color: #b3b3b3;
+    }
+/* ================================
+   FARM LIST ARROW NAVIGATION
+   ================================ */
+.arrow-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    padding: 0 30px;
+}
+
+.arrow {
+    font-size: 1.8rem;
+    color: #3B4D2C;
+    cursor: pointer;
+    transition: transform 0.2s ease, color 0.3s ease;
+}
+
+    .arrow:hover {
+        color: #6B8E23;
+        transform: scale(1.2);
+    }
+
+    .arrow[style*="opacity: 0.3"] {
+        cursor: default;
+        transform: none;
+    }
+.gender-options {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+    .gender-options input[type="radio"] {
+        width: 20px; /* bigger circle */
+        height: 20px;
+        accent-color: #8B5E3C; /* brownish like your buttons */
+        margin-right: 5px;
+    }
+
+    .gender-options label {
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+    }
+.options label input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    accent-color: #8B5E3C;
+    margin-right: 5px;
+}
 

@@ -7,30 +7,26 @@
 <link rel="stylesheet" href="~/css/site.css" />
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
 
-<div class="farm-create-container">
-    <div class="farm-header" style="text-align:center;">
+<div class="farm-delete-container">
+    <div class="farm-header text-center">
         <img src="~/images/Logo.png" alt="HerdWise Logo" class="logo-top" />
         <h1 class="form-title">DELETE FARM</h1>
-        <p class="subtitle">Are you sure you want to remove this farm?</p>
-        <a class="menu-button" href="/">MENU</a>
+        <p class="subtitle">Are you sure you want to remove this farm?</p>        
     </div>
 
-    <div class="delete-box">
-        <div class="farm-delete-card">
-            <img src="~/images/Farm.png" alt="Farm Image" class="farm-image" />
-            <div class="farm-info">
-                <p><strong>@Model.FarmName</strong></p>
-                <p>@Model.Location</p>
-                <p>Size: @Model.FarmSize hectares</p>
-                <p>Value: R @Model.PriceBought</p>
-            </div>
+    <div class="farm-confirm-box">
+        <div class="confirm-details">
+            <p><strong>Farm Name:</strong> @Model.FarmName</p>
+            <p><strong>Location:</strong> @Model.Location</p>
+            <p><strong>Size:</strong> @Model.FarmSize hectares</p>
+            <p><strong>Value:</strong> R @Model.PriceBought</p>
         </div>
 
-        <form asp-action="Delete" method="post">
+        <form asp-action="Delete" method="post" class="confirm-form">
             @Html.AntiForgeryToken()
             <input type="hidden" asp-for="FarmId" />
 
-            <div class="button-row" style="justify-content:center; gap:20px;">
+            <div class="button-row">
                 <button type="submit" class="delete-btn">YES, DELETE</button>
                 <a href="/Farms/Index" class="cancel-btn">NO, CANCEL</a>
             </div>

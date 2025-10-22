@@ -36,12 +36,12 @@
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="cattleList">
                     @if (Model != null && Model.Any())
                     {
                         foreach (var cattle in Model)
                         {
-                            <tr>
+                            <tr class="cattle-item">
                                 <td>@cattle.CattleId</td>
                                 <td>@cattle.Breed</td>
                                 <td>@cattle.Gender</td>
@@ -62,6 +62,12 @@
                     }
                 </tbody>
             </table>
+
+            <div class="arrow-nav">
+                <span class="arrow left-arrow" id="cattlePrevArrow">←</span>
+                <span class="arrow right-arrow" id="cattleNextArrow">→</span>
+            </div>
+
         </div>
 
         <!-- FOOTER -->
@@ -70,3 +76,9 @@
         </footer>
     </div>
 </div>
+@section Scripts {
+    <script src="~/js/pagination.js"></script>
+    <script>
+        setupPagination("#cattleList tr", "#cattlePrevArrow", "#cattleNextArrow", 5);
+    </script>
+}

@@ -11,12 +11,10 @@
         <img src="~/images/Logo.png" alt="HerdWise Logo" class="logo-top" />
         <h1 class="form-title">EDIT HERD</h1>
         <p class="subtitle">Update the details of your herd.</p>
-        <a class="menu-button" href="/">MENU</a>
+        
     </div>
 
     <div class="farm-content">
-        <img src="~/images/cows-group.png" class="herd-image" />
-
         <form asp-action="Edit" method="post" class="farm-form">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <input type="hidden" asp-for="HerdId" />
@@ -29,13 +27,17 @@
                 <span asp-validation-for="HerdName" class="text-danger"></span>
 
                 <label asp-for="Herdsize"></label>
-                <input asp-for="Herdsize" class="form-control" />
+                <input asp-for="Herdsize" class="form-control" min="1" />
                 <span asp-validation-for="Herdsize" class="text-danger"></span>
             </div>
 
-            <button type="submit" class="home-button">SAVE CHANGES</button>
+            <div class="form-actions">
+                <button type="submit" class="home-button">SAVE CHANGES</button>
+                <a href="/Herds/Index" class="cancel-btn">CANCEL</a>
+            </div>
         </form>
     </div>
+
 
     <p class="footer-text">Life isn’t perfect, but with HerdWise your herd can be.</p>
 </div>

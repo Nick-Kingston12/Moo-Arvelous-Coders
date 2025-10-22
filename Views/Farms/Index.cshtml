@@ -12,8 +12,7 @@
     <div class="farm-header">
         <img src="~/images/Logo.png" alt="HerdWise Logo" class="logo-top" />
         <h1 class="form-title">FARMS</h1>
-        <p class="subtitle">Welcome to your farm. Visit an existing farm or create a new one.</p>
-        <a class="menu-button" href="/">MENU</a>
+        <p class="subtitle">Welcome to your farm. Visit an existing farm or create a new one.</p>        
     </div>
 
     <div class="form-container">
@@ -32,11 +31,11 @@
             <div class="box-header">Visit Your Created Farm</div>
             <p class="instruction">Click on one of the farm links below to select and access your farm.</p>
 
-            <ol class="farm-list">
+            <ol id="farmList" class="farm-list">
                 @foreach (var farm in Model)
                 {
-                    <li>
-                        <a href="/Farms/Details/@farm.FarmId">@farm.FarmName</a>
+                    <li class="farm-item">
+                        <a href="/Farms/Details/@farm.FarmId" class="farm-link">@farm.FarmName</a>
                         <span class="button-group">
                             <a href="/Farms/Edit/@farm.FarmId" class="btn edit-btn">Edit</a>
                             <a href="/Farms/Delete/@farm.FarmId" class="btn delete-btn">Delete</a>
@@ -46,11 +45,18 @@
             </ol>
 
             <div class="arrow-nav">
-                <span class="arrow left-arrow">←</span>
-                <span class="arrow right-arrow">→</span>
+                <span class="arrow left-arrow" id="prevArrow">←</span>
+                <span class="arrow right-arrow" id="nextArrow">→</span>
             </div>
-        </div>
+
     </div>
 
     <p class="footer-text">Life isn’t perfect, but with HerdWise your farm can be.</p>
 </div>
+@section Scripts {
+        <script src="~/js/pagination.js"></script>
+        <script>
+            // Apply pagination to farms
+            setupPagination("#farmList li", "#prevArrow", "#nextArrow", 5);
+        </script>
+}

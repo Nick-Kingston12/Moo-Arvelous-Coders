@@ -51,6 +51,22 @@ namespace Moo_Arvelous_Coders.Controllers
             ModelState.Remove("FarmId");
             ModelState.Remove("FarmerId");
 
+            // SERVER-SIDE HERDSIZE VALIDATION
+            if (model.Herdsize < 1)
+            {
+                ModelState.AddModelError("Herdsize", "Herd size must be at least 1.");
+            }
+
+            // CHECK IF HERD NAME ALREADY EXISTS FOR THIS FARMER
+            bool herdExists = await _context.Herds
+                .AnyAsync(h => h.HerdName.ToLower() == model.HerdName.ToLower()
+                               && h.FarmerId == model.FarmerId);
+
+            if (herdExists)
+            {
+                ModelState.AddModelError("HerdName", "You already have a herd with this name.");
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Herds.Add(model);
@@ -59,8 +75,12 @@ namespace Moo_Arvelous_Coders.Controllers
                 TempData["SuccessMessage"] = "Herd created successfully!";
                 return RedirectToAction(nameof(Index));
             }
+
+            // If we get here, the model is invalid
             return View(model);
         }
+
+
 
         // GET: Herds/Edit/5
         public async Task<IActionResult> Edit(int id)

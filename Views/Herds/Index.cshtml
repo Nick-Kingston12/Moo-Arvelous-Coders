@@ -36,25 +36,24 @@
             <h3>Your Herds</h3>
             <p class="instruction">Click on a herd below to manage or update details.</p>
 
-            <ol class="herd-list">
+            <ol id="herdList" class="herd-list">
                 @foreach (var herd in Model)
                 {
-                    <li>
+                    <li class="herd-item">
                         <span class="herd-name">@herd.HerdName</span>
                         <div class="button-group" style="margin-top:8px;">
                             <a href="/Herds/Details/@herd.HerdId" class="btn details-btn">VIEW DETAILS</a>
                             <a href="/Herds/Edit/@herd.HerdId" class="btn edit-btn">EDIT</a>
                             <a href="/Herds/Delete/@herd.HerdId" class="btn delete-btn">DELETE</a>
                         </div>
-
                     </li>
                 }
             </ol>
 
-            <!-- Arrows (like your design) -->
-            <div class="arrow-nav" style="text-align: center; margin-top: 15px;">
-                <span class="arrow left-arrow">←</span>
-                <span class="arrow right-arrow">→</span>
+
+            <div class="arrow-nav">
+                <span class="arrow left-arrow" id="herdPrevArrow">←</span>
+                <span class="arrow right-arrow" id="herdNextArrow">→</span>
             </div>
         </div>
 
@@ -69,3 +68,9 @@
 
     <p class="footer-text">Life isn’t perfect, but with HerdWise your herd can be.</p>
 </div>
+@section Scripts {
+        <script src="~/js/pagination.js"></script>
+        <script>
+            setupPagination("#herdList li", "#herdPrevArrow", "#herdNextArrow", 5);
+        </script>
+}
