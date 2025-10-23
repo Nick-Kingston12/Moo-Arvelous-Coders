@@ -212,6 +212,80 @@ html {
         .search-bar .search-btn:hover {
             background-color: #873e25;
         }
+/* SEARCH BAR & RESULTS */
+.search-container {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    margin-top: 1rem;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 30px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    overflow: hidden;
+}
+
+    .search-bar input {
+        flex: 1;
+        border: none;
+        padding: 12px 16px;
+        border-radius: 30px;
+        font-size: 15px;
+        outline: none;
+    }
+
+    .search-bar .search-btn {
+        background-color: #5D3E1A;
+        border: none;
+        color: #fff;
+        padding: 10px 16px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+        .search-bar .search-btn:hover {
+            background-color: #8B5E34;
+        }
+
+.search-results {
+    list-style: none;
+    position: absolute;
+    width: 100%;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    margin-top: 5px;
+    max-height: 220px;
+    overflow-y: auto;
+    z-index: 999;
+    padding: 0;
+}
+
+    .search-results li {
+        padding: 10px 15px;
+        border-bottom: 1px solid #eee;
+    }
+
+        .search-results li a {
+            text-decoration: none;
+            color: #333;
+            display: block;
+        }
+
+        .search-results li:hover {
+            background-color: #f7f7f7;
+        }
+
+.no-results {
+    padding: 10px;
+    color: #777;
+    text-align: center;
+}
 
 /* ==================================================
    UNIVERSAL LAYOUT
@@ -1364,10 +1438,10 @@ input[type="text"], input[type="email"], input[type="password"], select, textare
 }
 
     .gender-options input[type="radio"] {
-        width: 20px; /* bigger circle */
-        height: 20px;
+        width: 30px; /* bigger circle */
+        height: 30px;
         accent-color: #8B5E3C; /* brownish like your buttons */
-        margin-right: 5px;
+        margin-right: 8px;
     }
 
     .gender-options label {
@@ -1376,9 +1450,9 @@ input[type="text"], input[type="email"], input[type="password"], select, textare
         font-weight: 500;
     }
 .options label input[type="radio"] {
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     accent-color: #8B5E3C;
-    margin-right: 5px;
+    margin-right: 8px;
 }
 

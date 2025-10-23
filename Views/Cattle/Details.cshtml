@@ -50,16 +50,19 @@
                     <a asp-action="Index" asp-controller="HealthRecords" asp-route-cattleId="@Model.CattleId" class="health-btn">
                         MANAGE HEALTH RECORDS
                     </a>
+                    <a asp-action="Index" class="cancel-btn">BACK</a>
+
+                    <!-- Only farmers see this -->
                 }
                 else if (User.IsInRole("Buyer"))
                 {
                     <a asp-action="BuyerHealthRecords" asp-controller="HealthRecords" asp-route-cattleId="@Model.CattleId" class="health-btn">
                         VIEW HEALTH RECORDS
                     </a>
+                    <!-- Buyer sees no BACK button -->
                 }
-
-                <a asp-action="Index" class="cancel-btn">BACK</a>
             </div>
+
 
         </div>
     </div>

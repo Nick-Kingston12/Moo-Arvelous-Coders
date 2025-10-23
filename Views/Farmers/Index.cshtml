@@ -13,13 +13,16 @@
         <img src="~/images/Logo.png" alt="HerdWise Logo" class="logo-top" />
         <h1 class="form-title">FARMERS</h1>
         <p class="subtitle">Manage registered farmers. View details, or remove from the system.</p>
-        <a class="menu-button" href="/">MENU</a>
+        
     </div>
 
     <!-- CREATE BUTTON -->
-    <div class="form-container" style="justify-content: center; margin-top: 1rem;">
-        <a asp-action="Create" class="btn create-btn">CREATE NEW FARMER</a>
-    </div>
+    @if (User.IsInRole("Farmer"))
+    {
+        <div class="form-container" style="justify-content: center; margin-top: 1rem;">
+            <a asp-action="Create" class="btn create-btn">CREATE NEW FARMER</a>
+        </div>
+    }
 
     <!-- TABLE SECTION -->
     <div class="farm-list-box" style="margin-top: 2rem;">
@@ -34,7 +37,10 @@
                     <th>Phone</th>
                     <th>Email</th>
                     <th>Location</th>
-                    <th>Actions</th>
+                    @if (User.IsInRole("Farmer"))
+                    {
+                        <th>Actions</th>
+                    }
                 </tr>
             </thead>
             <tbody id="farmerList">
@@ -47,12 +53,15 @@
                         <td>@farmer.PhoneNumber</td>
                         <td>@farmer.EmailAddress</td>
                         <td>@farmer.Location</td>
-                        <td>
-                            <div style="display:flex; gap:8px; justify-content:center;">
-                                <a asp-action="Details" asp-route-id="@farmer.FarmerId" class="btn save-btn">DETAILS</a>
-                                <a asp-action="Delete" asp-route-id="@farmer.FarmerId" class="btn delete-btn">DELETE</a>
-                            </div>
-                        </td>
+                        @if (User.IsInRole("Farmer"))
+                        {
+                            <td>
+                                <div style="display:flex; gap:8px; justify-content:center;">
+                                    <a asp-action="Details" asp-route-id="@farmer.FarmerId" class="btn save-btn">DETAILS</a>
+                                    <a asp-action="Delete" asp-route-id="@farmer.FarmerId" class="btn delete-btn">DELETE</a>
+                                </div>
+                            </td>
+                        }
                     </tr>
                 }
             </tbody>

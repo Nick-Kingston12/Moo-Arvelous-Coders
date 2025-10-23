@@ -89,6 +89,7 @@ namespace Moo_Arvelous_Coders.Controllers
             return View(buyer);
         }
 
+
         // GET: Buyers/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -103,34 +104,51 @@ namespace Moo_Arvelous_Coders.Controllers
         // POST: Buyers/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Buyer model)
+        public async Task<IActionResult> Edit(int id, Buyer model)
         {
-            if (!ModelState.IsValid) return View(model);
+            if (id != model.BuyerId)
+                return BadRequest();
 
-            try
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var buyer = await _context.Buyers.FindAsync(id);
+            if (buyer == null) return NotFound();
+
+            // Update basic info
+            buyer.BfirstName = model.BfirstName;
+            buyer.BlastName = model.BlastName;
+            buyer.BphoneNumber = model.BphoneNumber;
+            buyer.Bemail = model.Bemail;
+            buyer.Bidnumber = model.Bidnumber;
+            buyer.OrganizationName = model.OrganizationName;
+
+            // Update password if provided
+            if (!string.IsNullOrWhiteSpace(model.BPassword))
             {
-                var buyer = await _context.Buyers.FindAsync(model.BuyerId);
-                if (buyer == null) return NotFound();
+                var user = await _userManager.FindByIdAsync(buyer.IdentityUserId);
+                if (user != null)
+                {
+                    var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+                    var result = await _userManager.ResetPasswordAsync(user, token, model.BPassword);
+                    if (!result.Succeeded)
+                    {
+                        foreach (var error in result.Errors)
+                            ModelState.AddModelError("", error.Description);
 
-                buyer.BfirstName = model.BfirstName;
-                buyer.BlastName = model.BlastName;
-                buyer.BphoneNumber = model.BphoneNumber;
-                buyer.Bemail = model.Bemail;
-                buyer.Bidnumber = model.Bidnumber;
-                buyer.OrganizationName = model.OrganizationName;
-
-                _context.Update(buyer);
-                await _context.SaveChangesAsync();
-
-                TempData["SuccessMessage"] = "Buyer updated successfully!";
-                return RedirectToAction(nameof(Details), new { id = buyer.BuyerId });
+                        return View(model);
+                    }
+                }
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!_context.Buyers.Any(e => e.BuyerId == model.BuyerId)) return NotFound();
-                else throw;
-            }
+
+            _context.Update(buyer);
+            await _context.SaveChangesAsync();
+
+            TempData["SuccessMessage"] = "Buyer updated successfully!";
+            return RedirectToAction("Index");
         }
+
+
 
         // GET: Buyers/Delete/5
         public async Task<IActionResult> Delete(int? id)

@@ -28,14 +28,42 @@
             </div>
             <!-- SEARCH BAR -->
             <!-- SEARCH BAR -->
-            <form method="get" asp-action="Index" asp-controller="Cattle">
+            <div class="search-container">
                 <div class="search-bar">
-                    <input type="text" name="searchString" placeholder="Search by farmer, farm, herd, status, Cattle ID or Treatment type..." value="@ViewData["CurrentFilter"]" />
-                    <button type="submit" class="search-btn">
+                    <input type="text" id="searchInputBuyer" placeholder="Search cattle, farms, or farmers..." autocomplete="off" />
+                    <button type="button" class="search-btn">
                         <i class="fas fa-search"></i>
                     </button>
                 </div>
-            </form>
+
+                <ul id="searchResultsBuyer" class="search-results"></ul>
+            </div>
+
+            <script>
+                document.getElementById("searchInputBuyer").addEventListener("input", async function () {
+                    const query = this.value.trim();
+                    const resultsContainer = document.getElementById("searchResultsBuyer");
+                    resultsContainer.innerHTML = "";
+
+                    if (query.length < 2) return;
+
+                    const response = await fetch(`/Search/BuyerSearch?query=${encodeURIComponent(query)}`);
+                    const results = await response.json();
+
+                    if (!results.results || results.results.length === 0) {
+                        resultsContainer.innerHTML = "<li class='no-results'>No results found</li>";
+                        return;
+                    }
+
+                    results.results.forEach(item => {
+                        const li = document.createElement("li");
+                        li.innerHTML = `<a href="${item.url}">${item.title} <span class="result-type">(${item.type})</span></a>`;
+                        resultsContainer.appendChild(li);
+                    });
+                });
+            </script>
+
+
 
 
             <!-- BUTTONS STACKED VERTICALLY WITH TEXT NEXT TO BUTTON -->

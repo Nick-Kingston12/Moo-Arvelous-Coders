@@ -29,14 +29,46 @@
 
            
             <!-- SEARCH BAR -->
-            <form method="get" asp-action="Index" asp-controller="Search">
+            <!-- SEARCH BAR -->
+            <div class="search-container">
                 <div class="search-bar">
-                    <input type="text" name="query" placeholder="Search by farmer, farm, herd, status, Cattle ID or Treatment type..." />
-                    <button type="submit" class="search-btn">
+                    <input type="text" id="searchInputFarmer" placeholder="Search your farms, herds, cattle..." autocomplete="off" />
+                    <button type="button" class="search-btn">
                         <i class="fas fa-search"></i>
                     </button>
                 </div>
-            </form>
+
+                <ul id="searchResultsFarmer" class="search-results"></ul>
+            </div>
+
+            <script>
+                document.getElementById("searchInputFarmer").addEventListener("input", async function () {
+                    const query = this.value.trim();
+                    const resultsContainer = document.getElementById("searchResultsFarmer");
+                    resultsContainer.innerHTML = "";
+
+                    if (query.length < 2) return; // Only start searching after 2+ characters
+
+                    const response = await fetch(`/Search/Search?query=${encodeURIComponent(query)}`);
+
+                    const results = await response.json();
+
+                                    if (!results.results || results.results.length === 0) {
+                    resultsContainer.innerHTML = "<li class='no-results'>No results found</li>";
+                    return;
+                }
+
+
+                                                results.results.forEach(item => {
+                    const li = document.createElement("li");
+                    li.innerHTML = `<a href="${item.url}">${item.title} <span class="result-type">(${item.type})</span></a>`;
+                    resultsContainer.appendChild(li);
+                });
+
+
+                });
+            </script>
+
 
 
             <!-- BUTTONS STACKED VERTICALLY, LEFT-ALIGNED -->
