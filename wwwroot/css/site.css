@@ -4,6 +4,346 @@
 html {
     overflow-y: scroll;
 }
+/* ==========================================================
+   FARMERS TABLE STYLING (matches HerdWise design + cattle table layout)
+   ========================================================== */
+.farmers-table-container {
+    background-color: #f7f3ef;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    padding: 20px;
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto;
+    overflow-x: auto !important; /* match cattle table */
+}
+
+/* Header above the table */
+.farmers-table-header {
+    background-color: #c7a97a;
+    color: #3b2e2a;
+    text-align: center;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-family: "Poppins", sans-serif;
+    padding: 10px;
+    border-radius: 10px 10px 0 0;
+}
+
+/* FORCE NORMAL TABLE LAYOUT for farmers table */
+.farmers-table,
+.farmers-table thead,
+.farmers-table tbody,
+.farmers-table tfoot,
+.farmers-table tr,
+.farmers-table th,
+.farmers-table td {
+    display: table !important;
+}
+
+.farmers-table {
+    display: table !important;
+    table-layout: auto !important;
+    width: 100% !important;
+    border-collapse: separate !important;
+}
+
+    .farmers-table thead,
+    .farmers-table tbody {
+        display: table-header-group !important;
+        width: 100% !important;
+    }
+
+    .farmers-table tr {
+        display: table-row !important;
+    }
+
+    .farmers-table th,
+    .farmers-table td {
+        display: table-cell !important;
+        vertical-align: middle !important;
+        white-space: normal !important;
+        padding: 10px 12px !important;
+        float: none !important;
+        position: static !important;
+        width: auto !important;
+        min-width: 80px;
+        box-sizing: border-box !important;
+    }
+
+    /* Header styling (visual) */
+    .farmers-table thead th {
+        background-color: #d2b48c !important;
+        color: #3b2e2a !important;
+        text-transform: uppercase !important;
+    }
+
+    /* Table Body Rows */
+    .farmers-table tbody tr {
+        border-bottom: 1px solid #ddd;
+        transition: background-color 0.2s ease;
+    }
+
+        .farmers-table tbody tr:hover {
+            background-color: #f2ede9;
+        }
+
+    /* Table Cells */
+    .farmers-table td {
+        padding: 10px 16px;
+        color: #3b2e2a;
+        text-align: left;
+        vertical-align: middle;
+    }
+
+    /* Buttons inside table */
+    .farmers-table .btn {
+        font-size: 0.85rem;
+        padding: 6px 12px;
+        border-radius: 8px;
+        text-transform: uppercase;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    /* DETAILS button */
+    .farmers-table .save-btn {
+        background-color: #8b5e3c;
+        color: white;
+        border: none;
+    }
+
+        .farmers-table .save-btn:hover {
+            background-color: #704a2e;
+        }
+
+    /* DELETE button */
+    .farmers-table .delete-btn {
+        background-color: #b63b3b;
+        color: white;
+        border: none;
+    }
+
+        .farmers-table .delete-btn:hover {
+            background-color: #962d2d;
+        }
+
+/* Pagination arrows */
+.arrow-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.arrow {
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #8b5e3c;
+    transition: color 0.3s;
+}
+
+    .arrow:hover {
+        color: #5c3e27;
+    }
+
+/* Footer text alignment */
+.footer-text {
+    text-align: center;
+    color: #3b2e2a;
+    font-size: 0.9rem;
+    margin-top: 25px;
+    font-style: italic;
+}
+
+/* Ensure container doesn't clip content unexpectedly */
+.farmers-table-container {
+    overflow-x: auto !important;
+    overflow-y: visible !important;
+}
+
+/* Remove inline/block elements inside cells causing layout issues */
+.farmers-table td > * {
+    display: inline-block !important;
+}
+
+/* If any previous rules used display:block on rows/cells - revert it */
+.farmers-table tr.farmer-item,
+.farmers-table tr {
+    display: table-row !important;
+}
+/* ==========================================================
+   CATTLE TABLE STYLING (matches HerdWise design + farmers table layout)
+   ========================================================== */
+.cattle-table-container {
+    background-color: #f7f3ef;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    padding: 20px;
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto;
+    overflow-x: auto !important; /* match farmers table */
+}
+
+/* Header above the table */
+.cattle-table-header {
+    background-color: #c7a97a;
+    color: #3b2e2a;
+    text-align: center;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-family: "Poppins", sans-serif;
+    padding: 10px;
+    border-radius: 10px 10px 0 0;
+}
+
+/* FORCE NORMAL TABLE LAYOUT for cattle table */
+.cattle-table,
+.cattle-table thead,
+.cattle-table tbody,
+.cattle-table tfoot,
+.cattle-table tr,
+.cattle-table th,
+.cattle-table td {
+    display: table !important;
+}
+
+.cattle-table {
+    display: table !important;
+    table-layout: auto !important;
+    width: 100% !important;
+    border-collapse: separate !important;
+}
+
+    .cattle-table thead,
+    .cattle-table tbody {
+        display: table-header-group !important;
+        width: 100% !important;
+    }
+
+    .cattle-table tr {
+        display: table-row !important;
+    }
+
+    .cattle-table th,
+    .cattle-table td {
+        display: table-cell !important;
+        vertical-align: middle !important;
+        white-space: normal !important;
+        padding: 10px 12px !important;
+        float: none !important;
+        position: static !important;
+        width: auto !important;
+        min-width: 80px;
+        box-sizing: border-box !important;
+    }
+
+    /* Header styling (visual) */
+    .cattle-table thead th {
+        background-color: #d2b48c !important;
+        color: #3b2e2a !important;
+        text-transform: uppercase !important;
+    }
+
+    /* Table Body Rows */
+    .cattle-table tbody tr {
+        border-bottom: 1px solid #ddd;
+        transition: background-color 0.2s ease;
+    }
+
+        .cattle-table tbody tr:hover {
+            background-color: #f2ede9;
+        }
+
+    /* Table Cells */
+    .cattle-table td {
+        padding: 10px 16px;
+        color: #3b2e2a;
+        text-align: left;
+        vertical-align: middle;
+    }
+
+    /* Buttons inside table */
+    .cattle-table .btn {
+        font-size: 0.85rem;
+        padding: 6px 12px;
+        border-radius: 8px;
+        text-transform: uppercase;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    /* DETAILS button */
+    .cattle-table .save-btn {
+        background-color: #8b5e3c;
+        color: white;
+        border: none;
+    }
+
+        .cattle-table .save-btn:hover {
+            background-color: #704a2e;
+        }
+
+    /* DELETE button */
+    .cattle-table .delete-btn {
+        background-color: #b63b3b;
+        color: white;
+        border: none;
+    }
+
+        .cattle-table .delete-btn:hover {
+            background-color: #962d2d;
+        }
+
+/* Pagination arrows */
+.arrow-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.arrow {
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #8b5e3c;
+    transition: color 0.3s;
+}
+
+    .arrow:hover {
+        color: #5c3e27;
+    }
+
+/* Footer text alignment */
+.footer-text {
+    text-align: center;
+    color: #3b2e2a;
+    font-size: 0.9rem;
+    margin-top: 25px;
+    font-style: italic;
+}
+
+/* Ensure container doesn't clip content unexpectedly */
+.cattle-table-container {
+    overflow-x: auto !important;
+    overflow-y: visible !important;
+}
+
+/* Remove inline/block elements inside cells causing layout issues */
+.cattle-table td > * {
+    display: inline-block !important;
+}
+
+/* If any previous rules used display:block on rows/cells - revert it */
+.cattle-table tr.cattle-item,
+.cattle-table tr {
+    display: table-row !important;
+}
+
+
 
 .landing-wrapper {
     display: flex;
