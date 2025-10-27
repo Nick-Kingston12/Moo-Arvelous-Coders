@@ -6,30 +6,35 @@
 
 <link rel="stylesheet" href="~/css/site.css" />
 
-<div class="farm-create-container">
-    <div class="farm-header">
+<div class="herd-create-container">
+    <div class="herd-header">
         <img src="~/images/Logo.png" alt="HerdWise Logo" class="logo-top" />
-        <h1 class="form-title">DELETE HERD</h1>
-        <p class="subtitle">Are you sure you want to delete this herd?</p>
-        
+        <h1 class="welcome-title">DELETE HERD</h1>
+        <p class="subheading">Are you sure you want to permanently delete this herd?</p>
     </div>
 
-    <div class="farm-content">
-        <form asp-action="Delete" method="post">
-            <input type="hidden" asp-for="HerdId" />
-            <div class="form-box">
-                <p><strong>Herd ID:</strong> @Model.HerdId</p>
-                <p><strong>Name:</strong> @Model.HerdName</p>
-                <p><strong>Size:</strong> @Model.Herdsize</p>
-            </div>
+    <div class="form-herd-container">
+        <div class="image-container-herd">
+            <img src="~/images/herd.png" alt="Cartoon Herd" />
+        </div>
 
-            <div class="form-actions">
-                <button type="submit" class="delete-btn">YES, DELETE</button>
-                <a href="/Herds/Index" class="cancel-btn">NO, GO BACK</a>
-            </div>
-        </form>
+        <div class="herd-content">
+            <form asp-action="Delete" method="post" class="herd-form">
+                <input type="hidden" asp-for="HerdId" />
+
+                <div class="delete-summary">
+                    <p><strong>Herd ID:</strong> @Model.HerdId</p>
+                    <p><strong>Name:</strong> @Model.HerdName</p>
+                    <p><strong>Size:</strong> @Model.Herdsize</p>
+                </div>
+
+                <div class="herd-form-actions">
+                    <button type="submit" class="home-button" style="background-color: #d9534f;">YES, DELETE</button>
+                    <a href="/Herds/Index" class="home-button" style="background-color: #ccc; color: #333;">CANCEL</a>
+                </div>
+            </form>
+        </div>
     </div>
-
 
     <p class="footer-text">Life isn’t perfect, but with HerdWise your herd can be.</p>
 </div>

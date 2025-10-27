@@ -5,100 +5,89 @@
 }
 
 <link rel="stylesheet" href="~/css/site.css" />
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
 
 <div class="create-farmer-container">
-    <div class="herd-header">
+    <!-- HEADER -->
+    <div class="herd-header" style="text-align: center;">
         <img src="~/images/Logo.png" alt="HerdWise Logo" class="logo-top" />
-        <h1 class="welcome-title">REGISTER BUYER</h1>
-        <p class="subheading">Don't have an account yet? Create an auction buyer profile.</p>
-        
+        <h1 class="form-title">REGISTER BUYER</h1>
+        <p class="subtitle">Don't have an account yet? Create your buyer profile below.</p>
     </div>
 
+    <!-- REGISTER BOX -->
     <div class="register-container">
-
-        <div class="image-containerB">
-            <img src="~/images/moneytree.png" alt="Cartoon Farmer" />
-        </div>
-
+        <!-- LEFT PANEL: Illustration + Notes -->
         <div class="left-box">
+            <div class="image-container" style="text-align:center;">
+                <img src="~/images/moneytree.png" alt="Cartoon Buyer" />
+            </div>
             <h3 class="form-heading">NOTES</h3>
+            <br />
+            <br />
+            <br />
             <p class="reg-words">
-                Create your buyer profile by entering your personal information within the fields
-                on the right hand side to gain access to all cows information listen for sale.
+                Create your buyer profile by entering your personal information within the fields on the right-hand side.
                 <br><br>
-                All fields are required and have to be filled in.
+                All fields are required.
                 <br><br>
-                Create a strong 8 digit password making use of uppercase and lowercase letters as well as numbers and symbols.
+                Use a strong password containing uppercase, lowercase letters, numbers, and symbols.
             </p>
         </div>
 
+        <!-- RIGHT PANEL: Registration Form -->
         <div class="right-form">
             <h3 class="form-heading">PERSONAL INFORMATION</h3>
 
             <form asp-action="Create" method="post">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-                @if (Model?.BuyerId != null)
-                {
-                    <div class="form-group">
-                        <label>Buyer ID (generated):</label>
-                        <input class="form-control" value="@Model.BuyerId" readonly />
-                    </div>
-                }
-
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-
-                    <label asp-for="BfirstName" class="control-label">First Name:</label>
+                <label asp-for="BfirstName">First Name:</label>
                 <input asp-for="BfirstName" class="form-control" />
                 <span asp-validation-for="BfirstName" class="text-danger"></span>
 
-                    <label asp-for="BlastName" class="control-label">Last Name:</label>
+                <label asp-for="BlastName">Last Name:</label>
                 <input asp-for="BlastName" class="form-control" />
                 <span asp-validation-for="BlastName" class="text-danger"></span>
 
-                    <label asp-for="Bidnumber" class="control-label">ID Number:</label>
+                <label asp-for="Bidnumber">ID Number:</label>
                 <input asp-for="Bidnumber" class="form-control" maxlength="13" pattern="\d{13}" title="ID Number must be exactly 13 digits" />
                 <span asp-validation-for="Bidnumber" class="text-danger"></span>
 
-                    <label asp-for="BphoneNumber" class="control-label">Phone Number:</label>
+                <label asp-for="BphoneNumber">Phone Number:</label>
                 <input asp-for="BphoneNumber" class="form-control" />
                 <span asp-validation-for="BphoneNumber" class="text-danger"></span>
 
-                    <label asp-for="Bemail" class="control-label">Email Address:</label>
+                <label asp-for="Bemail">Email Address:</label>
                 <input asp-for="Bemail" class="form-control" />
                 <span asp-validation-for="Bemail" class="text-danger"></span>
 
-                <label asp-for="OrganizationName" class="control-label">Organization Name:</label>
+                <label asp-for="OrganizationName">Organization:</label>
                 <input asp-for="OrganizationName" class="form-control" />
                 <span asp-validation-for="OrganizationName" class="text-danger"></span>
 
-                <div id="errorMsg" class="error-message"></div>
-
-                <label asp-for="BPassword" class="control-label">Password:</label>
+                <label asp-for="BPassword">Password:</label>
                 <div class="password-container">
                     <input asp-for="BPassword" type="password" class="form-control" id="Password" />
-                    <button type="button" class="toggle-password" onclick="togglePassword('Password')">
-                        👁
-                    </button>
+                    <button type="button" class="toggle-password" onclick="togglePassword('Password')">👁</button>
                     <span asp-validation-for="BPassword" class="text-danger"></span>
                 </div>
 
-                <label asp-for="BConfirmPassword" class="control-label">Confirm Password:</label>
+                <label asp-for="BConfirmPassword">Confirm Password:</label>
                 <div class="password-container">
                     <input asp-for="BConfirmPassword" type="password" class="form-control" id="ConfirmPassword" />
-                    <button type="button" class="toggle-password" onclick="togglePassword('ConfirmPassword')">
-                        👁
-                    </button>
+                    <button type="button" class="toggle-password" onclick="togglePassword('ConfirmPassword')">👁</button>
                     <span asp-validation-for="BConfirmPassword" class="text-danger"></span>
                 </div>
 
+                <!-- BUTTONS -->
                 <div class="button-row">
                     <button type="reset" class="clear-btn">CLEAR FORM</button>
                     <button type="submit" class="submit-btn">CREATE ACCOUNT</button>
                 </div>
-
             </form>
+
             @if (!ViewData.ModelState.IsValid)
             {
                 <div class="text-danger" style="margin-top: 1rem;">
@@ -108,24 +97,18 @@
         </div>
     </div>
 
+    <!-- FOOTER -->
     <footer class="footer-text">
         <p>Life isn't perfect, but with HerdWise your farm can be.</p>
     </footer>
-
 </div>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-        <script>
-            function togglePassword(fieldId) {
-                var input = document.getElementById(fieldId);
-                if (input.type === "password") {
-                    input.type = "text";
-                } else {
-                    input.type = "password";
-                }
-            }
-        </script>
-    }
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+    <script>
+        function togglePassword(fieldId) {
+            var input = document.getElementById(fieldId);
+            input.type = input.type === "password" ? "text" : "password";
+        }
+    </script>
 }

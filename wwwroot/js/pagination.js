@@ -12,7 +12,10 @@ function setupPagination(itemSelector, prevArrowSelector, nextArrowSelector, ite
 
     function showPage(page) {
         items.forEach((item, index) => {
-            item.style.display = (index >= page * itemsPerPage && index < (page + 1) * itemsPerPage) ? "flex" : "none";
+            // If the element is a <tr>, use table-row display; otherwise, fallback to block.
+            const isTableRow = item.tagName.toLowerCase() === "tr";
+            const show = index >= page * itemsPerPage && index < (page + 1) * itemsPerPage;
+            item.style.display = show ? (isTableRow ? "table-row" : "block") : "none";
         });
     }
 

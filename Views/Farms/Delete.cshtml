@@ -1,38 +1,42 @@
-﻿@model Moo_Arvelous_Coders.Models.Farm
+﻿@model Moo_Arvelous_Coders.Models.Cattle
 
 @{
-    ViewData["Title"] = "Delete Farm";
+    ViewData["Title"] = "Delete Cattle";
 }
 
 <link rel="stylesheet" href="~/css/site.css" />
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
 
 <div class="farm-delete-container">
+    <!-- HEADER -->
     <div class="farm-header text-center">
         <img src="~/images/Logo.png" alt="HerdWise Logo" class="logo-top" />
-        <h1 class="form-title">DELETE FARM</h1>
-        <p class="subtitle">Are you sure you want to remove this farm?</p>        
+        <h1 class="form-title">DELETE CATTLE</h1>
+        <p class="subtitle">Are you sure you want to remove this cattle record?</p>
     </div>
 
+    <!-- CONFIRMATION BOX -->
     <div class="farm-confirm-box">
         <div class="confirm-details">
-            <p><strong>Farm Name:</strong> @Model.FarmName</p>
-            <p><strong>Location:</strong> @Model.Location</p>
-            <p><strong>Size:</strong> @Model.FarmSize hectares</p>
-            <p><strong>Value:</strong> R @Model.PriceBought</p>
+            <p><strong>Cattle ID:</strong> @Model.CattleId</p>
+            <p><strong>Breed:</strong> @Model.Breed</p>
+            <p><strong>Gender:</strong> @Model.Gender</p>
+            <p><strong>Weight:</strong> @Model.Weight kg</p>
+            <p><strong>Status:</strong> @Model.Status</p>
         </div>
 
         <form asp-action="Delete" method="post" class="confirm-form">
             @Html.AntiForgeryToken()
-            <input type="hidden" asp-for="FarmId" />
+            <input type="hidden" asp-for="CattleId" />
 
             <div class="button-row">
                 <button type="submit" class="delete-btn">YES, DELETE</button>
-                <a href="/Farms/Index" class="cancel-btn">NO, CANCEL</a>
+                <a href="/Cattle/Index" class="cancel-btn">NO, CANCEL</a>
             </div>
         </form>
     </div>
 
+    <!-- FOOTER -->
     <footer class="footer-text">
         <p>Life isn’t perfect, but with HerdWise your farm can be.</p>
     </footer>

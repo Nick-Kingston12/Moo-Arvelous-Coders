@@ -1,83 +1,89 @@
 ﻿@model IEnumerable<Moo_Arvelous_Coders.Models.Cattle>
 
 @{
-    ViewData["Title"] = "Cattle List";
+    ViewData["Title"] = "Cattle";
 }
 
 <link rel="stylesheet" href="~/css/site.css" />
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
 
-<div class="landing-wrapper">
-
-    <!-- LEFT COLOR BLOCK / LOGO -->
-    <div class="left-color-block">
-        <img src="~/images/Logo.png" alt="HerdWise Logo" class="logo-image" />
+<div class="farm-list-container">
+    <!-- HEADER -->
+    <div class="farm-header" style="text-align: center;">
+        <img src="~/images/Logo.png" alt="HerdWise Logo" class="logo-top" />
+        <h1 class="form-title">CATTLE</h1>
+        <p class="subtitle">Manage your herd's cattle — view, add, or delete cattle below.</p>
     </div>
 
-    <!-- RIGHT CONTENT -->
-    <div class="right-content">
-        <h2 class="welcome-title">CATTLE LIST</h2>
-        <p>View all cattle in your herd below.</p>
+    <!-- CREATE NEW CATTLE BUTTON -->
+    <div class="form-container" style="justify-content: center; margin-top: 1rem;">
+        <a class="btn create-btn" asp-action="Create">ADD NEW CATTLE</a>
+    </div>
 
-        <!-- ADD NEW CATTLE BUTTON -->
-        <div class="account-box">
-            <a asp-action="Create" class="home-button"> ADD NEW CATTLE</a>
+    <!-- SUCCESS MESSAGE -->
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="success-message" style="text-align:center; margin-top:10px;">
+            @TempData["SuccessMessage"]
         </div>
+    }
 
-        <!-- CATTLE TABLE -->
-        <div class="cattle-table-container">
-            <div class="cattle-table-header">Your Cattle</div>
+    <!-- CATTLE TABLE -->
+    <div class="farmers-table-container">
+        <h3>Your Cattle</h3>
+        <p class="instruction">Browse and manage cattle details below.</p>
 
-            <table class="cattle-table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Breed</th>
-                        <th>Gender</th>
-                        <th>Weight</th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody id="cattleList">
-                    @if (Model != null && Model.Any())
+        <table class="farmers-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Breed</th>
+                    <th>Gender</th>
+                    <th>Weight (kg)</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="cattleList">
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var cattle in Model)
                     {
-                        foreach (var cattle in Model)
-                        {
-                            <tr class="cattle-item">
-                                <td>@cattle.CattleId</td>
-                                <td>@cattle.Breed</td>
-                                <td>@cattle.Gender</td>
-                                <td>@cattle.Weight kg</td>
-                                <td>@cattle.Status</td>
-                                <td>
-                                    <a asp-action="Details" asp-route-id="@cattle.CattleId" class="btn details-btn">View</a>
-                                    <a asp-action="Delete" asp-route-id="@cattle.CattleId" class="btn delete-btn">Delete</a>
-                                </td>
-                            </tr>
-                        }
-                    }
-                    else
-                    {
-                        <tr>
-                            <td colspan="6" style="text-align:center;">No cattle found.</td>
+                        <tr class="cattle-item">
+                            <td>@cattle.CattleId</td>
+                            <td>@cattle.Breed</td>
+                            <td>@cattle.Gender</td>
+                            <td>@cattle.Weight</td>
+                            <td>@cattle.Status</td>
+                            <td>
+                                <div class="button-group">
+                                    <a asp-action="Details" asp-route-id="@cattle.CattleId" class="btn details-btn">VIEW</a>
+                                    <a asp-action="Delete" asp-route-id="@cattle.CattleId" class="btn delete-btn">DELETE</a>
+                                </div>
+                            </td>
                         </tr>
                     }
-                </tbody>
-            </table>
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="6" style="text-align:center;">No cattle found.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
 
-            <div class="arrow-nav">
-                <span class="arrow left-arrow" id="cattlePrevArrow">←</span>
-                <span class="arrow right-arrow" id="cattleNextArrow">→</span>
-            </div>
+        <!-- Pagination Arrows -->
+        <div class="arrow-nav">
+            <span class="arrow left-arrow" id="cattlePrevArrow">←</span>
+            <span class="arrow right-arrow" id="cattleNextArrow">→</span>
         </div>
-
-
-        <!-- FOOTER -->
-        <footer class="footer-text">
-            <p>Life isn't perfect, but with HerdWise your farm can be.</p>
-        </footer>
     </div>
+
+    <!-- FOOTER -->
+    <p class="footer-text">Life isn’t perfect, but with HerdWise your herd can be.</p>
 </div>
+
 @section Scripts {
     <script src="~/js/pagination.js"></script>
     <script>

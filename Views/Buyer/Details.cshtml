@@ -4,45 +4,47 @@
     ViewData["Title"] = "Buyer Details";
 }
 
-<div class="landing-wrapper">
-    <div class="left-color-block">
-        <img src="~/images/Logo.png" alt="HerdWise Logo" class="logo-image" />
+<link rel="stylesheet" href="~/css/site.css" />
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+
+<div class="personal-account-container">
+    <div class="herd-header" style="text-align:center;">
+        <img src="~/images/Logo.png" alt="HerdWise Logo" class="logo-top" />
+        <h1 class="form-title">BUYER DETAILS</h1>
+        <p class="subtitle">View detailed information about this buyer profile.</p>
     </div>
 
-    <div class="right-content">
-        <h2 class="welcome-title">Buyer Details</h2>
-        <p>View detailed information about the buyer.</p>
-
+    <div class="account-container">
         <div class="account-box">
             <h3 class="form-heading">Personal Information</h3>
-            <dl class="row">
-                <dt class="col-sm-4">First Name:</dt>
-                <dd class="col-sm-8">@Model.BfirstName</dd>
+            <dl>
+                <dt>First Name:</dt>
+                <dd>@Model.BfirstName</dd>
 
-                <dt class="col-sm-4">Last Name:</dt>
-                <dd class="col-sm-8">@Model.BlastName</dd>
+                <dt>Last Name:</dt>
+                <dd>@Model.BlastName</dd>
 
-                <dt class="col-sm-4">ID Number:</dt>
-                <dd class="col-sm-8">@Model.Bidnumber</dd>
+                <dt>ID Number:</dt>
+                <dd>@Model.Bidnumber</dd>
 
-                <dt class="col-sm-4">Phone Number:</dt>
-                <dd class="col-sm-8">@Model.BphoneNumber</dd>
+                <dt>Phone Number:</dt>
+                <dd>@Model.BphoneNumber</dd>
 
-                <dt class="col-sm-4">Email:</dt>
-                <dd class="col-sm-8">@Model.Bemail</dd>
+                <dt>Email Address:</dt>
+                <dd>@Model.Bemail</dd>
 
-                <dt class="col-sm-4">Organization:</dt>
-                <dd class="col-sm-8">@Model.OrganizationName</dd>
+                <dt>Organization:</dt>
+                <dd>@Model.OrganizationName</dd>
             </dl>
 
             <div class="button-row">
-                <a asp-action="Edit" asp-route-id="@Model.BuyerId" class="home-button">Edit</a>
-                <a asp-action="Index" class="home-button btn-secondary">Back to List</a>
+                <a asp-action="Edit" asp-route-id="@Model.BuyerId" class="submit-btn">EDIT</a>
+                <a asp-action="Index" class="clear-btn">BACK TO LIST</a>
             </div>
         </div>
-
-        <footer class="footer-text">
-            <p>Life isn't perfect, but with HerdWise your farm can be.</p>
-        </footer>
     </div>
+
+    <footer class="footer-text">
+        <p>Life isn't perfect, but with HerdWise your farm can be.</p>
+    </footer>
 </div>

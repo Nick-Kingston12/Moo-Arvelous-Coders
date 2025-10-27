@@ -6,21 +6,22 @@
 
 <link rel="stylesheet" href="~/css/site.css" />
 
-<div class="farm-create-container">
-    <div class="farm-header">
+<div class="herd-create-container">
+    <div class="herd-header">
         <img src="~/images/Logo.png" alt="HerdWise Logo" class="logo-top" />
-        <h1 class="form-title">EDIT HERD</h1>
-        <p class="subtitle">Update the details of your herd.</p>
-        
+        <h1 class="welcome-title">EDIT HERD</h1>
+        <p class="subheading">Update your herd information and save your changes.</p>
     </div>
 
-    <div class="farm-content">
-        <form asp-action="Edit" method="post" class="farm-form">
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <input type="hidden" asp-for="HerdId" />
+    <div class="form-herd-container">
+        <div class="image-container-herd">
+            <img src="~/images/herd.png" alt="Cartoon Herd" />
+        </div>
 
-            <div class="form-box">
-                <div class="form-header">Edit Herd Info</div>
+        <div class="herd-content">
+            <form asp-action="Edit" method="post" class="herd-form">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <input type="hidden" asp-for="HerdId" />
 
                 <label asp-for="HerdName"></label>
                 <input asp-for="HerdName" class="form-control" />
@@ -29,15 +30,14 @@
                 <label asp-for="Herdsize"></label>
                 <input asp-for="Herdsize" class="form-control" min="1" />
                 <span asp-validation-for="Herdsize" class="text-danger"></span>
-            </div>
 
-            <div class="form-actions">
-                <button type="submit" class="home-button">SAVE CHANGES</button>
-                <a href="/Herds/Index" class="cancel-btn">CANCEL</a>
-            </div>
-        </form>
+                <div class="herd-form-actions">
+                    <button type="submit" class="home-button">SAVE CHANGES</button>
+                    <a href="/Herds/Index" class="home-button" style="background-color: #ccc; color: #333;">CANCEL</a>
+                </div>
+            </form>
+        </div>
     </div>
-
 
     <p class="footer-text">Life isn’t perfect, but with HerdWise your herd can be.</p>
 </div>
